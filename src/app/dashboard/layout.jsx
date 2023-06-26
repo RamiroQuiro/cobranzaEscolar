@@ -10,7 +10,7 @@ export const metadata = {
 export default function DashboardLayout({ children }) {
   return (
     <html lang="es" >
-      <body >
+      <body className="overflow-x-hidden" >
         <main className="w-screen min-h-screen overflow-x-hidden relative">
           <NavBar/>
         {children}

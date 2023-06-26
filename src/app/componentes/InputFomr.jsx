@@ -6,7 +6,25 @@ export default function InputFomr({
   onChange,
   label,
   id,
+  options,
 }) {
+  if (label == "select") {
+    return (
+      <label
+        htmlFor="diluyentes"
+        className="peer w- text-sm  py-1 mt-2 pl-4 focus:bg-transparent  bg-transparent shadow-none border rounded-lg p-2 text-primary-text  border-primary-100/50 outline-none  focus:outline-none relative"
+      >
+        {children}
+        <select name="diluyentes" id="" onChange={onChange} className="ml-5 text-primary-text  bg-transparent ">
+          {options?.map((option, i) => (
+            <option key={i} value={option} className="p-1">
+              {option}
+            </option>
+          ))}
+        </select>
+      </label>
+    )
+  }
   if (label == "date") {
     return (
       <div
@@ -21,7 +39,7 @@ export default function InputFomr({
             id={name}
             value={value}
             required={true}
-            className="peer w- py-1 pl-4 focus:bg-transparent  bg-transparent shadow-none border-0 border-b text-gray-700 border-gray-500 outline-none focus:outline-none relative z-10 valid:bg-transparent bg-"
+            className="peer w- py-1 pl-4 focus:bg-transparent  bg-transparent shadow-none border-0 border-b text-primary-text  border-primary-100/50 outline-none focus:outline-none relative z-10 valid:bg-transparent bg-"
           />
         </label>
       </div>
@@ -41,7 +59,7 @@ export default function InputFomr({
         id={name}
         value={value}
         required={true}
-        className="peer w-full py-1 pl-8 bg-transparent shadow-none border border-primary-100/50 rounded-md text-gray-500  outline-none focus:outline-none relative z-10 valid:bg-transparent"
+        className="peer w-full py-1 pl-8 bg-transparent text-sm shadow-none border border-primary-100/50 rounded-md text-gray-500  outline-none focus:outline-none relative z-10 valid:bg-transparent"
       />
       {/* <FontAwesomeIcon icon={faIcon} className="text-gray-500 absolute left-0 bottom-3 h-2/6" />  */}
       <label
