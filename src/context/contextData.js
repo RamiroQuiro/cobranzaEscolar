@@ -14,8 +14,8 @@ export const contextData = create((set, get) => ({
     }));
   },
   cargarNewLegajo: (obj) => {
+      const{legajos}=get()
     const objNew = { ...obj, uid: uuidv4().slice(0, 8) };
-    const{legajos}=get()
     const newArray=legajos.concat(objNew)
 
     set((state) => ({

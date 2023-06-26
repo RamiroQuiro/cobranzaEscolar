@@ -4,6 +4,7 @@ import CabeceraContenedor from "@/app/componentes/CabeceraContenedor";
 import InputFomr from "@/app/componentes/InputFomr";
 import { contextData } from "@/context/contextData";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 export default function AgregarLegajo() {
   const [form, setForm] = useState({});
@@ -147,6 +148,7 @@ const cargarNewLegajo= contextData((state)=>state.cargarNewLegajo)
   const guardarLegajo=(e)=>{
     e.preventDefault()
     cargarNewLegajo(form)
+    toast.success('guardado')
   }
   return (
     <div className="w-full mx-auto ">
@@ -208,7 +210,9 @@ const cargarNewLegajo= contextData((state)=>state.cargarNewLegajo)
               );
             })}
         </div>
-
+<label htmlFor="activo" className="text-sm font-medium m-a">Activo
+</label>
+<input type="checkbox" name="activo" id="activo" onChange={handleForm}  value={true}/>
         <Boton1 onClick={guardarLegajo}>Guardar Datos</Boton1>
       </form>
     </div>
