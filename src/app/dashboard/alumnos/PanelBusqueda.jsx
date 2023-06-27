@@ -19,7 +19,7 @@ setForm({...form,[e.target.name]:e.target.value})
 
   return (
  
-      <form action="" className="w-full flex flex-col items-center  h-full p-4">
+      <form action="" className="w-full flex flex-col items-start  h-full p-4">
         <InputFomr onChange={handleForm} value={form?.nameAlumno} id={"nameAlumno"} name={"nameAlumno"} type={"text"}>
           ► Nombre Alumno | Matricula
         </InputFomr>

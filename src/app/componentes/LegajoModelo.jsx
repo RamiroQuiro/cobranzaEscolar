@@ -5,7 +5,7 @@ import { Chart } from "./ChartJS";
 import DatosLegajo from "../dashboard/alumnos/DatosLegajo";
 
 export default function LegajoModelo({ legajo }) {
-  const capturarLegajo = contextData((state) => state.capturarLegajo);
+  const cargarPantalla = contextData((state) => state.cargarPantalla);
   return (
     <div className="w-full mx-auto relative animate-apDeArriba ">
       <CabeceraContenedor>
@@ -14,16 +14,16 @@ export default function LegajoModelo({ legajo }) {
       <div className="absolute top-2  right-3 space-x-1">
         <button
           className="bg-primary-800 hover:bg-primary-300 duration-300 rounded-full p-1"
-          onClick={() => capturarLegajo("")}
+          onClick={() => cargarPantalla("listar")}
         >
           🔙
         </button>
-        <button className="bg-primary-800 hover:bg-primary-300 duration-300 rounded-full p-1">
-          ✏️
-        </button>
-        <button className="bg-primary-800 hover:bg-primary-300 duration-300 rounded-full p-1">
+        <button 
+         onClick={() => cargarPantalla("legajoCompleto")}
+        className="bg-primary-800 hover:bg-primary-300 duration-300 rounded-full p-1">
           🗒️
         </button>
+       
       </div>
       <DatosLegajo legajo={legajo}/>
       <div className="my-5">

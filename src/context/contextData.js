@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-hot-toast";
 
 export const contextData = create((set, get) => ({
+    label:"",
   captarUidLegajo: "",
   newLegajo: {},
   legajos: [],
@@ -33,4 +34,10 @@ export const contextData = create((set, get) => ({
       legajos: newArray,
     }));
   },
+  cargarPantalla:(name)=>{
+    set((state)=>({...state,
+        label: name
+    }))
+    // console.log("cargando pantalla")
+  }
 }));
