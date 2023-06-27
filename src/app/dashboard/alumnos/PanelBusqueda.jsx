@@ -23,6 +23,9 @@ setForm({...form,[e.target.name]:e.target.value})
         <InputFomr onChange={handleForm} value={form?.nameAlumno} id={"nameAlumno"} name={"nameAlumno"} type={"text"}>
           ► Nombre Alumno | Matricula
         </InputFomr>
+        <InputFomr onChange={handleForm} value={form?.nivelEducativo} id={"nameAlumno"} name={"nivelEducativo"} label={"select"} type={"select"} options={["jardin","primaria","secundaria"]}>
+          ► Grado Escolar
+        </InputFomr>
         <div className="p-4 text-sm ">
           <p className="my-2">
             Ingrese a buscar el alumno a visualuzar el legajo

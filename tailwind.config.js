@@ -84,9 +84,9 @@ module.exports = {
           "0%": { Height: "50px" },
           "100%": { Height: "auto" },
         },
-        aparecerDeAbajo: {
-          "0%": { opacity: "0", transform: "translateY(50%)" },
-          "100%": { opacity: "1", transform: "translateY(0%) " },
+        aparecerDeArriba: {
+          "0%": { opacity: "0", transform: "translateY(-10%)" },
+          "80%": { opacity: "1", transform: "translateY(0%) " },
         },
         desaparecer: {
           "0%": { opacity: "1" },
@@ -104,7 +104,7 @@ module.exports = {
       animation: {
         "waving-hand": "abrirCat 2s linear infinite",
         aparecer: "aparecer 1s ease-out ",
-        aparecerCostado: "aparecerCote .3s ease-in ",
+        apDeArriba: "aparecerDeArriba .7s ease-in ",
         desaparecerCostado: "desaparecerCote .3s ease-in ",
       },
       boxShadow: {

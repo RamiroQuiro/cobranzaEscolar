@@ -151,7 +151,7 @@ const cargarNewLegajo= contextData((state)=>state.cargarNewLegajo)
     toast.success('guardado')
   }
   return (
-    <div className="w-full mx-auto ">
+    <div className="w-full mx-auto animate-apDeArriba ">
       <CabeceraContenedor>Agregar Legajo</CabeceraContenedor>
       <form
         action=""

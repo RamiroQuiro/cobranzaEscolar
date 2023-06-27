@@ -1,11 +1,13 @@
 "use client";
 import { contextData } from "@/context/contextData";
 import CabeceraContenedor from "./CabeceraContenedor";
+import { Chart } from "./ChartJS";
+import DatosLegajo from "../dashboard/alumnos/DatosLegajo";
 
 export default function LegajoModelo({ legajo }) {
   const capturarLegajo = contextData((state) => state.capturarLegajo);
   return (
-    <div className="w-full mx-auto relative ">
+    <div className="w-full mx-auto relative animate-apDeArriba ">
       <CabeceraContenedor>
         {legajo?.nombreLegajo} | {legajo?.legajo}
       </CabeceraContenedor>
@@ -23,57 +25,13 @@ export default function LegajoModelo({ legajo }) {
           🗒️
         </button>
       </div>
-      <div className="flex flex-col gap-2  text-left w-full items-center justify-evenly px-3 py-5 text-sm">
-        <div className="flex items-center bg-white w-full rounded-lg py-1 px-2 justify-around mx-auto">
-          <div className="flex items-center w-1/2 justify-start gap-2">
-            <p>Nombre y Apellido:</p>
-            <p className="font-medium text-base">{legajo?.nombreLegajo}</p>
-          </div>
-          <div className="flex items-center w-1/2 justify-start gap-2">
-            <p>Numero de Legajo:</p>
-            <p className="font-medium text-base">{legajo?.legajo}</p>
-          </div>
+      <DatosLegajo legajo={legajo}/>
+      <div className="my-5">
+        <h2 className="font-medium mt-8 mb-4 ml-4">Estado contable</h2>
+        <div className="bg-white p-2 rounded-lg w-11/12 mx-auto">
+          <Chart />
         </div>
-        <div className="flex items-center bg-white w-full rounded-lg py-1 px-2 justify-around mx-auto">
-        <div className="flex items-center w-1/2 justify-start gap-2">
-            <p>Dni:</p>
-            <p className="font-medium text-base">{legajo?.dniLegajo}</p>
-          </div>
-          <div className="flex items-center w-1/2 justify-start gap-2">
-            <p>Domicilio:</p>
-            <p className="font-medium text-base">{legajo?.domicilio}</p>
-          </div>
-        </div>
-        <div className="flex items-center bg-white w-full rounded-lg py-1 px-2 justify-around mx-auto">
-        <div className="flex items-center w-1/2 justify-start gap-2">
-            <p>Telefono:</p>
-            <p className="font-medium text-base">{legajo?.celular}</p>
-          </div>
-          <div className="flex items-center w-1/2 justify-start gap-2">
-            <p>Email:</p>
-            <p className="font-medium text-base">{legajo?.email}</p>
-          </div>
-        </div>
-        <div className="flex items-center bg-white w-full rounded-lg py-1 px-2 justify-around mx-auto">
-        <div className="flex items-center w-1/2 justify-start gap-2">
-            <p>Nivel Educativo:</p>
-            <p className="font-medium text-base">{legajo?.nivelEducativo}</p>
-          </div>
-          <div className="flex items-center w-1/2 justify-start gap-2">
-            <p>Fecha Ingreso:</p>
-            <p className="font-medium text-base">{legajo?.fechaIngreso}</p>
-          </div>
-        </div>
-        <div className="flex items-center bg-white w-full rounded-lg py-1 px-2 justify-around mx-auto">
-        <div className="flex items-center w-1/2 justify-start gap-2">
-            <p>Nombre y Apellido Tutor:</p>
-            <p className="font-medium text-base">{legajo?.apellidoNombreTutor}</p>
-          </div>
-          <div className="flex items-center w-1/2 justify-start gap-2">
-            <p>Telefono Tutor:</p>
-            <p className="font-medium text-base">{legajo?.celularTutor}</p>
-          </div>
-        </div>
+        
       </div>
     </div>
   );
