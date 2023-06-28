@@ -8,13 +8,13 @@ export default function CheckBox({state,handleCheck}) {
             <label
             htmlFor="activo"
             className={
-                state?.activo === true
+                state === true
                 ? "cursor-pointer bg-green-300/50 shadow-sm p-2 shadow-green-300 text-green-600 rounded-lg text-xs mx-auto text-center font-medium"
                 : "cursor-pointer bg-red-300/50 shadow-sm p-2 shadow-red-300 text-red-600 rounded-lg text-xs mx-auto text-center font-medium"
             }
           >
             {" "}
-            {state?.activo === true ? "activo" : "inactivo"}
+            {state === true ? "activo" : "inactivo"}
           <input
             type="checkbox"
             name="activo"

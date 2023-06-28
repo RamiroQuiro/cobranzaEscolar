@@ -11,6 +11,7 @@ export default function AgregarLegajo() {
   const [form, setForm] = useState({ activo: true });
   const [checked, setChecked] = useState(true);
   const cargarNewLegajo = contextData((state) => state.cargarNewLegajo);
+  const cargarPantalla = contextData((state) => state.cargarPantalla);
   const handleForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -30,7 +31,7 @@ export default function AgregarLegajo() {
     },
     {
       name: "dniLegajo",
-      type: "number",
+      type: "text",
       onChange: handleForm,
       children: "> Numero de Documento",
       id: 2,
@@ -72,7 +73,7 @@ export default function AgregarLegajo() {
     {
       label: "",
       name: "celular",
-      type: "number",
+      type: "text",
       onChange: handleForm,
       children: "> Celular o Telefono",
       id: 11,
@@ -97,7 +98,7 @@ export default function AgregarLegajo() {
     {
       label: "",
       name: "dniTutor",
-      type: "number",
+      type: "text",
       onChange: handleForm,
       children: "> DNI del Tutor",
       id: 51,
@@ -113,7 +114,7 @@ export default function AgregarLegajo() {
     {
       label: "",
       name: "celularTutor",
-      type: "number",
+      type: "text",
       onChange: handleForm,
       children: "> Celular o Telefono",
       id: 53,
@@ -129,7 +130,7 @@ export default function AgregarLegajo() {
     {
       label: "",
       name: "legajo",
-      type: "number",
+      type: "text",
       onChange: handleForm,
       children: "> Numero de Legajo",
       id: 30,
@@ -156,8 +157,10 @@ export default function AgregarLegajo() {
   const guardarLegajo = (e) => {
     e.preventDefault();
     cargarNewLegajo(form);
-    console.log(form)
     toast.success("guardado");
+    setForm({});
+    cargarPantalla('listar')
+
   };
   return (
     <div className="w-full mx-auto animate-apDeArriba ">
@@ -221,7 +224,7 @@ export default function AgregarLegajo() {
         </div>
        <CheckBox
        handleCheck={handleCheck}
-       state={form}
+       state={form?.activo}
        />
         <Boton1 onClick={guardarLegajo}>Guardar Datos</Boton1>
       </form>

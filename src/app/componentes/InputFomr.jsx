@@ -17,7 +17,7 @@ export default function InputFomr({
         {children}
         <select name={name} disabled={disabled} id="" onChange={onChange} value={value} className="ml-5 text-primary-text  bg-transparent ">
           {options?.map((option, i) => (
-            <option disabled={disabled} key={i} value={value} className="p-1">
+            <option disabled={disabled} key={i}  className="p-1">
               {option}
             </option>
           ))}

@@ -2,8 +2,9 @@
 import { contextData } from "@/context/contextData";
 
 export default function BodyTablaAlumnos() {
-  const { legajos } = contextData((state) => ({
+  const { legajos, filtroActivo } = contextData((state) => ({
     legajos: state.legajos,
+    filtroActivo: state.filtroActivo,
   }));
   const cargarPantalla = contextData((state) => state.cargarPantalla);
   const capturarLegajo = contextData((state) => state.capturarLegajo);
@@ -11,10 +12,20 @@ export default function BodyTablaAlumnos() {
     cargarPantalla("irALegajo");
     capturarLegajo(uid);
   };
+
   return (
     <tbody className="divide-y divide-gray-200 my-3">
       {legajos
-        ?.filter((leg) => leg.activo == true)
+        ?.filter((leg) => {
+          if (filtroActivo == "activos") {
+            return leg.activo == true;
+          }
+          if (filtroActivo == "inactivos") {
+            return leg.activo == false;
+          } else {
+            return leg;
+          }
+        })
         ?.map((leg) => (
           <tr
             onClick={(e) => captaruid(e, leg.uid)}

@@ -1,28 +1,39 @@
 import { create } from "zustand";
 import { v4 as uuidv4 } from "uuid";
-import { toast } from "react-hot-toast";
 
 export const contextData = create((set, get) => ({
-    label:"",
+  label: "",
   captarUidLegajo: "",
   newLegajo: {},
   legajos: [],
   busquedaLegajo: "",
-
+  filtroActivo: "",
   llenarBusquedaLegajo: (id) => {
     set((state) => ({
       ...state,
       busquedaLegajo: id,
     }));
   },
+  cargarFiltro: (bool) => {
+    set((state) => ({
+      ...state,
+      filtroActivo: bool,
+    }));
+  },
   capturarLegajo: (uid) => {
-    const {legajos}=get()
-    if(legajos.length<=0)return
-    const find=legajos?.find(leg=>leg.uid==uid)
+    const { legajos } = get();
+    if (legajos.length <= 0) return;
+    const find = legajos?.find((leg) => leg.uid == uid);
     set((state) => ({
       ...state,
       captarUidLegajo: find,
     }));
+  },
+  actualizarLegajo: (obj) => {
+    const { legajos } = get();
+    let index = legajos.findIndex((item) => item.uid == obj.uid);
+    legajos[index] = obj;
+    set((state) => ({ ...state, legajos }));
   },
   cargarNewLegajo: (obj) => {
     const { legajos } = get();
@@ -34,10 +45,8 @@ export const contextData = create((set, get) => ({
       legajos: newArray,
     }));
   },
-  cargarPantalla:(name)=>{
-    set((state)=>({...state,
-        label: name
-    }))
+  cargarPantalla: (name) => {
+    set((state) => ({ ...state, label: name }));
     // console.log("cargando pantalla")
-  }
+  },
 }));
