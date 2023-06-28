@@ -1,5 +1,6 @@
 "use client";
-import { contextData } from "@/context/contextData";
+import { contextData, contextOrdenar } from "@/context/contextData";
+import { shallow } from "zustand/shallow";
 
 export default function BodyTablaAlumnos() {
   const { legajos, filtroActivo } = contextData((state) => ({
@@ -13,9 +14,22 @@ export default function BodyTablaAlumnos() {
     capturarLegajo(uid);
   };
 
+  const order = contextOrdenar(
+    (state) => state.ordenarPor,
+    shallow
+  );
   return (
     <tbody className="divide-y divide-gray-200 my-3">
       {legajos
+        ?.sort((a, b) => {
+          if(order=="nombreLegajo"){
+            if (a.nombreLegajo < b.nombreLegajo) return -1;
+            if (a.nombreLegajo > b.nombreLegajo) return 1;
+          }if (order=="legajo") return a.legajo-b.legajo
+          if (order=="dniLegajo") {
+            return a.dniLegajo-b.dniLegajo
+          }
+        })
         ?.filter((leg) => {
           if (filtroActivo == "activos") {
             return leg.activo == true;

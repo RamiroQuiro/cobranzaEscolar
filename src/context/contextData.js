@@ -50,3 +50,12 @@ export const contextData = create((set, get) => ({
     // console.log("cargando pantalla")
   },
 }));
+
+
+export const contextOrdenar = create((set, get) => ({
+  ordenarPor: "nombreLegajo",
+  cambiarOrden: (order) => {
+    
+    set((state)=>({...state, ordenarPor: order}));
+    },
+}))
