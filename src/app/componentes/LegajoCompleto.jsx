@@ -86,7 +86,7 @@ export default function LegajoCompleto() {
         {captarUidLegajo?.nombreLegajo} | {captarUidLegajo?.legajo}
       </CabeceraContenedor>
       <div className="absolute top-2  right-3 space-x-1">
-        <BotonEmoji onClick={() => cargarPantalla("listar")}>🔙</BotonEmoji>
+        <BotonEmoji onClick={() => cargarPantalla("irALegajo")}>🔙</BotonEmoji>
         <BotonEmoji status={edit} onClick={toggle}>✏️</BotonEmoji>
       </div>
       <div>

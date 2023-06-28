@@ -26,9 +26,8 @@ export default function BodyTablaAlumnos() {
             if (a.nombreLegajo < b.nombreLegajo) return -1;
             if (a.nombreLegajo > b.nombreLegajo) return 1;
           }if (order=="legajo") return a.legajo-b.legajo
-          if (order=="dniLegajo") {
-            return a.dniLegajo-b.dniLegajo
-          }
+          if (order=="dniLegajo") return a.dniLegajo-b.dniLegajo
+          if (order=="activo")  if (a.activo > b.activo) return -1;
         })
         ?.filter((leg) => {
           if (filtroActivo == "activos") {

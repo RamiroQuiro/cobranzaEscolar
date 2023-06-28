@@ -31,7 +31,7 @@ const handleClick=(e)=>{
       </th>
       <th 
         onClick={handleClick}
-        id="estado"
+        id="activo"
         className="whitespace-nowrap px-1 py-2 font-medium text-primary-800 cursor-pointer  hover:bg-primary-300/20 duration-200">
         Estado
       </th>
