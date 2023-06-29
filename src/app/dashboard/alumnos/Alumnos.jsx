@@ -23,7 +23,7 @@ export default function Alumnos() {
 
   return (
     <SectionBackground>
-      <div className="bg-primary-800 overflow-hidden rounded-lg flex flex-col items-center justify-between w-1/3 min-h-[250px] flex-auto pb-6">
+      <div className="bg-primary-800 overflow-hidden rounded-lg flex flex-col items-center justify-between md:w-1/4 min-h-[250px] flex-auto pb-6">
         <CabeceraContenedor>Buscar alumno</CabeceraContenedor>
 
         <PanelBusqueda />
