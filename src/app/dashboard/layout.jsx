@@ -11,7 +11,7 @@ export default function DashboardLayout({ children }) {
   return (
     <html lang="es" >
       <body className="" >
-        <main className="w-screen min-h-screen overflow-x-hidden relative">
+        <main className="w-screen min-h-screen  relative">
           <NavBar/>
         {children}
         </main>

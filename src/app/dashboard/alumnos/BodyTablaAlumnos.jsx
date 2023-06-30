@@ -14,20 +14,18 @@ export default function BodyTablaAlumnos() {
     capturarLegajo(uid);
   };
 
-  const order = contextOrdenar(
-    (state) => state.ordenarPor,
-    shallow
-  );
+  const order = contextOrdenar((state) => state.ordenarPor, shallow);
   return (
     <tbody className="divide-y divide-gray-200 my-3">
       {legajos
         ?.sort((a, b) => {
-          if(order=="nombreLegajo"){
+          if (order == "nombreLegajo") {
             if (a.nombreLegajo < b.nombreLegajo) return -1;
             if (a.nombreLegajo > b.nombreLegajo) return 1;
-          }if (order=="legajo") return a.legajo-b.legajo
-          if (order=="dniLegajo") return a.dniLegajo-b.dniLegajo
-          if (order=="activo")  if (a.activo > b.activo) return -1;
+          }
+          if (order == "legajo") return a.legajo - b.legajo;
+          if (order == "dniLegajo") return a.dniLegajo - b.dniLegajo;
+          if (order == "activo") if (a.activo > b.activo) return -1;
         })
         ?.filter((leg) => {
           if (filtroActivo == "activos") {

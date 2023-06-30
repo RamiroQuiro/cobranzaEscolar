@@ -5,16 +5,17 @@ import RealizarPago from './RealizarPago';
 import TablaCobranzas from './TablaCobranzas';
 import CicloLectivos from './CicloLectivos';
 import Conceptos from './Conceptos';
+import PanelCobranzas from './PanelCobranzas';
+import FormularioCargaCicloLectivo from './FormularioCargaCicloLectivo';
 
 export default function RenderPantallas({captarUidLegajo}) {
     const {pantallaActiva}=contextCobranzas((state)=>({
         pantallaActiva:state.pantallaActiva
     }))
 
-    console.log(pantallaActiva)
   switch (pantallaActiva) {
     case "pagosEfectuados":
-        return <TablaCobranzas />
+        return <PanelCobranzas />
         break;
     case "realizarPago":
         return <RealizarPago />
@@ -23,8 +24,10 @@ export default function RenderPantallas({captarUidLegajo}) {
         return <CicloLectivos/>
     case "conceptos":
         return <Conceptos/>
+    case "addCicloLectivo":
+        return <Conceptos/>
     default:
-        return <TablaCobranzas />
+        return <FormularioCargaCicloLectivo />
         break;
   }
 }
