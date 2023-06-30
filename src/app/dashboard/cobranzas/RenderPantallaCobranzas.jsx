@@ -1,12 +1,12 @@
 "use client"
 
 import { contextCobranzas } from '@/context/contextCobranzas';
-import RealizarPago from './RealizarPago';
 import CicloLectivos from './CicloLectivos';
 import Conceptos from './conceptos/Conceptos';
 import PanelCobranzas from './PanelCobranzas';
 import FormularioCargaCicloLectivo from './FormularioCargaCicloLectivo';
 import AgregarConcepto from './conceptos/AgregarConcepto';
+import RealizarPago from './pagos/RealizarPago';
 
 export default function RenderPantallas({captarUidLegajo}) {
     const {pantallaActiva}=contextCobranzas((state)=>({
@@ -27,6 +27,7 @@ export default function RenderPantallas({captarUidLegajo}) {
         return <FormularioCargaCicloLectivo/>
     case "agregarConceptos":
         return <AgregarConcepto/>
+  
     default:
         return <PanelCobranzas  />
         break;
