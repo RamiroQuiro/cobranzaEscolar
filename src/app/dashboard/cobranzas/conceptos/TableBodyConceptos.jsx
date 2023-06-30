@@ -1,12 +1,15 @@
-import { contextCobranzas } from "@/context/contextCobranzas"
+import BotonEmoji from '@/app/componentes/BotonEmoji'
+import { contextCobranzas } from '@/context/contextCobranzas'
+import React from 'react'
 
-export default function BodyTablaCicloLectivos() {
-    const {ciclosLectivos}=contextCobranzas((state)=>({
-        ciclosLectivos:state.ciclosLectivos
+export default function TableBodyConceptos() {
+    const {conceptos}=contextCobranzas((state)=>({
+        conceptos:state.conceptos
           }))
 
           const captaruid=contextCobranzas((state)=>state.captaruid)
 
+          console.log(conceptos)
   return (
     <tbody className="divide-y divide-gray-200 my-3">
     
@@ -30,20 +33,20 @@ export default function BodyTablaCicloLectivos() {
     //       return leg;
     //     }
     //   })
-      ciclosLectivos?.map((leg) => (
+    conceptos?.map((leg) => (
         <tr
           onClick={() => captaruid(leg.uid)}
           key={leg.id}
           className="odd:bg-primary-300/50 cursor-pointer hover:bg-gray-200/80 duration-200"
         >
           <td className="whitespace-nowrap px-4 py-2 font-medium text-primary-text">
-            {leg.cicloLectivo}
+            {leg.concepto}
           </td>
           <td className="whitespace-nowrap px-4 py-2 text-primary-text">
-            {leg.nivelEducativo}
+            {leg.montoConcepto}
           </td>
           <td className="whitespace-nowrap px-4 py-2 text-primary-text">
-            {leg.añoCiclo}
+            {leg.periodoCobroConcepto}
           </td>
           <td className="whitespace-nowrap  text-primary-text">
             <p
@@ -55,6 +58,9 @@ export default function BodyTablaCicloLectivos() {
             >
               {leg.activo == true ? "activo" : "inactivo"}
             </p>
+          </td>
+          <td className="whitespace-nowrap px-1 py-2 text-center text-primary-text">
+           <BotonEmoji>✏️</BotonEmoji> 
           </td>
         </tr>
       ))}

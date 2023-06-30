@@ -45,9 +45,9 @@ export default function FormularioCargaCicloLectivo() {
       onChange: handleForm,
     },
     {
-      name: "cuota",
+      name: "valorDelCicloLectivo",
       type: "text",
-      label: "Cuota Mensual del Ciclo Lectivo",
+      label: "Valor del Ciclo Lectivo",
       id: 4,
       onChange: handleForm,
     },

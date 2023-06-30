@@ -10,7 +10,7 @@ export default function PanelCobranzas() {
       <CabeceraContenedor>PanelCobranzas</CabeceraContenedor>
       <div className="w-full py-3 flex items-center justify-evenly ">
         <BotonBorderRedondos className={"border-primary-800 border-2"}>
-          Agregar Ciclo
+          Agregar Pago
         </BotonBorderRedondos>
       </div>
       <div>

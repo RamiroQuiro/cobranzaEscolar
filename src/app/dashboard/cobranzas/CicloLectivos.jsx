@@ -14,7 +14,7 @@ const cargarPantalla=contextCobranzas((state)=>state.cargarPantalla)
       <div className="w-full py-3 flex items-center justify-evenly ">
          <BotonBorderRedondos 
          id={"addCicloLectivo"}
-         onClick={cargarPantalla}
+         onClick={(e)=>cargarPantalla(e.target.id)}
          className={"border-primary-800 border-2"}>Agregar Ciclo</BotonBorderRedondos>
       </div>
       <div className="md:w-[96%] mx-auto my-8 rounded-lg bg-white overflow-hidden">
