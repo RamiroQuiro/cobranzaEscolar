@@ -6,6 +6,7 @@ import ContenedorDePantallas from "@/app/componentes/ContenedorDePantallas";
 import InputFomr from "@/app/componentes/InputFomr";
 import InputSearchLegajo from "@/app/componentes/InputSearchLegajo";
 import { contextCobranzas } from "@/context/contextCobranzas";
+import { contextData } from "@/context/contextData";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -18,6 +19,8 @@ export default function RealizarPago() {
   const handleForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
+  const captarUidLegajo = contextData((state) => state.captarUidLegajo);
   const handleCheck = () => {
     setChecked((state) => !state);
     setForm({ ...form, activo: checked });
@@ -53,31 +56,93 @@ export default function RealizarPago() {
     setForm({});
     cargarPantalla("conceptos");
   };
+
+  console.log(captarUidLegajo);
   return (
     <ContenedorDePantallas>
       <CabeceraContenedor>Ralizar Pago</CabeceraContenedor>
 
-     <InputSearchLegajo/>
+      <InputSearchLegajo />
       <form
         action=""
-        className="py-4 md:px-5 w-full flex flex-wrap items-center justify-between mx-auto gap-2"
+        className="py-4 md:px-5 w-full border-t border-primary-100 pt-8 flex flex-wrap items-center justify-between mx-auto gap-2"
       >
         <div className=" w-full flex flex-wrap items-center justify-between mx-auto gap-2">
-          {inputs?.map((input, index) => {
-            return (
+        <div className="flex items-center justify-stretch w-full gap-2 mb-4">
+            <div className="">
               <InputFomr
-                options={input.options}
-                name={input.name}
-                onChange={input.onChange}
-                type={input.type}
-                key={input.id}
+                className={"w-"}
+                onChange={handleForm}
+                type={"select"}
+                options={["recibo", "factura B", "presupuesto"]}
               >
-                {input.label}
+                Tipo de Recibo
               </InputFomr>
-            );
-          })}
+            </div>
+            <div className="w-1/2 flex-grow">
+              <InputFomr onChange={handleForm} type={"text"}>
+               n° 001
+              </InputFomr>
+            </div>
+          </div>
+          <div className="flex items-center justify-between w-full gap-2">
+            <InputFomr
+              classNameInput={"bg-white font-bold"}
+              value={captarUidLegajo?.nombreLegajo}
+              onChange={handleForm}
+            >
+              Nombre Alumno
+            </InputFomr>
+            <InputFomr
+              className={"w-1/3"}
+              classNameInput={"bg-white font-bold"}
+              value={captarUidLegajo?.legajo}
+              onChange={handleForm}
+            >
+              N° de Legajo
+            </InputFomr>
+          </div>
+          <div className="flex items-center justify-stretch w-full gap-2">
+            <div className="w-">
+              <InputFomr
+                className={"w-"}
+                onChange={handleForm}
+                type={"select"}
+                options={["contado", "transferencia", "cheque"]}
+              >
+                Forma de pagos
+              </InputFomr>
+            </div>
+            <div className="w-1/2 flex-grow">
+              <InputFomr onChange={handleForm} type={"text"}>
+                Moto a Pagar
+              </InputFomr>
+            </div>
+          </div>
+          <div className="flex items-center justify-stretch w-full gap-2">
+            <div className="w-">
+              <InputFomr
+                className={"w-"}
+                onChange={handleForm}
+                type={"text"}
+                classNameInput={"bg-white font-bold"}
+                value={captarUidLegajo?.cicloLectivo}
+              >
+                Ciclo Lectivo
+              </InputFomr>
+            </div>
+            <div className="w-">
+              <InputFomr
+                className={"w-"}
+                onChange={handleForm}
+                type={"text"}
+                classNameInput={"bg-white font-bold"}
+              >
+                Grado Escolar
+              </InputFomr>
+            </div>
+          </div>
           <textarea
-            onChange={handleForm}
             name="observacionesCicloLectivo"
             id=""
             cols="30"
@@ -88,8 +153,8 @@ export default function RealizarPago() {
             Obeservaciones
           </textarea>
         </div>
-        <CheckBox handleCheck={handleCheck} state={form?.activo} />
-        <Boton1 onClick={guardarLegajo}>Guardar Datos</Boton1>
+
+        <Boton1 onClick={"guardarLegajo"}>Realizar Pago</Boton1>
       </form>
     </ContenedorDePantallas>
   );

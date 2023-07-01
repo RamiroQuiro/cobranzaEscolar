@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import InputFomr from "./InputFomr";
 import { contextData } from "@/context/contextData";
+import { contextCobranzas } from "@/context/contextCobranzas";
 
 export default function InputSearchLegajo() {
   const [encontrado, setEncontrado] = useState(null);
@@ -22,8 +23,11 @@ export default function InputSearchLegajo() {
       let nombreApellidoTutor = leg.nombreApellidoTutor
         ?.toUpperCase()
         .includes(search?.toUpperCase());
-      if (busquedaLegajo || dniLegajo || legajo || nombreApellidoTutor)
-        return leg;
+      if (busquedaLegajo || dniLegajo || legajo || nombreApellidoTutor) {
+        if (leg.activo == true) {
+          return leg;
+        }
+      }
     });
     return encontrado;
   };
@@ -33,13 +37,17 @@ export default function InputSearchLegajo() {
     setEncontrado(busquedaFiltros(legajos, search));
   };
 
-const capturarLegajo=contextData((state)=>state.capturarLegajo)
+  const capturarLegajo = contextData((state) => state.capturarLegajo);
 
-  console.log(encontrado);
+  const handleClick = (leg) => {
+    capturarLegajo(leg.uid);
+    setSearch("");
+  };
   return (
     <div>
-      <div className="my-5 md:w-11/12 mx-auto relative">
-        <InputFomr onChange={handleSearch} type={"search"}>
+      <div className="my-5 md:w-10/12 mx-auto relative">
+        <span className="absolute top-3 right-2">🔎</span>
+        <InputFomr value={search} onChange={handleSearch} type={"search"}>
           Buscar Alumno | Legajo | Tutor
         </InputFomr>
         {search?.length >= 2 && (
@@ -47,11 +55,11 @@ const capturarLegajo=contextData((state)=>state.capturarLegajo)
             {encontrado ? (
               encontrado?.map((leg, i) => (
                 <div
-                onClick={()=>capturarLegajo(leg.uid)}
+                  onClick={() => handleClick(leg)}
                   className="w-full animate-aparecer py-2 rounded hover:bg-gray-100  border-b cursor-pointer px-2 text-sm "
                   key={i}
                 >
-                  {leg.nombreLegajo} | {leg.dniLegajo} | {leg.legajo}
+                  ► {leg.nombreLegajo} | ► {leg.dniLegajo} | ► {leg.legajo}
                 </div>
               ))
             ) : (

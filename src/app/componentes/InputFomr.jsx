@@ -5,8 +5,8 @@ export default function InputFomr({
   name,
   onChange,
   disabled,
-  id,
-  options,
+  id,className,
+  options,classNameInput
 }) {
   if (type == "select") {
     return (
@@ -49,7 +49,7 @@ export default function InputFomr({
 
   return (
     <div
-      className={`flex flex-col  items-start justify-between w-full relative py-2  animate-[aparecer_${
+      className={`${className} flex flex-col  items-start justify-between w-full relative py-2  animate-[aparecer_${
         id / 2
       }s]`}
     >
@@ -61,7 +61,7 @@ export default function InputFomr({
         id={name}
         value={value}
         required={true}
-        className="peer w-full py-1 pl-8 bg-transparent text-sm shadow-none border border-primary-100/50 rounded-md text-gray-500  outline-none focus:outline-none relative z-10 valid:bg-transparent disabled:font-bold"
+        className={`${classNameInput} peer w-full py-1 pl-8 bg-transparent text-sm shadow-none border border-primary-100/50 rounded-md text-gray-500  outline-none focus:outline-none relative z-10 valid:bg-transparent disabled:font-bold`}
       />
       {/* <FontAwesomeIcon icon={faIcon} className="text-gray-500 absolute left-0 bottom-3 h-2/6" />  */}
       <label

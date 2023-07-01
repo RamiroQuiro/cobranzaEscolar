@@ -149,8 +149,16 @@ export default function AgregarLegajo() {
       type: "select",
       options: ["jardin", "primaria", "secundaria"],
       onChange: handleForm,
-      children: " Nivel Educativo",
+      children: "Nivel Educativo",
       id: 31,
+    },
+    {
+      label: "text",
+      name: "nivelEducativo",
+      type: "text",
+      onChange: handleForm,
+      children: "Grado Educativo",
+      id: 32,
     },
   ];
 
