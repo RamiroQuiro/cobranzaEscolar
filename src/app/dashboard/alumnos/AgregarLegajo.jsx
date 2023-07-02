@@ -166,10 +166,10 @@ export default function AgregarLegajo() {
     },
     {
       label: "text",
-      name: "nivelEducativo",
+      name: "cicloLectivo",
       type: "text",
       onChange: handleForm,
-      children: "Grado Educativo",
+      children: "Ciclo Lectivo",
       id: 32,
     },
   ];

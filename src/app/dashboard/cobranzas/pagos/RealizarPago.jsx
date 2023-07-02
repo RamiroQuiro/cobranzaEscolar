@@ -14,12 +14,13 @@ export default function RealizarPago() {
   const [form, setForm] = useState({ activo: true });
   const [checked, setChecked] = useState(true);
   const cargarPantalla = contextCobranzas((state) => state.cargarPantalla);
+  const conceptos = contextCobranzas((state) => state.conceptos);
 
   const cargarConceptos = contextCobranzas((state) => state.cargarConceptos);
   const handleForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
+console.log(conceptos)
   const captarUidLegajo = contextData((state) => state.captarUidLegajo);
   const handleCheck = () => {
     setChecked((state) => !state);
@@ -130,8 +131,8 @@ export default function RealizarPago() {
                 onChange={handleForm}
                 type={"select"}
 
-                value={captarUidLegajo?.conceptos}
-                options={["cuota Mensual","Uniforme Escolar","seguro Escolar"]}
+                value={conceptos?.filter(conc=>conc.activo)?.map(concep=>concep.uid)}
+                options={conceptos?.filter(conc=>conc.activo)?.map(concep=>concep.concepto)}
                 classNameInput={"bg-white font-bold"}
               >
               Concepto

@@ -98,7 +98,7 @@ export default function LegajoCompleto() {
           action=""
           className="py-4 md:px-5 w-full flex flex-wrap items-center justify-between mx-auto gap-2"
         >
-          <div className=" w-full flex flex-wrap items-center justify-between  mx-auto gap-2">
+          <div className=" w-full flex flex-wrap items-center justify-between  mx-auto gap-y-4">
             <h2 className="font-medium my-5 w-full">Legajo de Alumno </h2>
 
             {etiquetas?.map((etiq, i) => (
