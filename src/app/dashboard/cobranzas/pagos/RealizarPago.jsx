@@ -80,9 +80,8 @@ export default function RealizarPago() {
               </InputFomr>
             </div>
             <div className="w-1/2 flex-grow">
-              <InputFomr onChange={handleForm} type={"text"}>
-               n° 001
-              </InputFomr>
+              
+               { }n° 001
             </div>
           </div>
           <div className="flex items-center justify-between w-full gap-2">
@@ -136,6 +135,7 @@ export default function RealizarPago() {
                 className={"w-"}
                 onChange={handleForm}
                 type={"text"}
+                value={captarUidLegajo?.gradoLectivo}
                 classNameInput={"bg-white font-bold"}
               >
                 Grado Escolar

@@ -1,47 +1,48 @@
 import { create } from "zustand";
 import { v4 as uuidv4 } from "uuid";
 
-
-const legajoPrueba=[
+const legajoPrueba = [
   {
-    nombreLegajo:"Carlos Jesus Quiroga Carrizo",
-    legajo:"2233",
-    dniLegajo:"48151410",
-    fechaNac:"26/09/2021",
-    nombreApellidoTutor:"Ramiro Quiroga",
-    domicilio:"Mza 14 lote ",
-    celular:"3854771992",
-    email:"<EMAIL>",
-    dniTutor:"333882244",
-    domicilioTutor:"Mza 14 lote ",
-    emailTutor:"rama.exe.13@gmail.com",
-    fechaIngreso:"15/08/2005",
-    cicloLectivo:"primaria",
-    sexo:"masculino",
-    nacionalidad:"argentina",
-    uid:15426,
-    activo:true
+    nombreLegajo: "Carlos Jesus Quiroga Carrizo",
+    legajo: "2233",
+    dniLegajo: "48151410",
+    fechaNac: "26/09/2021",
+    nombreApellidoTutor: "Ramiro Quiroga",
+    domicilio: "Mza 14 lote ",
+    celular: "3854771992",
+    email: "<EMAIL>",
+    dniTutor: "333882244",
+    domicilioTutor: "Mza 14 lote ",
+    emailTutor: "rama.exe.13@gmail.com",
+    fechaIngreso: "15/08/2005",
+    cicloLectivo: "primaria",
+    gradoLectivo: "",
+    sexo: "masculino",
+    nacionalidad: "argentina",
+    uid: 15426,
+    activo: true,
   },
   {
-    nombreLegajo:"Virginia Jazmin Quiroga Carrizo",
-    legajo:"2234",
-    dniLegajo:"48151410",
-    fechaNac:"26/09/2021",
-    nombreApellidoTutor:"Ramiro Quiroga",
-    domicilio:"Mza 14 lote ",
-    celular:"3854771992",
-    email:"<EMAIL>",
-    dniTutor:"333882244",
-    domicilioTutor:"Mza 14 lote ",
-    emailTutor:"rama.exe.13@gmail.com",
-    fechaIngreso:"15/08/2005",
-    cicloLectivo:"primaria",
-    sexo:"masculino",
-    nacionalidad:"argentina",
-    uid:154526,
-    activo:true
+    nombreLegajo: "Virginia Jazmin Quiroga Carrizo",
+    legajo: "2234",
+    dniLegajo: "48151410",
+    fechaNac: "26/09/2021",
+    nombreApellidoTutor: "Ramiro Quiroga",
+    domicilio: "Mza 14 lote ",
+    celular: "3854771992",
+    email: "<EMAIL>",
+    dniTutor: "333882244",
+    domicilioTutor: "Mza 14 lote ",
+    emailTutor: "rama.exe.13@gmail.com",
+    fechaIngreso: "15/08/2005",
+    cicloLectivo: "primaria",
+    gradoLectivo: "",
+    sexo: "masculino",
+    nacionalidad: "argentina",
+    uid: 154526,
+    activo: true,
   },
-]
+];
 
 export const contextData = create((set, get) => ({
   label: "",
@@ -93,13 +94,9 @@ export const contextData = create((set, get) => ({
   },
 }));
 
-
 export const contextOrdenar = create((set, get) => ({
   ordenarPor: "nombreLegajo",
   cambiarOrden: (order) => {
-    
-    set((state)=>({...state, ordenarPor: order}));
-    },
-}))
-
-
+    set((state) => ({ ...state, ordenarPor: order }));
+  },
+}));

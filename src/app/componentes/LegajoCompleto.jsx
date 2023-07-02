@@ -77,7 +77,8 @@ export default function LegajoCompleto() {
     { nombre: "Celular Tutor", name: "celularTutor", type: "tel" },
     { nombre: "Correo electronico Tutor", name: "emailTutor", type: "email" },
     { nombre: "Fecha de Ingreso", name: "fechaIngreso", type: "date" },
-    { nombre: "Nivel Educativo", name: "nivelEducativo", type: "text" },
+    { nombre: "Nivel Educativo", name: "cicloLectivo", type: "text" },
+      { nombre: "Grado Educativo", name: "gradoLectivo", type: "text" },
   ];
 
   return (
