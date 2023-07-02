@@ -37,7 +37,7 @@ export default function AgregarConcepto() {
         onChange: handleForm,
       },
       {
-        name: "periodoCobroConcepto",
+        name: "tipoPago",
         type: "select",
         options: ["mensual", "trimestral", "unicaVez", "anual"],
         label: "Modo que se cobrara el Concepto",

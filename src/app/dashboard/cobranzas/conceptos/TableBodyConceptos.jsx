@@ -43,10 +43,10 @@ export default function TableBodyConceptos() {
             {leg.concepto}
           </td>
           <td className="whitespace-nowrap px-4 py-2 text-primary-text">
-            {leg.montoConcepto}
+            $ {leg.montoConcepto}
           </td>
           <td className="whitespace-nowrap px-4 py-2 text-primary-text">
-            {leg.periodoCobroConcepto}
+            {leg.tipoPago}
           </td>
           <td className="whitespace-nowrap  text-primary-text">
             <p

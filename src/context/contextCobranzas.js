@@ -1,13 +1,15 @@
 import { create } from "zustand";
 import { v4 as uuidv4 } from "uuid";
+import { ciclos,conceptosCargados } from "../base/cicloLectivo";
+
 
 
 
 export const contextCobranzas = create((set, get) => ({
   pantallaActiva: "pagosEfectuados",
   pagosEfectuados: [],
-  ciclosLectivos: [],
-  conceptos: [],
+  ciclosLectivos: ciclos,
+  conceptos: conceptosCargados,
   uidActivo: "",
   captaruid: () => {
     set((uid) => ({

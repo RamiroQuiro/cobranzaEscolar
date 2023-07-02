@@ -51,7 +51,7 @@ export default function InputSearchLegajo() {
           Buscar Alumno | Legajo | Tutor
         </InputFomr>
         {search?.length >= 2 && (
-          <div className="w-full  rounded-xl animate-apDeArriba bg-white  text-sm  flex flex-col items-start gap-y-2">
+          <div className="w-full absolute z-30 shadow-md  rounded-xl animate-apDeArriba bg-white  text-sm  flex flex-col items-start gap-y-2">
             {encontrado ? (
               encontrado?.map((leg, i) => (
                 <div

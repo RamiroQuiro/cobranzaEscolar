@@ -57,7 +57,6 @@ export default function RealizarPago() {
     cargarPantalla("conceptos");
   };
 
-  console.log(captarUidLegajo);
   return (
     <ContenedorDePantallas>
       <CabeceraContenedor>Ralizar Pago</CabeceraContenedor>
@@ -68,21 +67,23 @@ export default function RealizarPago() {
         className="py-4 md:px-5 w-full border-t border-primary-100 pt-8 flex flex-wrap items-center justify-between mx-auto gap-2"
       >
         <div className=" w-full flex flex-wrap items-center justify-between mx-auto gap-2">
-        <div className="flex items-center justify-stretch w-full gap-2 mb-4">
+          <div className="flex items-center justify-end w-full gap-2 mb-4">
             <div className="">
               <InputFomr
                 className={"w-"}
                 onChange={handleForm}
                 type={"select"}
-                options={["recibo", "factura B", "presupuesto"]}
+                options={[
+                  "recibo",
+                  "factura B",
+                  "presupuesto",
+                  "nota de credito",
+                ]}
               >
                 Tipo de Recibo
               </InputFomr>
             </div>
-            <div className="w-1/2 flex-grow">
-              
-               { }n° 001
-            </div>
+            <div className="rounded-lg bg-white px-5 py-2 flex ">{}n° 001</div>
           </div>
           <div className="flex items-center justify-between w-full gap-2">
             <InputFomr
@@ -100,25 +101,7 @@ export default function RealizarPago() {
             >
               N° de Legajo
             </InputFomr>
-          </div>
-          <div className="flex items-center justify-stretch w-full gap-2">
-            <div className="w-">
-              <InputFomr
-                className={"w-"}
-                onChange={handleForm}
-                type={"select"}
-                options={["contado", "transferencia", "cheque"]}
-              >
-                Forma de pagos
-              </InputFomr>
-            </div>
-            <div className="w-1/2 flex-grow">
-              <InputFomr onChange={handleForm} type={"text"}>
-                Moto a Pagar
-              </InputFomr>
-            </div>
-          </div>
-          <div className="flex items-center justify-stretch w-full gap-2">
+          </div> <div className="flex items-center justify-between w-full gap-2">
             <div className="w-">
               <InputFomr
                 className={"w-"}
@@ -141,7 +124,38 @@ export default function RealizarPago() {
                 Grado Escolar
               </InputFomr>
             </div>
+            <div className="w-">
+              <InputFomr
+                className={"w-"}
+                onChange={handleForm}
+                type={"select"}
+
+                value={captarUidLegajo?.conceptos}
+                options={["cuota Mensual","Uniforme Escolar","seguro Escolar"]}
+                classNameInput={"bg-white font-bold"}
+              >
+              Concepto
+              </InputFomr>
+            </div>
           </div>
+          <div className="flex items-center justify-stretch w-full gap-2">
+            <div className="w-">
+              <InputFomr
+                className={"w-"}
+                onChange={handleForm}
+                type={"select"}
+                options={["contado", "transferencia", "cheque"]}
+              >
+                Forma de pagos
+              </InputFomr>
+            </div>
+            <div className="w-1/2 flex-grow">
+              <InputFomr onChange={handleForm} type={"text"}>
+                Moto a Pagar
+              </InputFomr>
+            </div>
+          </div>
+         
           <textarea
             name="observacionesCicloLectivo"
             id=""

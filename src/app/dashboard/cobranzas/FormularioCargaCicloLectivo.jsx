@@ -51,13 +51,13 @@ export default function FormularioCargaCicloLectivo() {
       id: 4,
       onChange: handleForm,
     },
-    {
-      name: "matriculaInicial",
-      type: "text",
-      label: "Matricula del Ciclo",
-      id: 5,
-      onChange: handleForm,
-    },
+    // {
+    //   name: "matriculaInicial",
+    //   type: "text",
+    //   label: "Matricula del Ciclo",
+    //   id: 5,
+    //   onChange: handleForm,
+    // },
   ];
   const guardarLegajo = (e) => {
     e.preventDefault();
