@@ -35,8 +35,8 @@ export default function DatosLegajo({legajo}) {
     </div>
     <div className="flex items-center bg-white w-full rounded-lg py-1 px-2 justify-around mx-auto">
       <div className="flex items-center w-1/2 justify-start gap-2">
-        <p>Nivel Educativo:</p>
-        <p className="font-medium text-base">{legajo?.nivelEducativo}</p>
+        <p>Ciclo Lectivo:</p>
+        <p className="font-medium text-base">{legajo?.cicloLectivo}</p>
       </div>
       <div className="flex items-center w-1/2 justify-start gap-2">
         <p>Fecha Ingreso:</p>

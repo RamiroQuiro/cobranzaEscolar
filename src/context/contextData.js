@@ -10,7 +10,7 @@ const legajoPrueba = [
     nombreApellidoTutor: "Ramiro Quiroga",
     domicilio: "Mza 14 lote ",
     celular: "3854771992",
-    email: "<EMAIL>",
+    email: "rama.exe.13@gmail.com",
     dniTutor: "333882244",
     domicilioTutor: "Mza 14 lote ",
     emailTutor: "rama.exe.13@gmail.com",

@@ -8,6 +8,7 @@ import { useState } from "react";
 import CheckBox from "./CheckBox";
 import { toast } from "react-hot-toast";
 import { shallow } from "zustand/shallow";
+import { contextCobranzas } from "@/context/contextCobranzas";
 
 export default function LegajoCompleto() {
   const { captarUidLegajo } = contextData((state) => ({
@@ -17,6 +18,7 @@ export default function LegajoCompleto() {
   const [edit, setEdit] = useState(false);
   const [form, setForm] = useState(captarUidLegajo);
   const cargarPantalla = contextData((state) => state.cargarPantalla);
+  const ciclosLectivos = contextCobranzas((state) => state.ciclosLectivos);
   const actualizarLegajo = contextData((state) => state.actualizarLegajo);
   const handleForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -77,7 +79,7 @@ export default function LegajoCompleto() {
     { nombre: "Celular Tutor", name: "celularTutor", type: "tel" },
     { nombre: "Correo electronico Tutor", name: "emailTutor", type: "email" },
     { nombre: "Fecha de Ingreso", name: "fechaIngreso", type: "date" },
-    { nombre: "Nivel Educativo", name: "cicloLectivo", type: "text" },
+    { nombre: "Ciclo Lectivo", name: "cicloLectivo", type: "select", options:ciclosLectivos?.map((ciclo)=>ciclo.cicloLectivo) ,value:ciclosLectivos?.map(cicl=>cicl.uid) },
       { nombre: "Grado Educativo", name: "gradoLectivo", type: "text" },
   ];
 
@@ -97,11 +99,14 @@ export default function LegajoCompleto() {
           className="py-4 md:px-5 w-full flex flex-wrap items-center justify-between mx-auto gap-2"
         >
           <div className=" w-full flex flex-wrap items-center justify-between  mx-auto gap-2">
-            <h2 className="font-medium my-5">Legajo de Alumno </h2>
+            <h2 className="font-medium my-5 w-full">Legajo de Alumno </h2>
 
             {etiquetas?.map((etiq, i) => (
-              <InputFomr
+              <div 
                 key={i}
+                className="w-1/3 flex-grow mx-2"
+              >
+              <InputFomr
                 options={etiq.options}
                 disabled={edit ? false : true}
                 onChange={handleForm}
@@ -111,6 +116,7 @@ export default function LegajoCompleto() {
               >
                 {etiq.nombre}
               </InputFomr>
+              </div>
             ))}
           </div>
           <CheckBox handleCheck={edit && handleCheck} state={form?.activo} />

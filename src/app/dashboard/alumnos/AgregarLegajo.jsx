@@ -4,17 +4,28 @@ import CabeceraContenedor from "@/app/componentes/CabeceraContenedor";
 import CheckBox from "@/app/componentes/CheckBox";
 import InputFomr from "@/app/componentes/InputFomr";
 import { contextData } from "@/context/contextData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { contextCobranzas } from "@/context/contextCobranzas";
 
 export default function AgregarLegajo() {
   const [form, setForm] = useState({ activo: true });
   const [checked, setChecked] = useState(true);
+  const ciclosLectivos = contextCobranzas((state) => state.ciclosLectivos);
+  const [ciclos, setCiclos] = useState(ciclosLectivos)
   const cargarNewLegajo = contextData((state) => state.cargarNewLegajo);
   const cargarPantalla = contextData((state) => state.cargarPantalla);
   const handleForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
+  useEffect(()=>{
+    const traerCiclos=()=>{
+      // fetch("http://localhost:3001/ciclo")
+    }
+
+
+  },[])
 
   const handleCheck = () => {
     setChecked((state) => !state);
@@ -145,9 +156,10 @@ export default function AgregarLegajo() {
     },
     {
       label: "select",
-      name: "nivelEducativo",
+      name: "cicloLectivo",
       type: "select",
-      options: ["jardin", "primaria", "secundaria"],
+      value:ciclos?.map((ciclo)=>ciclo.uid),
+      options: ciclos?.map((ciclo)=>ciclo.cicloLectivo),
       onChange: handleForm,
       children: "Nivel Educativo",
       id: 31,
@@ -195,38 +207,45 @@ export default function AgregarLegajo() {
                 </InputFomr>
               );
             })}
-          <h2 className="font-medium mt-8">Datos del Tutor</h2>
+          <h2 className="font-medium mt-8 w-full">Datos del Tutor</h2>
           {inputs
             ?.filter((input) => input.id >= 50 && input.id <= 59)
             ?.map((input, index) => {
-              return (
+              return ( <div
+                className="w-1/3 flex-grow mx-2"
+                  key={input.id}
+                >
                 <InputFomr
                   options={input.options}
                   label={input.label}
                   name={input.name}
                   onChange={input.onChange}
                   type={input.type}
-                  key={input.id}
                 >
                   {input.children}
                 </InputFomr>
+                </div>
               );
             })}
-          <h2 className="font-medium mt-8">Datos Escolar</h2>
+          <h2 className=" w-full font-medium mt-8">Datos Escolar</h2>
           {inputs
             ?.filter((input) => input.id >= 30 && input.id <= 39)
             ?.map((input, index) => {
               return (
+                <div
+                className="w-1/3 flex-grow mx-2"
+                  key={input.id}
+                >
                 <InputFomr
                   options={input.options}
                   label={input.label}
                   name={input.name}
                   onChange={input.onChange}
                   type={input.type}
-                  key={input.id}
                 >
                   {input.children}
                 </InputFomr>
+                </div>
               );
             })}
         </div>
