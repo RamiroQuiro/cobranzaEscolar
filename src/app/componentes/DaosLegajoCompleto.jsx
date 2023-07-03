@@ -10,7 +10,7 @@ export default function DaosLegajoCompleto({handleForm,etiq,edit,form,captarUidL
     options={etiq.options}
     disabled={edit ? false : true}
     onChange={handleForm}
-    value={!edit ? captarUidLegajo[etiq.name] : form[etiq.name]}
+    value={ form[etiq.name]}
     name={etiq.name}
     type={etiq.type}
   >

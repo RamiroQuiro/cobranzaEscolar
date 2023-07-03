@@ -32,10 +32,12 @@ export default function LegajoCompleto() {
 
   useEffect(() => {
     if(!captarUidLegajo || !ciclosLectivos)return
-    setOpcionesCicloLectivo(ciclosLectivos.find(opt=>opt.uid==captarUidLegajo.cicloLectivo))
-console.log(opcionesCicloLectivo)
-  }, [captarUidLegajo,ciclosLectivos,opcionesCicloLectivo])
-  
+    const cicloLec=ciclosLectivos.find(opt=>opt.uid==captarUidLegajo.cicloLectivo)
+    if(!cicloLec)return
+    else{
+      setForm({...form,cicloLectivo:cicloLec.label})
+    }
+  }, [captarUidLegajo,ciclosLectivos])
   const guardarLegajo = (e) => {
     e.preventDefault();
     actualizarLegajo(form);
@@ -90,7 +92,7 @@ console.log(opcionesCicloLectivo)
     { nombre: "Celular Tutor", name: "celularTutor", type: "tel" },
     { nombre: "Correo electronico Tutor", name: "emailTutor", type: "email" },
     { nombre: "Fecha de Ingreso", name: "fechaIngreso", type: "date" },
-    { nombre: "Ciclo Lectivo", name: "cicloLectivo", type: edit? "select":"text", options:!edit? opcionesCicloLectivo?.label : ciclosLectivos},
+    { nombre: "Ciclo Lectivo", name: "cicloLectivo", type: edit? "select":"text", options: ciclosLectivos},
       { nombre: "Grado Educativo", name: "gradoLectivo", type: "text" },
   ];
   return (
