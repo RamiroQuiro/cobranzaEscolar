@@ -40,7 +40,7 @@ export default function TableBodyConceptos() {
           className="odd:bg-primary-300/50 cursor-pointer hover:bg-gray-200/80 duration-200"
         >
           <td className="whitespace-nowrap px-4 py-2 font-medium text-primary-text">
-            {leg.concepto}
+            {leg.label}
           </td>
           <td className="whitespace-nowrap px-4 py-2 text-primary-text">
             $ {leg.montoConcepto}

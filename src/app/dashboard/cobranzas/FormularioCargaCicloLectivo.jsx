@@ -31,7 +31,7 @@ export default function FormularioCargaCicloLectivo() {
     {
       name: "nivelEducativo",
       type: "select",
-      options: ["primaria", "secundaria", "jardin"],
+      options: [{label:"primaria"}, {label:"secundaria"},{label: "jardin"}],
       label: "Nivel Educativo",
       id: 2,
       onChange: handleForm,
@@ -39,7 +39,7 @@ export default function FormularioCargaCicloLectivo() {
     {
       name: "añoCiclo",
       type: "select",
-      options: ["2020", "2021", "2022", "2023", "2024", "2025"],
+      options: [{label:"2023"},{label: "2024"},{label: "2025"}],
       label: "Año del Ciclo Lectivo",
       id: 3,
       onChange: handleForm,

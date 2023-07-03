@@ -23,7 +23,7 @@ export default function AgregarConcepto() {
     };
     const inputs = [
       {
-        name: "concepto",
+        name: "label",
         type: "text",
         label: "Concepto A Cobrar",
         id: 1,
@@ -39,7 +39,7 @@ export default function AgregarConcepto() {
       {
         name: "tipoPago",
         type: "select",
-        options: ["mensual", "trimestral", "unicaVez", "anual"],
+        options: [{label:"mensual"}, {label:"trimestral"}, {label:"unicaVez"}, {label:"anual"}],
         label: "Modo que se cobrara el Concepto",
         id: 3,
         onChange: handleForm,

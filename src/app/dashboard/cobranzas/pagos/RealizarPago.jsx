@@ -13,14 +13,17 @@ import { toast } from "react-hot-toast";
 export default function RealizarPago() {
   const [form, setForm] = useState({ activo: true });
   const [checked, setChecked] = useState(true);
+  const [conceptoSelec, setConceptoSelec] = useState(null)
   const cargarPantalla = contextCobranzas((state) => state.cargarPantalla);
-  const conceptos = contextCobranzas((state) => state.conceptos);
+  const {conceptos,comprobantes} = contextCobranzas((state) => ({
+    conceptos:state.conceptos,
+    comprobantes:state.comprobantes
+  }));
 
   const cargarConceptos = contextCobranzas((state) => state.cargarConceptos);
   const handleForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-console.log(conceptos)
   const captarUidLegajo = contextData((state) => state.captarUidLegajo);
   const handleCheck = () => {
     setChecked((state) => !state);
@@ -44,7 +47,7 @@ console.log(conceptos)
     {
       name: "periodoCobroConcepto",
       type: "select",
-      options: ["mensual", "trimestral", "unicaVez", "anual"],
+      options: [{label:"mensual"}, {label:"trimestral"}, {label:"unicaVez"}, {label:"anual"}],
       label: "Modo que se cobrara el Concepto",
       id: 3,
       onChange: handleForm,
@@ -57,10 +60,15 @@ console.log(conceptos)
     setForm({});
     cargarPantalla("conceptos");
   };
+const onSelectComprobante=(e)=>{
+  console.log(e.target.value)
+  setConceptoSelec(e.target.value)
+
+}
 
   return (
     <ContenedorDePantallas>
-      <CabeceraContenedor>Ralizar Pago</CabeceraContenedor>
+      <CabeceraContenedor>Realizar Pago</CabeceraContenedor>
 
       <InputSearchLegajo />
       <form
@@ -72,19 +80,14 @@ console.log(conceptos)
             <div className="">
               <InputFomr
                 className={"w-"}
-                onChange={handleForm}
+                onChange={onSelectComprobante}
                 type={"select"}
-                options={[
-                  "recibo",
-                  "factura B",
-                  "presupuesto",
-                  "nota de credito",
-                ]}
+                options={comprobantes}
               >
                 Tipo de Recibo
               </InputFomr>
             </div>
-            <div className="rounded-lg bg-white px-5 py-2 flex ">{}n° 001</div>
+            <div className="rounded-lg bg-white px-5 py-2 flex ">{comprobantes?.find(comp=>comp.uid==conceptoSelec)?.numeroComprobante}</div>
           </div>
           <div className="flex items-center justify-between w-full gap-2">
             <InputFomr
@@ -130,9 +133,7 @@ console.log(conceptos)
                 className={"w-"}
                 onChange={handleForm}
                 type={"select"}
-
-                value={conceptos?.filter(conc=>conc.activo)?.map(concep=>concep.uid)}
-                options={conceptos?.filter(conc=>conc.activo)?.map(concep=>concep.concepto)}
+                options={conceptos}
                 classNameInput={"bg-white font-bold"}
               >
               Concepto
@@ -145,7 +146,7 @@ console.log(conceptos)
                 className={"w-"}
                 onChange={handleForm}
                 type={"select"}
-                options={["contado", "transferencia", "cheque"]}
+                options={[{label:"contado"}, {label:"transferencia"},{label: "cheque"}]}
               >
                 Forma de pagos
               </InputFomr>
@@ -164,9 +165,9 @@ console.log(conceptos)
             placeholder="Observaciones"
             className="w-full border outline-none border-primary-200/50 bg-transparent rounded-xl p-2 text-sm"
             rows="5"
-          >
-            Obeservaciones
-          </textarea>
+            
+          />
+          
         </div>
 
         <Boton1 onClick={"guardarLegajo"}>Realizar Pago</Boton1>

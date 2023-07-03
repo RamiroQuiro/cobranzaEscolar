@@ -1,6 +1,6 @@
 export const ciclos = [
   {
-    cicloLectivo: "secundario 2023",
+    label: "secundario 2023",
     materias: ["Matemática Discreta I"],
     nivelEducativo: "secundaria",
     añoCiclo: "2023",
@@ -9,11 +9,21 @@ export const ciclos = [
     valorDelCicloLectivo: "1500",
     uid: 156951,
   },
+  {
+    label: "primaria 2023",
+    materias: ["Matemática Discreta I"],
+    nivelEducativo: "secundaria",
+    añoCiclo: "2023",
+    activo: true,
+    horarios: ["14-16", "18-20"],
+    valorDelCicloLectivo: "25000",
+    uid: 156953,
+  },
 ];
 
 export const conceptosCargados = [
   {
-    concepto: "Otro Concepto",
+    label: "Otro Concepto",
     montoConcepto: "",
     tipoPago: "",
     fechaInicio: "2023/07/01",
@@ -21,7 +31,7 @@ export const conceptosCargados = [
     uid: 1527,
   },
   {
-    concepto: "cuota mensual 2023",
+    label: "cuota mensual 2023",
     montoConcepto: "1200",
     tipoPago: "mensual",
     fechaInicio: "2023/07/01",
@@ -29,7 +39,7 @@ export const conceptosCargados = [
     uid: 1567,
   },
   {
-    concepto: "Matricula Primaria 2023",
+    label: "Matricula Primaria 2023",
     montoConcepto: "2200",
     tipoPago: "anual",
     activo: true,
@@ -37,7 +47,7 @@ export const conceptosCargados = [
     uid: 1568,
   },
   {
-    concepto: "cuota hermanos",
+    label: "cuota hermanos",
     montoConcepto: "600",
     tipoPago: "mensual",
     activo: true,
@@ -48,27 +58,27 @@ export const conceptosCargados = [
 
 export const comprobantes = [
   {
-    nombre: "Recibo",
+    label: "Recibo",
     descripcion: "Comprobante de pago por el servicio educativo.",
     codigoTipoDocumental: "REC",
     formatoArchivo: "pdf",
-    numeroComprobante: "000",
-    uid: 12345,
+    numeroComprobante:0,
+    uid: "12345",
   },
   {
-    nombre: "Factura B",
+    label: "Factura B",
     descripcion: "Factura B de pago por el servicio educativo.",
     codigoTipoDocumental: "FACTB",
     formatoArchivo: "pdf",
-    numeroComprobante: "000",
-    uid: 12346,
+    numeroComprobante: 0,
+    uid: "12346",
   },
   {
-    nombre: "Nota de Credito",
+    label: "Nota de Credito",
     descripcion: "Nota de Creadito.",
     codigoTipoDocumental: "CRED",
     formatoArchivo: "pdf",
-    numeroComprobante: "000",
-    uid: 12347,
+    numeroComprobante: 0,
+    uid: "12347",
   },
 ];

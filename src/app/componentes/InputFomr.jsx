@@ -15,10 +15,10 @@ export default function InputFomr({
         className="peer w- text-sm  py-1 mt-2 pl-4 focus:bg-transparent  bg-transparent shadow-none border rounded-lg p-2 text-primary-text  border-primary-100/50 outline-none   focus:outline-none relative"
       >
         {children}
-        <select name={name} disabled={disabled} id="" onChange={onChange} value={value} className="ml-5 text-primary-text  bg-transparent ">
+        <select name={name} disabled={disabled} id="" onChange={onChange}  className="ml-5 text-primary-text  bg-transparent ">
           {options?.map((option, i) => (
-            <option disabled={disabled} key={i} value={value}  className="p-1">
-              {option}
+            <option disabled={disabled} key={option?.uid ||  i} value={option?.uid || option?.label}  className="p-1">
+              {option?.label}
             </option>
           ))}
         </select>

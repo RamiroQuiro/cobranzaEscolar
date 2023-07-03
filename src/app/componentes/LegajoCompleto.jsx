@@ -4,21 +4,24 @@ import CabeceraContenedor from "./CabeceraContenedor";
 import BotonEmoji from "./BotonEmoji";
 import Boton1 from "./Boton1";
 import InputFomr from "./InputFomr";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CheckBox from "./CheckBox";
 import { toast } from "react-hot-toast";
 import { shallow } from "zustand/shallow";
 import { contextCobranzas } from "@/context/contextCobranzas";
+import { options } from "./ChartJS";
+import DaosLegajoCompleto from "./DaosLegajoCompleto";
 
 export default function LegajoCompleto() {
   const { captarUidLegajo } = contextData((state) => ({
     captarUidLegajo: state.captarUidLegajo,
   }),shallow);
+  const ciclosLectivos = contextCobranzas((state) => state.ciclosLectivos);
   const [checked, setChecked] = useState(true);
   const [edit, setEdit] = useState(false);
   const [form, setForm] = useState(captarUidLegajo);
   const cargarPantalla = contextData((state) => state.cargarPantalla);
-  const ciclosLectivos = contextCobranzas((state) => state.ciclosLectivos);
+  const [opcionesCicloLectivo, setOpcionesCicloLectivo] = useState({})
   const actualizarLegajo = contextData((state) => state.actualizarLegajo);
   const handleForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -26,6 +29,13 @@ export default function LegajoCompleto() {
   if (captarUidLegajo.length <= 0) {
     <div>Cargando..</div>;
   }
+
+  useEffect(() => {
+    if(!captarUidLegajo || !ciclosLectivos)return
+    setOpcionesCicloLectivo(ciclosLectivos.find(opt=>opt.uid==captarUidLegajo.cicloLectivo))
+console.log(opcionesCicloLectivo)
+  }, [captarUidLegajo,ciclosLectivos,opcionesCicloLectivo])
+  
   const guardarLegajo = (e) => {
     e.preventDefault();
     actualizarLegajo(form);
@@ -62,8 +72,9 @@ export default function LegajoCompleto() {
     {
       nombre: "Sexo",
       name: "sexo",
-      type: "select",
-      options: ["masculino", "femenino"],
+      type: edit? "select":"text",
+      options: [{label:"masculino"}, {label:"femenino"}
+    ],
     },
     { nombre: "Fecha de Nacimiento", name: "fechaNac", type: "date" },
     { nombre: "Domicilio", name: "domicilio", type: "text" },
@@ -79,10 +90,9 @@ export default function LegajoCompleto() {
     { nombre: "Celular Tutor", name: "celularTutor", type: "tel" },
     { nombre: "Correo electronico Tutor", name: "emailTutor", type: "email" },
     { nombre: "Fecha de Ingreso", name: "fechaIngreso", type: "date" },
-    { nombre: "Ciclo Lectivo", name: "cicloLectivo", type: "select", options:ciclosLectivos?.map((ciclo)=>ciclo.cicloLectivo) ,value:ciclosLectivos?.map(cicl=>cicl.uid) },
+    { nombre: "Ciclo Lectivo", name: "cicloLectivo", type: edit? "select":"text", options:!edit? opcionesCicloLectivo?.label : ciclosLectivos},
       { nombre: "Grado Educativo", name: "gradoLectivo", type: "text" },
   ];
-
   return (
     <div className="w-full mx-auto relative animate-apDeArriba ">
       <CabeceraContenedor>
@@ -101,23 +111,20 @@ export default function LegajoCompleto() {
           <div className=" w-full flex flex-wrap items-center justify-between  mx-auto gap-y-4">
             <h2 className="font-medium my-5 w-full">Legajo de Alumno </h2>
 
-            {etiquetas?.map((etiq, i) => (
-              <div 
-                key={i}
-                className="w-1/3 flex-grow mx-2"
-              >
-              <InputFomr
-                options={etiq.options}
-                disabled={edit ? false : true}
-                onChange={handleForm}
-                value={!edit ? captarUidLegajo[etiq.name] : form[etiq.name]}
-                name={etiq.name}
-                type={etiq.type}
-              >
-                {etiq.nombre}
-              </InputFomr>
-              </div>
-            ))}
+            {
+           opcionesCicloLectivo&&
+            etiquetas.map((etiq, i) => (
+              <DaosLegajoCompleto
+              key={i}
+              captarUidLegajo={captarUidLegajo}
+              edit={edit}
+              etiq={etiq}
+              form={form}
+              handleForm={handleForm}
+              />
+            ))
+
+          }
           </div>
           <CheckBox handleCheck={edit && handleCheck} state={form?.activo} />
           <Boton1 disabled={!edit} onClick={guardarLegajo}>
