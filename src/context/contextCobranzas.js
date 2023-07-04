@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { v4 as uuidv4 } from "uuid";
-import { ciclos,comprobantes,conceptosCargados } from "../base/cicloLectivo";
+import { ciclos,comprobantes,conceptosCargados,pagosRealizados } from "../base/cicloLectivo";
 
 
 
@@ -8,10 +8,25 @@ import { ciclos,comprobantes,conceptosCargados } from "../base/cicloLectivo";
 export const contextCobranzas = create((set, get) => ({
   comprobantes:comprobantes,
   pantallaActiva: "pagosEfectuados",
-  pagosEfectuados: [],
+  pagosEfectuados: pagosRealizados,
   ciclosLectivos: ciclos,
   conceptos: conceptosCargados,
   uidActivo: "",
+  efectuarPago:(obj)=>{
+    const {pagosEfectuados,comprobantes}=get()
+
+    const newObj={...obj,uid:uuidv4().slice(0,6)}
+    const newArray=pagosEfectuados.concat(newObj)
+    let indice=comprobantes?.findIndex((comp)=>comp.uid==obj.tipoComprobante)
+    
+    comprobantes[indice].numeroComprobante= comprobantes[indice].numeroComprobante+1
+    set((state) => ({
+      ...state,
+      comprobantes,
+      pagosEfectuados: newArray,
+    }));
+    console.log(comprobantes)
+  },
   captaruid: () => {
     set((uid) => ({
       ...state,

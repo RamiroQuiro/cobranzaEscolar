@@ -5,8 +5,10 @@ export default function InputFomr({
   name,
   onChange,
   disabled,
-  id,className,
-  options,classNameInput
+  id,
+  className,
+  options,
+  classNameInput,
 }) {
   if (type == "select") {
     return (
@@ -15,15 +17,31 @@ export default function InputFomr({
         className="peer w- text-sm  py-1 mt-2 pl-4 focus:bg-transparent  bg-transparent shadow-none border rounded-lg p-2 text-primary-text  border-primary-100/50 outline-none   focus:outline-none relative"
       >
         {children}
-        <select name={name} disabled={disabled} id="" onChange={onChange}  className="ml-5 text-primary-text  bg-transparent ">
-          {options?.map((option, i) => (
-            <option disabled={disabled} key={option?.uid ||  i} value={option?.uid || option?.label}  className="p-1">
-              {option?.label}
-            </option>
-          ))}
+        <select
+          name={name}
+          disabled={disabled}
+          id=""
+          onChange={onChange}
+          className="ml-5 text-primary-text  bg-transparent "
+        >
+          <option selected="true" disabled="disabled">
+            seleccione una Opcion
+          </option>
+          {options?.map((option, i) => {
+            return (
+              <option
+                disabled={disabled}
+                key={option?.uid || i}
+                value={option?.uid || option?.label}
+                className="p-1"
+              >
+                {option?.label}
+              </option>
+            );
+          })}
         </select>
       </label>
-    )
+    );
   }
   if (type == "date") {
     return (
@@ -33,7 +51,7 @@ export default function InputFomr({
         <label htmlFor={name} className="text-xs ">
           {children}
           <input
-          disabled={disabled}
+            disabled={disabled}
             onChange={onChange}
             type={type}
             name={name}
@@ -54,7 +72,7 @@ export default function InputFomr({
       }s]`}
     >
       <input
-      disabled={disabled}
+        disabled={disabled}
         onChange={onChange}
         type={type}
         name={name}
@@ -65,7 +83,6 @@ export default function InputFomr({
       />
       {/* <FontAwesomeIcon icon={faIcon} className="text-gray-500 absolute left-0 bottom-3 h-2/6" />  */}
       <label
-      
         htmlFor="email"
         className=" peer-focus:bg-primary-800 peer-focus:text-primary-text text-sm peer-focus:p-1 peer-focus:rounded-sm peer-focus:ml-2 peer-focus:-translate-y-5  peer-valid:bg-primary-800 peer-valid:text-primary-text  peer-valid:p-1 peer-valid:rounded-sm peer-valid:text-xs peer-focus:z-20 peer-focus:text-xs peer-valid:ml-2 peer-valid:z-20 peer-valid:-translate-y-5 duration-500 text-gray-500 absolute left-0 bottom-3 pl-4 peer-disabled:p-1 peer-disabled:bg-primary-800 peer-disabled:-translate-y-5"
       >

@@ -62,7 +62,7 @@ export const comprobantes = [
     descripcion: "Comprobante de pago por el servicio educativo.",
     codigoTipoDocumental: "REC",
     formatoArchivo: "pdf",
-    numeroComprobante:0,
+    numeroComprobante: 0,
     uid: "12345",
   },
   {
@@ -80,5 +80,24 @@ export const comprobantes = [
     formatoArchivo: "pdf",
     numeroComprobante: 0,
     uid: "12347",
+  },
+];
+
+export const pagosRealizados = [
+  {
+    legajo: "2233",
+    concepto: 156953,
+    tipoComprobante: undefined,
+    cicloLectivo: "156951",
+    formaDePago: "transferencia",
+    cicloLectivo: "156951",
+    concepto: undefined,
+    formaDePago: "transferencia",
+    legajo: "2233",
+    montoPagado: "4900",
+    numeroComprobante: undefined,
+    observacionesPagoRealizado: undefined,
+    tipoComprobante: undefined,
+    uid:15462
   },
 ];

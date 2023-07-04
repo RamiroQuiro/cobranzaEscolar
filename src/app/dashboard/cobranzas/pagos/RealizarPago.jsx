@@ -8,17 +8,20 @@ import InputSearchLegajo from "@/app/componentes/InputSearchLegajo";
 import { contextCobranzas } from "@/context/contextCobranzas";
 import { contextData } from "@/context/contextData";
 import React, { useState } from "react";
-import { toast } from "react-hot-toast";
+import BotonDePago from "./BotonPago";
 
 export default function RealizarPago() {
-  const [form, setForm] = useState({ activo: true });
   const [checked, setChecked] = useState(true);
-  const [conceptoSelec, setConceptoSelec] = useState(null)
+  const [conceptoSelec, setConceptoSelec] = useState(null);
+  const [form, setForm] = useState({});
   const cargarPantalla = contextCobranzas((state) => state.cargarPantalla);
-  const {conceptos,comprobantes} = contextCobranzas((state) => ({
-    conceptos:state.conceptos,
-    comprobantes:state.comprobantes
-  }));
+  const { conceptos, ciclosLectivos, comprobantes } = contextCobranzas(
+    (state) => ({
+      conceptos: state.conceptos,
+      comprobantes: state.comprobantes,
+      ciclosLectivos: state.ciclosLectivos,
+    })
+  );
 
   const cargarConceptos = contextCobranzas((state) => state.cargarConceptos);
   const handleForm = (e) => {
@@ -47,24 +50,27 @@ export default function RealizarPago() {
     {
       name: "periodoCobroConcepto",
       type: "select",
-      options: [{label:"mensual"}, {label:"trimestral"}, {label:"unicaVez"}, {label:"anual"}],
+      options: [
+        { label: "mensual" },
+        { label: "trimestral" },
+        { label: "unicaVez" },
+        { label: "anual" },
+      ],
       label: "Modo que se cobrara el Concepto",
       id: 3,
       onChange: handleForm,
     },
   ];
-  const guardarLegajo = (e) => {
-    e.preventDefault();
-    cargarConceptos(form);
-    toast.success("guardado");
-    setForm({});
-    cargarPantalla("conceptos");
-  };
-const onSelectComprobante=(e)=>{
-  console.log(e.target.value)
-  setConceptoSelec(e.target.value)
 
-}
+  const onSelectComprobante = (e) => {
+    handleForm(e);
+    setConceptoSelec(e.target.value);
+  };
+
+  const mostrar4dig = (num) => {
+    let num_str = String(num).padStart(4, "0");
+    return num_str;
+  };
 
   return (
     <ContenedorDePantallas>
@@ -79,7 +85,9 @@ const onSelectComprobante=(e)=>{
           <div className="flex items-center justify-end w-full gap-2 mb-4">
             <div className="">
               <InputFomr
+                classNameInput={"text-left"}
                 className={"w-"}
+                name={"tipoComprobante"}
                 onChange={onSelectComprobante}
                 type={"select"}
                 options={comprobantes}
@@ -87,10 +95,21 @@ const onSelectComprobante=(e)=>{
                 Tipo de Recibo
               </InputFomr>
             </div>
-            <div className="rounded-lg bg-white px-5 py-2 flex ">{comprobantes?.find(comp=>comp.uid==conceptoSelec)?.numeroComprobante}</div>
+            <div className="w-1/3">
+              <InputFomr
+                name="numeroComprobante"
+                onChange={handleForm}
+                value={mostrar4dig(
+                  comprobantes?.find((comp) => comp.uid == conceptoSelec)
+                    ?.numeroComprobante
+                )}
+                className="rounded-lg bg-white px-5 py-2 flex text-right"
+              ></InputFomr>
+            </div>
           </div>
           <div className="flex items-center justify-between w-full gap-2">
             <InputFomr
+              name={"nombreLegajo"}
               classNameInput={"bg-white font-bold"}
               value={captarUidLegajo?.nombreLegajo}
               onChange={handleForm}
@@ -98,6 +117,7 @@ const onSelectComprobante=(e)=>{
               Nombre Alumno
             </InputFomr>
             <InputFomr
+              name={"name"}
               className={"w-1/3"}
               classNameInput={"bg-white font-bold"}
               value={captarUidLegajo?.legajo}
@@ -105,14 +125,20 @@ const onSelectComprobante=(e)=>{
             >
               N° de Legajo
             </InputFomr>
-          </div> <div className="flex items-center justify-between w-full gap-2">
+          </div>{" "}
+          <div className="flex items-center justify-between w-full gap-2">
             <div className="w-">
               <InputFomr
+                name={"cicloLectivo"}
                 className={"w-"}
                 onChange={handleForm}
                 type={"text"}
                 classNameInput={"bg-white font-bold"}
-                value={captarUidLegajo?.cicloLectivo}
+                value={
+                  ciclosLectivos?.filter(
+                    (filtro) => filtro.uid == captarUidLegajo?.cicloLectivo
+                  )[0]?.label
+                }
               >
                 Ciclo Lectivo
               </InputFomr>
@@ -122,6 +148,7 @@ const onSelectComprobante=(e)=>{
                 className={"w-"}
                 onChange={handleForm}
                 type={"text"}
+                name="gradoLectivo"
                 value={captarUidLegajo?.gradoLectivo}
                 classNameInput={"bg-white font-bold"}
               >
@@ -133,10 +160,11 @@ const onSelectComprobante=(e)=>{
                 className={"w-"}
                 onChange={handleForm}
                 type={"select"}
+                name={"concepto"}
                 options={conceptos}
                 classNameInput={"bg-white font-bold"}
               >
-              Concepto
+                Concepto
               </InputFomr>
             </div>
           </div>
@@ -145,32 +173,43 @@ const onSelectComprobante=(e)=>{
               <InputFomr
                 className={"w-"}
                 onChange={handleForm}
+                name={"formaDePago"}
                 type={"select"}
-                options={[{label:"contado"}, {label:"transferencia"},{label: "cheque"}]}
+                options={[
+                  { label: "contado" },
+                  { label: "transferencia" },
+                  { label: "cheque" },
+                ]}
               >
                 Forma de pagos
               </InputFomr>
             </div>
             <div className="w-1/2 flex-grow">
-              <InputFomr onChange={handleForm} type={"text"}>
+              <InputFomr
+                name={"montoPagado"}
+                onChange={handleForm}
+                type={"text"}
+              >
                 Moto a Pagar
               </InputFomr>
             </div>
           </div>
-         
           <textarea
-            name="observacionesCicloLectivo"
+            name="observacionesPagoRealizado"
             id=""
             cols="30"
             placeholder="Observaciones"
             className="w-full border outline-none border-primary-200/50 bg-transparent rounded-xl p-2 text-sm"
             rows="5"
-            
           />
-          
         </div>
 
-        <Boton1 onClick={"guardarLegajo"}>Realizar Pago</Boton1>
+        <BotonDePago
+          legajoSelect={captarUidLegajo}
+          form={form}
+          cargarPantalla={cargarPantalla}
+          setForm={setForm}
+        />
       </form>
     </ContenedorDePantallas>
   );
