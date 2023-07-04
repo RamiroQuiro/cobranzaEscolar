@@ -1,4 +1,5 @@
 import Footer from "../componentes/Footer"
+import ModalPantalla from "../componentes/ModalPantalla"
 import NavBar from "../componentes/navBar/NavBar"
 
 

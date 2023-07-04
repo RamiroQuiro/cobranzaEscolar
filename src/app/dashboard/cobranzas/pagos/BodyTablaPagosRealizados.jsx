@@ -1,6 +1,7 @@
+"use client";
 import BotonEmoji from "@/app/componentes/BotonEmoji";
 import { contextCobranzas } from "@/context/contextCobranzas";
-import { contextOrdenar } from "@/context/contextData";
+import { contextData, contextOrdenar } from "@/context/contextData";
 import React from "react";
 import { shallow } from "zustand/shallow";
 
@@ -9,6 +10,13 @@ export default function BodyTablaPagosRealizados() {
     pagosEfectuados: state.pagosEfectuados,
   }));
   const order = contextOrdenar((state) => state.ordenarPor, shallow);
+  const activarModal = contextData((state) => state.activarModal);
+  const capturarUidPago = contextCobranzas((state) => state.capturarUidPago);
+  const selectorDePagos = (e, uid) => {
+    e.preventDefault();
+    capturarUidPago(uid)
+    activarModal();
+  };
   return (
     <tbody className="divide-y divide-gray-200 my-3">
       {pagosEfectuados
@@ -23,7 +31,7 @@ export default function BodyTablaPagosRealizados() {
         })
         ?.map((pagos) => (
           <tr
-            onClick={(e) => captaruid(e, pagos.uid)}
+            onClick={(e) => selectorDePagos(e, pagos.uid)}
             key={pagos.uid}
             className="odd:bg-primary-300/50 cursor-pointer hover:bg-gray-200/80 duration-200"
           >

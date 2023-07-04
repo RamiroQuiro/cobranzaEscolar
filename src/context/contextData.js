@@ -45,12 +45,19 @@ const legajoPrueba = [
 ];
 
 export const contextData = create((set, get) => ({
+  modal:false,
   label: "",
   captarUidLegajo: "",
   newLegajo: {},
   legajos: legajoPrueba,
   busquedaLegajo: "",
   filtroActivo: "",
+  activarModal:()=>{
+    const status=get().modal
+set(state=>({
+  ...state,modal : !status
+}))
+  },
   llenarBusquedaLegajo: (id) => {
     set((state) => ({
       ...state,

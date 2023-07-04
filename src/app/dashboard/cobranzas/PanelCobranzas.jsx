@@ -4,13 +4,15 @@ import TablaCobranzas from "./TablaCobranzas";
 import BotonBorderRedondos from "@/app/componentes/BotonBorderRedondos";
 import ContenedorDePantallas from "@/app/componentes/ContenedorDePantallas";
 import { contextCobranzas } from "@/context/contextCobranzas";
+import PagoCompleto from "./pagos/PagoCompleto";
 
 export default function PanelCobranzas() {
 const cargarPantalla=contextCobranzas((state)=>state.cargarPantalla)
 
   return (
     <ContenedorDePantallas>
-      <CabeceraContenedor>PanelCobranzas</CabeceraContenedor>
+      <PagoCompleto/>
+      <CabeceraContenedor>Panel Cobranzas</CabeceraContenedor>
       <div className="w-full py-3 flex items-center justify-evenly ">
         <BotonBorderRedondos
         id={"realizarPago"}

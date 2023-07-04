@@ -6,12 +6,22 @@ import { ciclos,comprobantes,conceptosCargados,pagosRealizados } from "../base/c
 
 
 export const contextCobranzas = create((set, get) => ({
+  uidPagoSeleccionado:"",
   comprobantes:comprobantes,
   pantallaActiva: "pagosEfectuados",
   pagosEfectuados: pagosRealizados,
   ciclosLectivos: ciclos,
   conceptos: conceptosCargados,
   uidActivo: "",
+  capturarUidPago:(uid)=>{
+      const { pagosEfectuados } = get();
+      if (pagosEfectuados.length <= 0) return;
+      const find = pagosEfectuados?.find((leg) => leg.uid == uid);
+      set((state) => ({
+        ...state,
+        uidPagoSeleccionado: find,
+      }));
+  },
   efectuarPago:(obj)=>{
     const {pagosEfectuados,comprobantes}=get()
 
