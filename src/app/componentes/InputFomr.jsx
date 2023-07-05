@@ -25,19 +25,30 @@ export default function InputFomr({
           className="ml-5 text-primary-text  bg-transparent "
         >
           <option selected="true" disabled="disabled">
-            seleccione una Opcion
+            Selec. una Opcion
           </option>
           {options?.map((option, i) => {
-            return (
+            if (option.selected) {
               <option
+                selected
                 disabled={disabled}
                 key={option?.uid || i}
                 value={option?.uid || option?.label}
                 className="p-1"
               >
                 {option?.label}
-              </option>
-            );
+              </option>;
+            } else
+              return (
+                <option
+                  disabled={disabled}
+                  key={option?.uid || i}
+                  value={option?.uid || option?.label}
+                  className="p-1"
+                >
+                  {option?.label}
+                </option>
+              );
           })}
         </select>
       </label>

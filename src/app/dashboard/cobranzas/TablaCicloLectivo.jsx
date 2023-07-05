@@ -32,6 +32,11 @@ export default function TablaCicloLectivo() {
           className="whitespace-nowrap px-4 py-2 font-medium text-primary-800 cursor-pointer  hover:bg-primary-300/20 duration-200"
         >
          Estado
+        </th> <th
+          id="legajo"
+          className="whitespace-nowrap px-4 py-2 font-medium text-primary-800 cursor-pointer  hover:bg-primary-300/20 duration-200"
+        >
+         Acciones
         </th>
       </tr>
     </thead>

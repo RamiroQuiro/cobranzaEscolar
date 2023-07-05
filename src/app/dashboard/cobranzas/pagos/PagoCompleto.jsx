@@ -67,8 +67,8 @@ export default function PagoCompleto({ uidPago }) {
           <BotonEmoji onClick={activarModal}>🔽</BotonEmoji>
           <BotonEmoji onClick={botonCerrar}>❌</BotonEmoji>
         </div>
-        <div className="p-5 flex flex-col w-full justify-between h-full">
-          <div className="">
+        <div className="p-5 flex flex-col w-full justify-between h-full gap-3">
+          <div className="border-b">
             <pre>
               Pago a cuenta de{" "}
               <span className="uppercase font-bold">
@@ -76,7 +76,7 @@ export default function PagoCompleto({ uidPago }) {
               </span>
             </pre>
           </div>
-          <div>
+          <div className="border-b">
             <pre>
               Monto Pagado:{" "}
               <span className="uppercase font-bold">
@@ -90,7 +90,7 @@ export default function PagoCompleto({ uidPago }) {
               </span>{" "}
             </pre>
           </div>
-          <div>
+          <div className="border-b">
             <pre>
               Observaciones de pago:{" "}
               <span className="uppercase font-bold">

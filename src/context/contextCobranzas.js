@@ -55,7 +55,6 @@ export const contextCobranzas = create((set, get) => ({
       comprobantes,
       pagosEfectuados: newArray,
     }));
-    console.log(comprobantes);
   },
   captaruid: () => {
     set((uid) => ({

@@ -1,3 +1,4 @@
+import BotonEmoji from "@/app/componentes/BotonEmoji"
 import { contextCobranzas } from "@/context/contextCobranzas"
 
 export default function BodyTablaCicloLectivos() {
@@ -55,6 +56,9 @@ export default function BodyTablaCicloLectivos() {
             >
               {leg.activo == true ? "activo" : "inactivo"}
             </p>
+          </td>
+          <td className="whitespace-nowrap px-1 py-2 text-center text-primary-text">
+           <BotonEmoji>✏️</BotonEmoji> 
           </td>
         </tr>
       ))}

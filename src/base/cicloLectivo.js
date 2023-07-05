@@ -62,7 +62,7 @@ export const comprobantes = [
     descripcion: "Comprobante de pago por el servicio educativo.",
     codigoTipoDocumental: "REC",
     formatoArchivo: "pdf",
-    numeroComprobante: 0,
+    numeroComprobante: 1,
     uid: "12345",
   },
   {
@@ -70,7 +70,7 @@ export const comprobantes = [
     descripcion: "Factura B de pago por el servicio educativo.",
     codigoTipoDocumental: "FACTB",
     formatoArchivo: "pdf",
-    numeroComprobante: 0,
+    numeroComprobante: 1,
     uid: "12346",
   },
   {
@@ -78,7 +78,7 @@ export const comprobantes = [
     descripcion: "Nota de Creadito.",
     codigoTipoDocumental: "CRED",
     formatoArchivo: "pdf",
-    numeroComprobante: 0,
+    numeroComprobante: 1,
     uid: "12347",
   },
 ];

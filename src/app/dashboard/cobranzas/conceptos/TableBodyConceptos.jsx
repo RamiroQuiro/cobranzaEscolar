@@ -9,7 +9,6 @@ export default function TableBodyConceptos() {
 
           const captaruid=contextCobranzas((state)=>state.captaruid)
 
-          console.log(conceptos)
   return (
     <tbody className="divide-y divide-gray-200 my-3">
     

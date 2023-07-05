@@ -13,7 +13,7 @@ const cargarPantalla=contextCobranzas((state)=>state.cargarPantalla)
     <ContenedorDePantallas>
       <PagoCompleto/>
       <CabeceraContenedor>Panel Cobranzas</CabeceraContenedor>
-      <div className="w-full py-3 flex items-center justify-evenly ">
+      <div className="w-full py-5 flex items-center justify-evenly ">
         <BotonBorderRedondos
         id={"realizarPago"}
         onClick={(e)=>cargarPantalla(e.target.id)}
