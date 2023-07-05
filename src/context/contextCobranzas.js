@@ -1,41 +1,61 @@
 import { create } from "zustand";
 import { v4 as uuidv4 } from "uuid";
-import { ciclos,comprobantes,conceptosCargados,pagosRealizados } from "../base/cicloLectivo";
+import {
+  ciclos,
+  comprobantes,
+  conceptosCargados,
+  pagosRealizados,
+} from "../base/cicloLectivo";
 
 
+  function obtenerFechaActual() {
+    let fecha = new Date();
+    let dia = fecha.getDate();
+    let mes = fecha.getMonth() + 1;
+    let anio = fecha.getFullYear();
+    return `${dia}/${mes}/${anio}`;
+}
 
-
+function obtenerHoraActual() {
+    let fecha = new Date();
+    let hora = fecha.getHours();
+    let minutos = fecha.getMinutes();
+    return `${hora}:${minutos}`;
+}
 export const contextCobranzas = create((set, get) => ({
-  uidPagoSeleccionado:"",
-  comprobantes:comprobantes,
+  uidPagoSeleccionado: "",
+  comprobantes: comprobantes,
   pantallaActiva: "pagosEfectuados",
   pagosEfectuados: pagosRealizados,
   ciclosLectivos: ciclos,
   conceptos: conceptosCargados,
   uidActivo: "",
-  capturarUidPago:(uid)=>{
-      const { pagosEfectuados } = get();
-      if (pagosEfectuados.length <= 0) return;
-      const find = pagosEfectuados?.find((leg) => leg.uid == uid);
-      set((state) => ({
-        ...state,
-        uidPagoSeleccionado: find,
-      }));
+  capturarUidPago: (uid) => {
+    const { pagosEfectuados } = get();
+    if (pagosEfectuados.length <= 0) return;
+    const find = pagosEfectuados?.find((leg) => leg.uid == uid);
+    set((state) => ({
+      ...state,
+      uidPagoSeleccionado: find,
+    }));
   },
-  efectuarPago:(obj)=>{
-    const {pagosEfectuados,comprobantes}=get()
+  efectuarPago: (obj) => {
+    const { pagosEfectuados, comprobantes } = get();
+   
+    const newObj = { ...obj, uid: uuidv4().slice(0, 6),fechaYHora:new Date()};
+    const newArray = pagosEfectuados.concat(newObj);
+    let indice = comprobantes?.findIndex(
+      (comp) => comp.uid == obj.tipoComprobante
+    );
 
-    const newObj={...obj,uid:uuidv4().slice(0,6)}
-    const newArray=pagosEfectuados.concat(newObj)
-    let indice=comprobantes?.findIndex((comp)=>comp.uid==obj.tipoComprobante)
-    
-    comprobantes[indice].numeroComprobante= comprobantes[indice].numeroComprobante+1
+    comprobantes[indice].numeroComprobante =
+      comprobantes[indice].numeroComprobante + 1;
     set((state) => ({
       ...state,
       comprobantes,
       pagosEfectuados: newArray,
     }));
-    console.log(comprobantes)
+    console.log(comprobantes);
   },
   captaruid: () => {
     set((uid) => ({

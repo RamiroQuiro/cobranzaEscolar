@@ -209,6 +209,7 @@ if(conceptoSelec){
             </div>
           </div>
           <textarea
+          onChange={handleForm}
             name="observacionesPagoRealizado"
             id=""
             cols="30"

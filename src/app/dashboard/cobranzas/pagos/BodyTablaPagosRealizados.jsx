@@ -14,13 +14,13 @@ export default function BodyTablaPagosRealizados() {
   const capturarUidPago = contextCobranzas((state) => state.capturarUidPago);
   const selectorDePagos = (e, uid) => {
     e.preventDefault();
-    capturarUidPago(uid)
+    capturarUidPago(uid);
     activarModal();
   };
   return (
     <tbody className="divide-y divide-gray-200 my-3">
       {pagosEfectuados
-        ?.sort((a, b) => {
+        ?.reverse()?.sort((a, b) => {
           if (order == "nombreLegajo") {
             if (a.nombreLegajo < b.nombreLegajo) return -1;
             if (a.nombreLegajo > b.nombreLegajo) return 1;
@@ -28,6 +28,7 @@ export default function BodyTablaPagosRealizados() {
           if (order == "legajo") return a.legajo - b.legajo;
           if (order == "dniLegajo") return a.dniLegajo - b.dniLegajo;
           if (order == "activo") if (a.activo > b.activo) return -1;
+          else return 1;
         })
         ?.map((pagos) => (
           <tr
