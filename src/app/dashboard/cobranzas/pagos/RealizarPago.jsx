@@ -7,7 +7,7 @@ import InputFomr from "@/app/componentes/InputFomr";
 import InputSearchLegajo from "@/app/componentes/InputSearchLegajo";
 import { contextCobranzas } from "@/context/contextCobranzas";
 import { contextData } from "@/context/contextData";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BotonDePago from "./BotonPago";
 
 export default function RealizarPago() {
@@ -22,6 +22,18 @@ export default function RealizarPago() {
       ciclosLectivos: state.ciclosLectivos,
     })
   );
+  useEffect(() => {
+    if(!conceptoSelec)return
+if(conceptoSelec){
+  let numeroComp=comprobantes?.find((comp) => comp.uid == conceptoSelec)?.numeroComprobante
+  setForm({
+    ...form,
+    numeroComprobante:numeroComp
+  })
+}
+
+  }, [conceptoSelec])
+  
 
   const cargarConceptos = contextCobranzas((state) => state.cargarConceptos);
   const handleForm = (e) => {
@@ -65,12 +77,16 @@ export default function RealizarPago() {
   const onSelectComprobante = (e) => {
     handleForm(e);
     setConceptoSelec(e.target.value);
+  
   };
 
   const mostrar4dig = (num) => {
-    let num_str = String(num).padStart(4, "0");
-    return num_str;
-  };
+    let num_Sring=String(num).padStart(4, "0")
+    if(num_Sring==undefined){
+       return 0
+    }
+    return num_Sring
+  }
 
   return (
     <ContenedorDePantallas>
@@ -96,15 +112,13 @@ export default function RealizarPago() {
               </InputFomr>
             </div>
             <div className="w-1/3">
-              <InputFomr
+              <div
                 name="numeroComprobante"
-                onChange={handleForm}
-                value={mostrar4dig(
-                  comprobantes?.find((comp) => comp.uid == conceptoSelec)
-                    ?.numeroComprobante
-                )}
                 className="rounded-lg bg-white px-5 py-2 flex text-right"
-              ></InputFomr>
+                placeholder="Número Comprobante"
+              >{mostrar4dig(
+                comprobantes?.find((comp) => comp.uid == conceptoSelec)?.numeroComprobante
+              ) || null}</div>
             </div>
           </div>
           <div className="flex items-center justify-between w-full gap-2">

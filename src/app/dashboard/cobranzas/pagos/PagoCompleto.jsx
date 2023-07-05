@@ -28,7 +28,10 @@ useEffect(() => {
   const ciclo=ciclosLectivos?.find(comp=>comp.uid==uidPagoSeleccionado?.cicloLectivo)
 console.log(comproban)
   setRelacionesData({
-    tipoComprobante:comproban?.label
+    tipoComprobante:comproban?.label,
+    numeroComprobante:uidPagoSeleccionado?.numeroComprobante,
+
+
   })
 
 }, [legajos,comprobantes,ciclosLectivos])
@@ -43,7 +46,7 @@ const botonCerrar=()=>{
   if (modal) {
     return (
       <ModalPantalla>
-        <CabeceraContenedor>{}</CabeceraContenedor>
+      <CabeceraContenedor>{relacionesData?.tipoComprobante}  N°{relacionesData?.numeroComprobante}</CabeceraContenedor>
         <div className="absolute top-2 right-2 flex items-center justify-between gap-2">
           <BotonEmoji onClick={activarModal}>🖨️</BotonEmoji>
           <BotonEmoji onClick={activarModal}>🔽</BotonEmoji>
