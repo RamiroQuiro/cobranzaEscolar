@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
+import BotonLink from "./BotonLink";
 
 export default function NavBar() {
   const links = [
@@ -29,8 +31,7 @@ export default function NavBar() {
       <div className="md:w-1/2 h-full flex items-center justify-between px-10">
         {
             links?.map((link)=>(
-
-                <Link className="border rounded-xl p-2 text-xs text-gray-800  font-light" href={link.link} key={link.id}>{link.name}</Link>
+               <BotonLink key={link.id} link={link}/>
             ))
 }
       </div>

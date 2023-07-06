@@ -4,16 +4,16 @@ import CabeceraContenedor from "@/app/componentes/CabeceraContenedor";
 import ModalPantalla from "@/app/componentes/ModalPantalla";
 import { contextCobranzas } from "@/context/contextCobranzas";
 import { contextData } from "@/context/contextData";
+import useRelacionesData from "@/hook/useRelacionesData";
 import { useEffect, useState } from "react";
 
 export default function PagoCompleto({ uidPago }) {
-  const [relacionesData, setRelacionesData] = useState(null);
+  const activarModal = contextData((state) => state.activarModal);
+  const capturarUidPago = contextCobranzas((state) => state.capturarUidPago);
   const { modal, legajos } = contextData((state) => ({
     legajos: state.legajos,
     modal: state.modal,
   }));
-  const activarModal = contextData((state) => state.activarModal);
-  const capturarUidPago = contextCobranzas((state) => state.capturarUidPago);
   const { uidPagoSeleccionado, comprobantes, ciclosLectivos, conceptos } =
     contextCobranzas((state) => ({
       comprobantes: state.comprobantes,
@@ -22,39 +22,18 @@ export default function PagoCompleto({ uidPago }) {
       uidPagoSeleccionado: state.uidPagoSeleccionado,
     }));
 
-  useEffect(() => {
-    if (!legajos && !comprobantes && !ciclosLectivos) return;
-    const concep = conceptos?.find(
-      (leg) => leg.uid == uidPagoSeleccionado?.concepto
-    );
-    const leg = legajos?.find(
-      (leg) => leg.legajo == uidPagoSeleccionado?.legajo
-    );
-    const comproban = comprobantes?.find(
-      (comp) => comp.uid == uidPagoSeleccionado?.tipoComprobante
-    );
-    const ciclo = ciclosLectivos?.find(
-      (comp) => comp.uid == uidPagoSeleccionado?.cicloLectivo
-    );
-    setRelacionesData({
-      tipoComprobante: comproban?.label,
-      numeroComprobante: uidPagoSeleccionado?.numeroComprobante,
-      nombreLegajo: leg?.nombreLegajo,
-      conceptoDePago: uidPagoSeleccionado?.conceptoDePago,
-      tipoComprobante: comproban?.label,
-      concepto: concep?.label,
-      cicloLectivo: ciclo?.label,
-      montoPagado: uidPagoSeleccionado?.montoPagado,
-      obsercacionesPagoRealizado:
-        uidPagoSeleccionado?.observacionesPagoRealizado,
-      uidPago: uidPagoSeleccionado?.uid,
+    const {relacionesData} = useRelacionesData({
+      legajos,
+      comprobantes,
+      ciclosLectivos,
+      uidPagoSeleccionado,
+      conceptos,
     });
-  }, [legajos, comprobantes, ciclosLectivos, uidPagoSeleccionado]);
-
   const botonCerrar = () => {
     activarModal();
     capturarUidPago("");
   };
+
   if (modal) {
     return (
       <ModalPantalla>
@@ -73,6 +52,12 @@ export default function PagoCompleto({ uidPago }) {
               Pago a cuenta de{" "}
               <span className="uppercase font-bold">
                 {relacionesData?.nombreLegajo}
+              </span>
+            </pre>
+            <pre>
+              Fecha de Pago{" "}
+              <span className="uppercase font-bold">
+                {relacionesData?.fecha}
               </span>
             </pre>
           </div>

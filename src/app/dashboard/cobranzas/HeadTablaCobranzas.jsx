@@ -7,19 +7,19 @@ export default function HeadTablaCobranzas() {
     }
     let ordenarPor="ordenarpor"
   return (
-    <thead className="text-left ltr:text-left rtl:text-right bg-primary-600 rounded py-2 sticky top-0 left-0">
+    <thead className="text-center ltr:text-left rtl:text-right bg-primary-600 rounded py-2 sticky top-0 left-0">
     <tr>
       <th
       onClick={handleClick}
       id="nombreLegajo"
-      className="whitespace-nowrap px-1 py-2 font-medium text-primary-800 cursor-pointer hover:bg-primary-300/20 duration-200">
-         Comp<span className="duration-200"> {ordenarPor=="nombreLegajo" && "⬇️"}</span>
+      className="whitespace-nowrap pl-1 py-2 font-medium text-primary-800 cursor-pointer hover:bg-primary-300/20 duration-200">
+         Comproban<span className="duration-200"> {ordenarPor=="nombreLegajo" && "⬇️"}</span>
       </th>
       <th
       onClick={handleClick}
       id="nombreLegajo"
       className="whitespace-nowrap px-1 py-2 font-medium text-primary-800 cursor-pointer hover:bg-primary-300/20 duration-200">
-        N°Comprobante <span className="duration-200"> {ordenarPor=="nombreLegajo" && "⬇️"}</span>
+        N° <span className="duration-200"> {ordenarPor=="nombreLegajo" && "⬇️"}</span>
       </th>
       <th 
         onClick={handleClick}
@@ -38,6 +38,12 @@ export default function HeadTablaCobranzas() {
         id="activo"
         className="whitespace-nowrap px-1 py-2 font-medium text-primary-800 cursor-pointer  hover:bg-primary-300/20 duration-200">
         Fecha Pago <span className="duration-200"> {ordenarPor=="activo" && "⬇️"}</span>
+      </th>
+      <th 
+        onClick={handleClick}
+        id="activo"
+        className="whitespace-nowrap px-1 py-2 font-medium text-primary-800 cursor-pointer  hover:bg-primary-300/20 duration-200">
+        Monto <span className="duration-200"> {ordenarPor=="activo" && "⬇️"}</span>
       </th>
       <th 
         onClick={handleClick}

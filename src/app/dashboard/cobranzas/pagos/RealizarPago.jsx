@@ -1,7 +1,5 @@
 "use client";
-import Boton1 from "@/app/componentes/Boton1";
 import CabeceraContenedor from "@/app/componentes/CabeceraContenedor";
-import CheckBox from "@/app/componentes/CheckBox";
 import ContenedorDePantallas from "@/app/componentes/ContenedorDePantallas";
 import InputFomr from "@/app/componentes/InputFomr";
 import InputSearchLegajo from "@/app/componentes/InputSearchLegajo";
@@ -11,7 +9,6 @@ import React, { useEffect, useState } from "react";
 import BotonDePago from "./BotonPago";
 
 export default function RealizarPago() {
-  const [checked, setChecked] = useState(true);
   const [conceptoSelec, setConceptoSelec] = useState(null);
   const [form, setForm] = useState({});
   const cargarPantalla = contextCobranzas((state) => state.cargarPantalla);
@@ -23,27 +20,23 @@ export default function RealizarPago() {
     })
   );
   useEffect(() => {
-    if(!conceptoSelec)return
-if(conceptoSelec){
-  let numeroComp=comprobantes?.find((comp) => comp.uid == conceptoSelec)?.numeroComprobante
-  setForm({
-    ...form,
-    numeroComprobante:numeroComp
-  })
-}
+    if (!conceptoSelec) return;
+    if (conceptoSelec) {
+      let numeroComp = comprobantes?.find(
+        (comp) => comp.uid == conceptoSelec
+      )?.numeroComprobante;
+      setForm({
+        ...form,
+        numeroComprobante: numeroComp,
+      });
+    }
+  }, [conceptoSelec]);
 
-  }, [conceptoSelec])
-  
-
-  const cargarConceptos = contextCobranzas((state) => state.cargarConceptos);
   const handleForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   const captarUidLegajo = contextData((state) => state.captarUidLegajo);
-  const handleCheck = () => {
-    setChecked((state) => !state);
-    setForm({ ...form, activo: checked });
-  };
+
   const inputs = [
     {
       name: "nombreLegajo",
@@ -77,16 +70,15 @@ if(conceptoSelec){
   const onSelectComprobante = (e) => {
     handleForm(e);
     setConceptoSelec(e.target.value);
-  
   };
 
   const mostrar4dig = (num) => {
-    let num_Sring=String(num).padStart(4, "0")
-    if(num_Sring==undefined){
-       return 0
+    let num_Sring = String(num).padStart(4, "0");
+    if (num_Sring == undefined) {
+      return 0;
     }
-    return num_Sring
-  }
+    return num_Sring;
+  };
 
   return (
     <ContenedorDePantallas>
@@ -116,9 +108,12 @@ if(conceptoSelec){
                 name="numeroComprobante"
                 className="rounded-lg bg-white px-5 py-2 flex text-right"
                 placeholder="Número Comprobante"
-              >{mostrar4dig(
-                comprobantes?.find((comp) => comp.uid == conceptoSelec)?.numeroComprobante
-              ) || null}</div>
+              >
+                {mostrar4dig(
+                  comprobantes?.find((comp) => comp.uid == conceptoSelec)
+                    ?.numeroComprobante
+                ) || null}
+              </div>
             </div>
           </div>
           <div className="flex items-center justify-between w-full gap-2">
@@ -209,7 +204,7 @@ if(conceptoSelec){
             </div>
           </div>
           <textarea
-          onChange={handleForm}
+            onChange={handleForm}
             name="observacionesPagoRealizado"
             id=""
             cols="30"

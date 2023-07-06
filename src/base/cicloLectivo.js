@@ -91,13 +91,13 @@ export const pagosRealizados = [
     cicloLectivo: "156951",
     formaDePago: "transferencia",
     cicloLectivo: "156951",
-    concepto: undefined,
     formaDePago: "transferencia",
     legajo: "2233",
     montoPagado: "4900",
-    numeroComprobante: undefined,
+    numeroComprobante: 0,
     observacionesPagoRealizado: undefined,
-    tipoComprobante: undefined,
+    tipoComprobante: 12345,
+    fechaYHora:new Date(),
     uid:15462
   },
 ];
