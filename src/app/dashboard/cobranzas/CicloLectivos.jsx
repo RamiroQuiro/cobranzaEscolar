@@ -9,7 +9,7 @@ export default function CicloLectivos() {
 const cargarPantalla=contextCobranzas((state)=>state.cargarPantalla)
 
   return (
-   <ContenedorDePantallas>
+   <ContenedorDePantallas className={"w-full"}>
       <CabeceraContenedor>Ciclos Lectivos</CabeceraContenedor>
       <div className="w-full py-3 flex items-center justify-evenly ">
          <BotonBorderRedondos 

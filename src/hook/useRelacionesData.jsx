@@ -27,6 +27,20 @@ function useRelacionesData({
       fecha.mes < 10 ? "0" + fecha.mes : fecha.mes
     }/${fecha.year}`;
   };
+  const obtenerHora = (data) => {
+    let fechapago = data;
+    if (!fechapago) return;
+    const event = fechapago;
+    const fecha = {
+      horas: event.getHours(),
+      minutos: event.getMinutes(),
+      segundos: event.getSeconds(),
+      
+    };
+    return `${fecha.horas < 10 ? "0" + fecha.horas : fecha.horas}:${
+      fecha.minutos < 10 ? "0" + fecha.minutos : fecha.minutos
+    }:${fecha.segundos < 10 ? "0" + fecha.segundos : fecha.segundos}`;
+  };
 
   useEffect(() => {
     if (!legajos && !comprobantes && !ciclosLectivos) return;
@@ -44,12 +58,14 @@ function useRelacionesData({
     );
     setRelacionesData({
       fecha: obtenerFecha(uidPagoSeleccionado?.fechaYHora),
+      hora:obtenerHora(uidPagoSeleccionado?.fechaYHora),
       tipoComprobante: comproban?.label,
       legajo: uidPagoSeleccionado?.legajo,
       numeroComprobante: uidPagoSeleccionado?.numeroComprobante,
       nombreLegajo: leg?.nombreLegajo,
       tipoComprobante: comproban?.label,
       concepto: concep?.label,
+    formaDePago: uidPagoSeleccionado?.formaDePago,
       cicloLectivo: ciclo?.label,
       montoPagado: uidPagoSeleccionado?.montoPagado,
       obsercacionesPagoRealizado:
@@ -70,6 +86,7 @@ function useRelacionesData({
           );
           return {
             fecha: obtenerFecha(uidPagoSeleccionado?.fechaYHora),
+            hora:obtenerHora(uidPagoSeleccionado?.fechaYHora),
             tipoComprobante: comproban?.label,
             numeroComprobante: element?.numeroComprobante,
             nombreLegajo: leg?.nombreLegajo,

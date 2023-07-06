@@ -7,6 +7,7 @@ import PanelCobranzas from './PanelCobranzas';
 import FormularioCargaCicloLectivo from './FormularioCargaCicloLectivo';
 import AgregarConcepto from './conceptos/AgregarConcepto';
 import RealizarPago from './pagos/RealizarPago';
+import ReciboPDF from './pagos/ReciboPDF';
 
 export default function RenderPantallas({captarUidLegajo}) {
     const {pantallaActiva}=contextCobranzas((state)=>({
@@ -27,6 +28,8 @@ export default function RenderPantallas({captarUidLegajo}) {
         return <FormularioCargaCicloLectivo/>
     case "agregarConceptos":
         return <AgregarConcepto/>
+    case "reciboPDF":
+        return <ReciboPDF/>
   
     default:
         return <PanelCobranzas  />

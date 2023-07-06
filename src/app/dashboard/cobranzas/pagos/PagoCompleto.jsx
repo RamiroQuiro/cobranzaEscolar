@@ -14,6 +14,8 @@ export default function PagoCompleto({ uidPago }) {
     legajos: state.legajos,
     modal: state.modal,
   }));
+  const cargarPantalla = contextCobranzas((state) => state.cargarPantalla);
+
   const { uidPagoSeleccionado, comprobantes, ciclosLectivos, conceptos } =
     contextCobranzas((state) => ({
       comprobantes: state.comprobantes,
@@ -33,7 +35,9 @@ export default function PagoCompleto({ uidPago }) {
     activarModal();
     capturarUidPago("");
   };
-
+  const handleClick = (e) => {
+    cargarPantalla(e.target.id);
+  };
   if (modal) {
     return (
       <ModalPantalla>
@@ -42,8 +46,8 @@ export default function PagoCompleto({ uidPago }) {
           {relacionesData?.numeroComprobante}
         </CabeceraContenedor>
         <div className="absolute top-2 right-2 flex items-center justify-between gap-2">
-          <BotonEmoji onClick={activarModal}>🖨️</BotonEmoji>
-          <BotonEmoji onClick={activarModal}>🔽</BotonEmoji>
+          <BotonEmoji onClick={handleClick}>🖨️</BotonEmoji>
+          <BotonEmoji onClick={handleClick} id={"reciboPDF"}>🔽</BotonEmoji>
           <BotonEmoji onClick={botonCerrar}>❌</BotonEmoji>
         </div>
         <div className="p-5 flex flex-col w-full justify-between h-full gap-3">

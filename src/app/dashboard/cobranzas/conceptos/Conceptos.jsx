@@ -9,7 +9,7 @@ import TableBodyConceptos from "./TableBodyConceptos";
 export default function Conceptos() {
   const cargarPantalla = contextCobranzas((state) => state.cargarPantalla);
   return (
-    <ContenedorDePantallas>
+    <ContenedorDePantallas className={"w-full"}>
       <CabeceraContenedor>Conceptos</CabeceraContenedor>
       <div className="w-full py-3 flex items-center justify-evenly ">
         <BotonBorderRedondos
