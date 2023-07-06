@@ -22,16 +22,16 @@ export default function RealizarPago() {
   useEffect(() => {
     if (!conceptoSelec) return;
     if (conceptoSelec) {
-      let numeroComp = comprobantes?.find(
-        (comp) => comp.uid == conceptoSelec
-      )?.numeroComprobante;
+      let numeroComp = comprobantes?.tipoComprobante?.find((comp) => comp.uid == conceptoSelec?.tipoComprobante)?.numeroComprobante
+      let montoConcepto = conceptos?.find((comp) => comp.uid == conceptoSelec?.concepto)?.montoConcepto
       setForm((form)=>({
         ...form,
+        montoPagado:montoConcepto,
         numeroComprobante: numeroComp,
-      }));
+      }))
     }
-  }, [conceptoSelec]);
 
+  }, [conceptoSelec]);
   const handleForm = (e) => {
     setForm(form=>({ ...form, [e.target.name]: e.target.value }))
   };
@@ -69,7 +69,7 @@ export default function RealizarPago() {
 
   const onSelectComprobante = (e) => {
     handleForm(e);
-    setConceptoSelec(e.target.value);
+    setConceptoSelec(conceptoSelec=>({...conceptoSelec,[e.target.name]: e.target.value }))
   };
 
   const mostrar4dig = (num) => {
@@ -80,7 +80,10 @@ export default function RealizarPago() {
       return num_Sring
     }
   };
-
+const comprobarMonto=(num)=>{
+    if(!num)return null
+  return `$ `+String(num)
+}
   return (
     <ContenedorDePantallas>
       <CabeceraContenedor>Realizar Pago</CabeceraContenedor>
@@ -111,9 +114,9 @@ export default function RealizarPago() {
                 placeholder="Número Comprobante"
               >
                 {mostrar4dig(
-                  comprobantes?.find((comp) => comp.uid == conceptoSelec)
+                  comprobantes?.find((comp) => comp.uid == conceptoSelec?.tipoComprobante)
                     ?.numeroComprobante
-                ) || null}
+                )}
               </div>
             </div>
           </div>
@@ -168,7 +171,7 @@ export default function RealizarPago() {
             <div className="w-">
               <InputFomr
                 className={"w-"}
-                onChange={handleForm}
+                onChange={onSelectComprobante}
                 type={"select"}
                 name={"concepto"}
                 options={conceptos}
@@ -198,8 +201,8 @@ export default function RealizarPago() {
               <InputFomr
                 name={"montoPagado"}
                 onChange={handleForm}
-                type={"text"}
-                value={""}
+               value={comprobarMonto(conceptos?.find((comp) => comp.uid == conceptoSelec?.concepto)
+                ?.montoConcepto)}
               >
                 Moto a Pagar
               </InputFomr>

@@ -10,7 +10,7 @@ export default function PanelCobranzas() {
 const cargarPantalla=contextCobranzas((state)=>state.cargarPantalla)
 
   return (
-    <ContenedorDePantallas>
+    <ContenedorDePantallas className={"w-full"}>
       <PagoCompleto/>
       <CabeceraContenedor>Panel Cobranzas</CabeceraContenedor>
       <div className="w-full py-5 flex items-center justify-evenly ">

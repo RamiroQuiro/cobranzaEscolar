@@ -33,14 +33,21 @@ export default function PanelBusqueda() {
       ...search,
       searchAlumno:e.target.value,
     }))
-    llenarBusquedaLegajo(search?.searchAlumno);
+    llenarBusquedaLegajo(e.target.value,);
+}
+
+const resetBusqueda=(e)=>{
+e.preventDefault()
+llenarBusquedaLegajo('')
+setSearch({})
 }
   return (
     <form action="" className="w-full flex flex-col items-start  h-full p-4">
+
       <InputFomr
       classNameInput={"pr-4"}
         onChange={onChange}
-        value={form?.nameAlumno}
+        // value={search?.searchAlumno}
         id={"searchAlumno"}
         name={"searchAlumno"}
         type={"search"}
@@ -49,7 +56,7 @@ export default function PanelBusqueda() {
       </InputFomr>
       <InputFomr
         onChange={onChange}
-        value={form?.cicloLectivo}
+        value={search?.searchAlumno}
         id={"searchAlumno"}
         name={"cicloLectivo"}
         label={"select"}
@@ -59,7 +66,7 @@ export default function PanelBusqueda() {
         ► Ciclo Escolar
       </InputFomr>
       <div className="py-4 flex items-center gap-2 text-sm">
-        <BotonEmoji onClick={() => cargarBusqueda()}>Buscar 🔎</BotonEmoji>
+        <BotonEmoji onClick={resetBusqueda}>Resetear Busqueda 🔎</BotonEmoji>
       </div>
 
       <InputFomr

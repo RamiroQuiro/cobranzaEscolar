@@ -67,7 +67,7 @@ export default function BodyTablaAlumnos() {
           <tr
             onClick={(e) => captaruid(e, leg.uid)}
             key={leg.uid}
-            className="odd:bg-primary-300/50 cursor-pointer hover:bg-gray-200/80 duration-200"
+            className="odd:bg-primary-300/50 cursor-pointer hover:bg-gray-200/80 duration-200 animate-[aparecer_.2s]"
           >
             <td className="whitespace-nowrap px-4 py-2 font-medium text-primary-text">
               {leg.nombreLegajo}
