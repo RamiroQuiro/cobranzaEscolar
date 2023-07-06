@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 
 const useBusquedaFiltros = (arr) => {
   const [search, setSearch] = useState('');
-  const [encontrado, setEncontrado] = useState([]);
+  const [encontrado, setEncontrado] = useState(arr);
 
   const busquedaFiltros = useCallback(
     (arr, search) => {
@@ -31,7 +31,9 @@ const useBusquedaFiltros = (arr) => {
   const handleSearch = useCallback(
     (e) => {
       setSearch(e.target.value);
+  
       setEncontrado(busquedaFiltros(arr, e.target.value));
+
     },
     [arr, busquedaFiltros]
   );

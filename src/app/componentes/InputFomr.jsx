@@ -24,7 +24,7 @@ export default function InputFomr({
           onChange={onChange}
           className="ml-5 text-primary-text  bg-transparent "
         >
-          <option selected="true" disabled="disabled">
+          <option selected disabled="disabled">
             Selec. una Opcion
           </option>
           {options?.map((option, i) => {

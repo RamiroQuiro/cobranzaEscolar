@@ -1,6 +1,5 @@
 "use client";
 import BotonEmoji from "@/app/componentes/BotonEmoji";
-import CheckBox from "@/app/componentes/CheckBox";
 import InputFomr from "@/app/componentes/InputFomr";
 import { contextCobranzas } from "@/context/contextCobranzas";
 import { contextData } from "@/context/contextData";
@@ -8,44 +7,50 @@ import { useState } from "react";
 
 export default function PanelBusqueda() {
   const [form, setForm] = useState(null);
+  const [search, setSearch] = useState(null)
   const llenarBusquedaLegajo = contextData(
     (state) => state.llenarBusquedaLegajo
   );
+  
+
   const cargarFiltro = contextData((state) => state.cargarFiltro);
-  const { busquedaLegajo } = contextData((state) => ({
-    busquedaLegajo: state.busquedaLegajo,
-  }));
+
   const {ciclosLectivos}=contextCobranzas(state=>({
     ciclosLectivos:state.ciclosLectivos
   }))
 
   const cargarBusqueda = () => {
-    llenarBusquedaLegajo(form);
+    llenarBusquedaLegajo(form?.searchAlumno);
   };
 
   const handleFiltro = (e) => {
     cargarFiltro(e.target.value);
   };
-  const handleForm = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    cargarBusqueda();
-  };
 
+
+  const onChange=(e)=>{
+    setSearch(search=>({
+      ...search,
+      searchAlumno:e.target.value,
+    }))
+    llenarBusquedaLegajo(search?.searchAlumno);
+}
   return (
     <form action="" className="w-full flex flex-col items-start  h-full p-4">
       <InputFomr
-        onChange={handleForm}
+      classNameInput={"pr-4"}
+        onChange={onChange}
         value={form?.nameAlumno}
-        id={"nameAlumno"}
-        name={"nameAlumno"}
-        type={"text"}
+        id={"searchAlumno"}
+        name={"searchAlumno"}
+        type={"search"}
       >
         ► Nombre Alumno | Matricula
       </InputFomr>
       <InputFomr
-        onChange={handleForm}
+        onChange={onChange}
         value={form?.cicloLectivo}
-        id={"nameAlumno"}
+        id={"searchAlumno"}
         name={"cicloLectivo"}
         label={"select"}
         type={"select"}
