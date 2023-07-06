@@ -3,40 +3,14 @@ import React, { useState } from "react";
 import InputFomr from "./InputFomr";
 import { contextData } from "@/context/contextData";
 import { contextCobranzas } from "@/context/contextCobranzas";
+import useBusquedaFiltros from "@/hook/useBusquedaFiltros";
 
 export default function InputSearchLegajo() {
-  const [encontrado, setEncontrado] = useState(null);
-  const [search, setSearch] = useState(null);
   const { legajos } = contextData((state) => ({
     legajos: state.legajos,
   }));
 
-  const busquedaFiltros = (arr, search) => {
-    const encontrado = arr?.filter((leg) => {
-      let busquedaLegajo = leg.nombreLegajo
-        ?.toUpperCase()
-        .includes(search?.toUpperCase());
-      let dniLegajo = leg.dniLegajo
-        ?.toUpperCase()
-        .includes(search?.toUpperCase());
-      let legajo = leg.legajo?.toUpperCase().includes(search?.toUpperCase());
-      let nombreApellidoTutor = leg.nombreApellidoTutor
-        ?.toUpperCase()
-        .includes(search?.toUpperCase());
-      if (busquedaLegajo || dniLegajo || legajo || nombreApellidoTutor) {
-        if (leg.activo == true) {
-          return leg;
-        }
-      }
-    });
-    return encontrado;
-  };
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-    setEncontrado(busquedaFiltros(legajos, search));
-  };
-
+const{encontrado,handleSearch,search,setSearch}=useBusquedaFiltros(legajos)
   const capturarLegajo = contextData((state) => state.capturarLegajo);
 
   const handleClick = (leg) => {
@@ -46,8 +20,7 @@ export default function InputSearchLegajo() {
   return (
     <div>
       <div className="my-5 md:w-10/12 mx-auto relative">
-        <span className="absolute top-3 right-2">🔎</span>
-        <InputFomr value={search} onChange={handleSearch} type={"search"}>
+        <InputFomr classNameInput={"pr-4"} value={search} onChange={handleSearch} type={"search"}>
           Buscar Alumno | Legajo | Tutor
         </InputFomr>
         {search?.length >= 2 && (

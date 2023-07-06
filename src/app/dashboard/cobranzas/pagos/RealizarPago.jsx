@@ -25,15 +25,15 @@ export default function RealizarPago() {
       let numeroComp = comprobantes?.find(
         (comp) => comp.uid == conceptoSelec
       )?.numeroComprobante;
-      setForm({
+      setForm((form)=>({
         ...form,
         numeroComprobante: numeroComp,
-      });
+      }));
     }
   }, [conceptoSelec]);
 
   const handleForm = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm(form=>({ ...form, [e.target.name]: e.target.value }))
   };
   const captarUidLegajo = contextData((state) => state.captarUidLegajo);
 
@@ -73,11 +73,12 @@ export default function RealizarPago() {
   };
 
   const mostrar4dig = (num) => {
-    let num_Sring = String(num).padStart(4, "0");
-    if (num_Sring == undefined) {
-      return 0;
+    if (!num) {
+      return "0000"
+    }else{
+      let num_Sring = String(num).padStart(4, "0");
+      return num_Sring
     }
-    return num_Sring;
   };
 
   return (
@@ -198,6 +199,7 @@ export default function RealizarPago() {
                 name={"montoPagado"}
                 onChange={handleForm}
                 type={"text"}
+                value={""}
               >
                 Moto a Pagar
               </InputFomr>

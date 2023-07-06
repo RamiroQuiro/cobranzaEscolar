@@ -35,7 +35,7 @@ export default function LegajoCompleto() {
     const cicloLec=ciclosLectivos.find(opt=>opt.uid==captarUidLegajo.cicloLectivo)
     if(!cicloLec)return
     else{
-      setForm({...form,cicloLectivo:cicloLec.label})
+      setForm((form)=>({...form,cicloLectivo:cicloLec.label}))
     }
   }, [captarUidLegajo,ciclosLectivos])
   const guardarLegajo = (e) => {

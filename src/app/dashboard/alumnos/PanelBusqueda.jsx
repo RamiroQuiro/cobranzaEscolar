@@ -2,6 +2,7 @@
 import BotonEmoji from "@/app/componentes/BotonEmoji";
 import CheckBox from "@/app/componentes/CheckBox";
 import InputFomr from "@/app/componentes/InputFomr";
+import { contextCobranzas } from "@/context/contextCobranzas";
 import { contextData } from "@/context/contextData";
 import { useState } from "react";
 
@@ -14,6 +15,9 @@ export default function PanelBusqueda() {
   const { busquedaLegajo } = contextData((state) => ({
     busquedaLegajo: state.busquedaLegajo,
   }));
+  const {ciclosLectivos}=contextCobranzas(state=>({
+    ciclosLectivos:state.ciclosLectivos
+  }))
 
   const cargarBusqueda = () => {
     llenarBusquedaLegajo(form);
@@ -40,14 +44,14 @@ export default function PanelBusqueda() {
       </InputFomr>
       <InputFomr
         onChange={handleForm}
-        value={form?.nivelEducativo}
+        value={form?.cicloLectivo}
         id={"nameAlumno"}
-        name={"nivelEducativo"}
+        name={"cicloLectivo"}
         label={"select"}
         type={"select"}
-        options={["jardin", "primaria", "secundaria"]}
+        options={ciclosLectivos}
       >
-        ► Grado Escolar
+        ► Ciclo Escolar
       </InputFomr>
       <div className="py-4 flex items-center gap-2 text-sm">
         <BotonEmoji onClick={() => cargarBusqueda()}>Buscar 🔎</BotonEmoji>
