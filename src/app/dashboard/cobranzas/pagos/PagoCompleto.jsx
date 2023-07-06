@@ -5,7 +5,9 @@ import ModalPantalla from "@/app/componentes/ModalPantalla";
 import { contextCobranzas } from "@/context/contextCobranzas";
 import { contextData } from "@/context/contextData";
 import useRelacionesData from "@/hook/useRelacionesData";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useEffect, useState } from "react";
+import ReciboPDF from "./ReciboPDF";
 
 export default function PagoCompleto({ uidPago }) {
   const activarModal = contextData((state) => state.activarModal);
@@ -38,6 +40,9 @@ export default function PagoCompleto({ uidPago }) {
   const handleClick = (e) => {
     cargarPantalla(e.target.id);
   };
+  const handleDownload=()=>{
+    
+  }
   if (modal) {
     return (
       <ModalPantalla>
@@ -47,6 +52,10 @@ export default function PagoCompleto({ uidPago }) {
         </CabeceraContenedor>
         <div className="absolute top-2 right-2 flex items-center justify-between gap-2">
           <BotonEmoji onClick={handleClick}>🖨️</BotonEmoji>
+          <PDFDownloadLink
+          document={<ReciboPDF/>}
+          fileName="ReciboIntiHuasi"
+          ><BotonEmoji onClick={handleClick}></BotonEmoji></PDFDownloadLink>
           <BotonEmoji onClick={handleClick} id={"reciboPDF"}>🔽</BotonEmoji>
           <BotonEmoji onClick={botonCerrar}>❌</BotonEmoji>
         </div>
