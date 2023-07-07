@@ -24,7 +24,7 @@ export default function BotonDePago({form,cargarPantalla,setForm,legajoSelect}) 
   }, [form,legajoSelect])
   
 
-
+console.log(registrarPago)
     const realizarPago = (e) => {
         e.preventDefault();
         efectuarPago(registrarPago)

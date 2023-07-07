@@ -5,9 +5,10 @@ import ModalPantalla from "@/app/componentes/ModalPantalla";
 import { contextCobranzas } from "@/context/contextCobranzas";
 import { contextData } from "@/context/contextData";
 import useRelacionesData from "@/hook/useRelacionesData";
-import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useEffect, useState } from "react";
 import ReciboPDF from "./ReciboPDF";
+import useReceiptPDF from "@/hook/useReciepPDF";
+import VisorRecibos from "./VisorRecibos";
 
 export default function PagoCompleto({ uidPago }) {
   const activarModal = contextData((state) => state.activarModal);
@@ -17,6 +18,7 @@ export default function PagoCompleto({ uidPago }) {
     modal: state.modal,
   }));
   const cargarPantalla = contextCobranzas((state) => state.cargarPantalla);
+  const {downloadPDF,generatePDF}=useReceiptPDF()
 
   const { uidPagoSeleccionado, comprobantes, ciclosLectivos, conceptos } =
     contextCobranzas((state) => ({
@@ -41,7 +43,8 @@ export default function PagoCompleto({ uidPago }) {
     cargarPantalla(e.target.id);
   };
   const handleDownload=()=>{
-    
+    generatePDF("pagoRealizado")
+    downloadPDF()
   }
   if (modal) {
     return (
@@ -52,14 +55,11 @@ export default function PagoCompleto({ uidPago }) {
         </CabeceraContenedor>
         <div className="absolute top-2 right-2 flex items-center justify-between gap-2">
           <BotonEmoji onClick={handleClick}>🖨️</BotonEmoji>
-          <PDFDownloadLink
-          document={<ReciboPDF/>}
-          fileName="ReciboIntiHuasi"
-          ><BotonEmoji onClick={handleClick}></BotonEmoji></PDFDownloadLink>
-          <BotonEmoji onClick={handleClick} id={"reciboPDF"}>🔽</BotonEmoji>
+          <BotonEmoji onClick={handleClick} id={"reciboPDF"}>🔎</BotonEmoji>
+          <BotonEmoji onClick={handleDownload}>🔽</BotonEmoji>
           <BotonEmoji onClick={botonCerrar}>❌</BotonEmoji>
         </div>
-        <div className="p-5 flex flex-col w-full justify-between h-full gap-3">
+        <div id="pagoRealizado" className="p-5 flex flex-col w-full justify-between h-full gap-3">
           <div className="border-b">
             <pre>
               Pago a cuenta de{" "}

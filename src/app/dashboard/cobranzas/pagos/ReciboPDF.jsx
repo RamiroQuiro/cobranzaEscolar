@@ -1,97 +1,231 @@
-"use client"
+"use client";
 
+import {
+  Document,
+  PDFRenderer,
+  PDFViewer,
+  Page,
+  View,
+  Text,
+  Image,
+} from "@react-pdf/renderer";
+import { createTw } from "react-pdf-tailwind";
+const tw = createTw({
+  theme: {
+    fontFamily: {
+      sans: ["Comic Sans"],
+    },
+    extend: {
+      colors: {
+        custom: "#bada55",
+      },
+    },
+  },
+});
 
-import { Document, PDFRenderer, PDFViewer, Page, Text, View } from "@react-pdf/renderer";
-export default function ReciboPDF({relacionesData}) {
-    
-return(
+const mostrar4dig = (num) => {
+  if (!num) {
+    return "0000"
+  }else{
+    let num_Sring = String(num).padStart(4, "0");
+    return num_Sring
+  }
+};
+export default function ReciboPDF({ relacionesData }) {
+  // The 'theme' object is your Tailwind theme config
+console.log(relacionesData)
+  return (
     <Document
-    language="español"
+    style={{
+      paddingTop:"16mm",
+      height:'90vh'
+    }}
     >
-        <Page
-        size={"A5"}
-        orientation="landscape"
-
-     
-
+      <Page
+      style={tw("pt-4 mt-12 flex flex-row gap-4 w-full justify-between items-center")}
+      orientation="landscape" size={"A6"} fixed>
+        <View
+          style={tw(
+            "w-full flex flex-col items-center justify-normal  rounded-md shadow-shadowCaja1"
+          )}
         >
-    <View 
+          <View
+            style={tw(
+              "bg-gray-400  h-1/4 flex flex-row items-center justify-evenly w-full"
+            )}
+          >
+            <View style={tw("w-1/3 ")}>
+              <View
+                style={tw(
+                  "bg-white mx-auto h-full rounded-full w-1/2 flex items-center justify-center text-2xl"
+                )}
+              >
+             <Text></Text>
+              </View>
+            </View>
+            <View style={tw("w-1/3 text-white font-bold")}>
+              {" "}
+              <Text
+               
+              >
+               {relacionesData?.tipoComprobante}
+              </Text>
+            </View>
+            <View style={tw("w-1/3  text-white font-bold")}>
+              {" "}
+              <Text
+               
+              >
+                N°{mostrar4dig(relacionesData?.numeroComprobante)}
+              </Text>
+            </View>
+          </View>
+            <View
+              style={tw(
+                "p-5 flex flex-col w-full h-full justify-start items-center gap-3 text-sm"
+              )}
+            >
+             <View style={tw("w-full flex flex-row items-center border-b mb-2 justify-between")}>
+                <Text>
+                  Fecha de Pago{" "}
+                  <Text style={tw("uppercase font-bold")}>
+                    {relacionesData?.fecha}
+                  </Text>
+                </Text>
+                <Text>
+                  Hora :
+                  <Text style={tw("uppercase font-bold")}>
+                    {relacionesData?.hora}
+                  </Text>
+                </Text>
+              </View>
+              <View style={tw("w-full flex flex-row items-center border-b mb-2 justify-between")}>
+                <Text>
+                  Recibi Conforme de{" "}
+                  <Text style={tw("uppercase font-bold")}>
+                    {relacionesData?.nombreLegajo}
+                  </Text>
+                </Text>
+                <Text>
+                  N° Legajo{" "}
+                  <Text style={tw("uppercase font-bold")}>
+                    {relacionesData?.legajo}
+                  </Text>
+                </Text>
+              </View>
+              <View style={tw("w-full flex flex-row items-center border-b mb-2 justify-between")}>
+                <Text>
+                  Por concepto de:{" "}
+                  <Text style={tw("uppercase font-bold")}>
+                    {relacionesData?.concepto}
+                  </Text>{" "}
+                </Text>
+                </View>
+                <View style={tw("w-full flex flex-row items-center border-b mb-2 justify-between")}>
+                <Text>
+                  El Monto de:{" "}
+                  <Text style={tw("uppercase font-bold")}>
+                    $ {relacionesData?.montoPagado}
+                  </Text>{" "}
+                </Text>{" "}
+                <Text>
+                  Medio de Pago:{" "}
+                  <Text style={tw("uppercase font-bold")}>
+                    {relacionesData?.formaDePago}
+                  </Text>{" "}
+                </Text>
+              </View>
+              <View style={tw("w-full flex flex-row items-center border-b mb-2 justify-between")}>
+                <Text>
+                  Observaciones de pago:{" "}
+                  <Text style={tw("uppercase font-bold")}>
+                    {relacionesData?.obsercacionesPagoRealizado}
+                  </Text>{" "}
+                </Text>
+              </View>
+            </View>
+          </View>
+      </Page>
+    </Document>
+  );
+  {
+    /*return(
+  
+    <div 
+    className="w-full flex flex-col items-center justify-normal h-[550px] rounded-md shadow-shadowCaja1">
+      <div className="bg-blue-800 h-1/3 flex items-center justify-evenly w-full">
+        <div className="w-1/3 h-full">
+            <div className="bg-white mx-auto h-full rounded-full w-1/2 flex items-center justify-center text-7xl">🏫</div>
+        </div>
+        <div className="w-1/3 h-full"> <pre className=" mx-auto flex h-full items-center justify-center text-3xl text-white">RECIBO</pre></div>
+        <div className="w-1/3 h-full"> <pre className=" mx-auto flex h-full items-center justify-center text-3xl text-white">N° 0002</pre></div>
+      </div>
+      <div className="w-full">
 
-    className="w-full flex flex-col items-center justify-normal h-[350px] rounded-md shadow-shadowCaja1">
-      <View className="bg-blue-800 h-1/3 flex items-center justify-evenly w-full">
-        <View className="w-1/3 h-full">
-            <View className="bg-white mx-auto h-full rounded-full w-1/2 flex items-center justify-center text-7xl">🏫</View>
-        </View>
-        <View className="w-1/3 h-full"> <View className=" mx-auto flex h-full items-center justify-center text-3xl text-white">RECIBO</View></View>
-        <View className="w-1/3 h-full"> <View className=" mx-auto flex h-full items-center justify-center text-3xl text-white">N° 0002</View></View>
-      </View>
-      <View className="w-full">
-
-      <View className="p-5 flex flex-col w-full justify-between h-full gap-3">
-        <View className="w-full flex items-center justify-between">
-            <Text>
+      <div className="p-5 flex flex-col w-full justify-between h-full gap-3">
+        <div className="w-full flex items-center justify-between">
+            <pre>
               Fecha de Pago{" "}
-              <Text className="uppercase font-bold">
+              <pre className="uppercase font-bold">
                 {relacionesData?.fecha}
-              </Text></Text>
-            <Text>
+              </pre></pre>
+            <pre>
               Hora :
-              <Text className="uppercase font-bold">
+              <pre className="uppercase font-bold">
               {
                 relacionesData?.hora
-              }</Text>
-            </Text>
-            </View>
-          <View className="border-b w-10/12 flex items-center justify-between">
-            <Text>
+              }</pre>
+            </pre>
+            </div>
+          <div className="border-b w-10/12 flex items-center justify-between">
+            <pre>
              Recibi Conforme de{" "}
-              <Text className="uppercase font-bold">
+              <pre className="uppercase font-bold">
                 {relacionesData?.nombreLegajo}
-              </Text>
-            </Text>
-            <Text>
+              </pre>
+            </pre>
+            <pre>
              N° Legajo{" "}
-              <Text className="uppercase font-bold">
+              <pre className="uppercase font-bold">
                 {relacionesData?.legajo}
-              </Text>
-            </Text>
-          </View>
-          <View className="border-b">
+              </pre>
+            </pre>
+          </div>
+          <div className="border-b">
             
-            <Text>
+            <pre>
               Por concepto de:{" "}
-              <Text className="uppercase font-bold">
+              <pre className="uppercase font-bold">
                 {relacionesData?.concepto}
-              </Text>{" "}
-            </Text>
-            <Text>
+              </pre>{" "}
+            </pre>
+            <pre>
               El Monto de:{" "}
-              <Text className="uppercase font-bold">
+              <pre className="uppercase font-bold">
                 $ {relacionesData?.montoPagado}
-              </Text>{" "}
-            </Text>   <Text>
+              </pre>{" "}
+            </pre>   <pre>
               Medio de Pago:{" "}
-              <Text className="uppercase font-bold">
+              <pre className="uppercase font-bold">
                 {relacionesData?.formaDePago}
 
-              </Text>{" "}
-            </Text>
-          </View>
-          <View className="border-b">
-            <Text>
+              </pre>{" "}
+            </pre>
+          </div>
+          <div className="border-b">
+            <pre>
               Observaciones de pago:{" "}
-              <Text className="uppercase font-bold">
+              <pre className="uppercase font-bold">
                 {relacionesData?.obsercacionesPagoRealizado}
-              </Text>{" "}
-            </Text>
+              </pre>{" "}
+            </pre>
          
-          </View>
-        </View>
-      </View>
-    </View>
-    </Page>
-    </Document>
+          </div>
+        </div>
+      </div>
+    </div>
+   
   
-)
-
+            )*/
+  }
 }

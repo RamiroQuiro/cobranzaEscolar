@@ -22,8 +22,9 @@ export default function RealizarPago() {
   useEffect(() => {
     if (!conceptoSelec) return;
     if (conceptoSelec) {
-      let numeroComp = comprobantes?.tipoComprobante?.find((comp) => comp.uid == conceptoSelec?.tipoComprobante)?.numeroComprobante
+      let numeroComp = comprobantes?.find((comp) => comp.uid == conceptoSelec?.tipoComprobante)?.numeroComprobante
       let montoConcepto = conceptos?.find((comp) => comp.uid == conceptoSelec?.concepto)?.montoConcepto
+      console.log(numeroComp)
       setForm((form)=>({
         ...form,
         montoPagado:montoConcepto,
@@ -68,6 +69,7 @@ export default function RealizarPago() {
   ];
 
   const onSelectComprobante = (e) => {
+    console.log("seleccionado ", e.target.value);
     handleForm(e);
     setConceptoSelec(conceptoSelec=>({...conceptoSelec,[e.target.name]: e.target.value }))
   };
@@ -108,16 +110,18 @@ const comprobarMonto=(num)=>{
               </InputFomr>
             </div>
             <div className="w-1/3">
-              <div
+              <InputFomr
+              value={mostrar4dig(
+                comprobantes?.find((comp) => comp.uid == conceptoSelec?.tipoComprobante)
+                  ?.numeroComprobante
+              )}
+              onChange={handleForm}
                 name="numeroComprobante"
                 className="rounded-lg bg-white px-5 py-2 flex text-right"
                 placeholder="Número Comprobante"
               >
-                {mostrar4dig(
-                  comprobantes?.find((comp) => comp.uid == conceptoSelec?.tipoComprobante)
-                    ?.numeroComprobante
-                )}
-              </div>
+                {}
+              </InputFomr>
             </div>
           </div>
           <div className="flex items-center justify-between w-full gap-2">

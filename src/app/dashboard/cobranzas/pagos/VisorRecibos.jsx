@@ -28,10 +28,10 @@ export default function VisorRecibos() {
 
     if(relacionesData)
     {
-        return <PDFViewer
-         className='w-full h-[90vh]'
-         
-        > <ReciboPDF relacionesData={relacionesData}/></PDFViewer>
+        return  <PDFViewer
+        className='w-10/12 h-[90vh] '
+        width={"90%"}
+        ><ReciboPDF relacionesData={relacionesData}/></PDFViewer>
     }
   return (
     <div>esperar</div>
