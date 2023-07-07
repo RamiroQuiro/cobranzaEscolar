@@ -85,12 +85,12 @@ function useRelacionesData({
             (comp) => comp.uid == element?.cicloLectivo
           );
           return {
-            fecha: obtenerFecha(uidPagoSeleccionado?.fechaYHora),
-            hora:obtenerHora(uidPagoSeleccionado?.fechaYHora),
+            fecha: obtenerFecha(element?.fechaYHora),
+            hora:obtenerHora(element?.fechaYHora),
             tipoComprobante: comproban?.label,
             numeroComprobante: element?.numeroComprobante,
             nombreLegajo: leg?.nombreLegajo,
-            legajo: uidPagoSeleccionado?.legajo,
+            legajo: element?.legajo,
             tipoComprobante: comproban?.label,
             concepto: concep?.label,
             cicloLectivo: ciclo?.label,

@@ -19,7 +19,6 @@ export default function PagoCompleto({ uidPago }) {
     modal: state.modal,
   }));
   const cargarPantalla = contextCobranzas((state) => state.cargarPantalla);
-  const {downloadPDF,generatePDF}=useReceiptPDF()
 
   const { uidPagoSeleccionado, comprobantes, ciclosLectivos, conceptos } =
     contextCobranzas((state) => ({
@@ -29,24 +28,22 @@ export default function PagoCompleto({ uidPago }) {
       uidPagoSeleccionado: state.uidPagoSeleccionado,
     }));
 
-    const {relacionesData} = useRelacionesData({
-      legajos,
-      comprobantes,
-      ciclosLectivos,
-      uidPagoSeleccionado,
-      conceptos,
-    });
+  const { relacionesData } = useRelacionesData({
+    legajos,
+    comprobantes,
+    ciclosLectivos,
+    uidPagoSeleccionado,
+    conceptos,
+  });
   const botonCerrar = () => {
     activarModal();
     capturarUidPago("");
   };
   const handleClick = (e) => {
+    activarModal();
     cargarPantalla(e.target.id);
   };
-  const handleDownload=()=>{
-    generatePDF("pagoRealizado")
-    downloadPDF()
-  }
+
   if (modal) {
     return (
       <ModalPantalla>
@@ -55,12 +52,21 @@ export default function PagoCompleto({ uidPago }) {
           {relacionesData?.numeroComprobante}
         </CabeceraContenedor>
         <div className="absolute top-2 right-2 flex items-center justify-between gap-2">
-          <BotonEmoji onClick={handleClick}>🖨️</BotonEmoji>
-          <BotonEmoji onClick={handleClick} id={"reciboPDF"}>🔎</BotonEmoji>
-          <PDFDownloadLink document={<ReciboPDF/>}></PDFDownloadLink><BotonEmoji onClick={handleDownload}>🔽</BotonEmoji><PDFDownloadLink/>
+          <BotonEmoji onClick={handleClick} id={"reciboPDF"}>
+            🖨️
+          </BotonEmoji>
+          <PDFDownloadLink
+            document={<ReciboPDF relacionesData={relacionesData} />}
+            fileName="SistemaEscolarCuotas"
+          >
+            <BotonEmoji>🔽</BotonEmoji>
+          </PDFDownloadLink>
           <BotonEmoji onClick={botonCerrar}>❌</BotonEmoji>
         </div>
-        <div id="pagoRealizado" className="p-5 flex flex-col w-full justify-between h-full gap-3">
+        <div
+          id="pagoRealizado"
+          className="p-5 flex flex-col w-full justify-between h-full gap-3"
+        >
           <div className="border-b">
             <pre>
               Pago a cuenta de{" "}

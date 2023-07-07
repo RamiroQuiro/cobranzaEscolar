@@ -29,7 +29,8 @@ export default function VisorRecibos() {
     if(relacionesData)
     {
         return  <PDFViewer
-        className='w-10/12 h-[90vh] '
+        className='w-full rounded-lg  h-[90vh] '
+        
         width={"90%"}
         ><ReciboPDF relacionesData={relacionesData}/></PDFViewer>
     }

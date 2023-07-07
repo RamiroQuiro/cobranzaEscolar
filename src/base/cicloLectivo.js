@@ -62,7 +62,7 @@ export const comprobantes = [
     descripcion: "Comprobante de pago por el servicio educativo.",
     codigoTipoDocumental: "REC",
     formatoArchivo: "pdf",
-    numeroComprobante: 1,
+    numeroComprobante: 2,
     uid: "12345",
   },
   {
@@ -70,7 +70,7 @@ export const comprobantes = [
     descripcion: "Factura B de pago por el servicio educativo.",
     codigoTipoDocumental: "FACTB",
     formatoArchivo: "pdf",
-    numeroComprobante: 1,
+    numeroComprobante: 2,
     uid: "12346",
   },
   {
@@ -78,7 +78,7 @@ export const comprobantes = [
     descripcion: "Nota de Creadito.",
     codigoTipoDocumental: "CRED",
     formatoArchivo: "pdf",
-    numeroComprobante: 1,
+    numeroComprobante: 2,
     uid: "12347",
   },
 ];
@@ -86,8 +86,56 @@ export const comprobantes = [
 export const pagosRealizados = [
   {
     legajo: "2233",
+    concepto: 1564,
+    tipoComprobante: "12345",
+    cicloLectivo: "156951",
+    formaDePago: "transferencia",
+    montoPagado: "4900",
+    numeroComprobante: 1,
+    observacionesPagoRealizado: undefined,
+    fechaYHora:new Date(),
+    uid:15452
+  },
+  {
+    legajo: "2234",
+    concepto: 1568,
+    tipoComprobante: "12346",
+    cicloLectivo: "156951",
+    formaDePago: "transferencia",
+    montoPagado: "4900",
+    numeroComprobante: 1,
+    observacionesPagoRealizado: undefined,
+    fechaYHora:new Date(),
+    uid:15643
+  },
+  {
+    legajo: "2233",
+    concepto: 1568,
+    tipoComprobante: 12347,
+    cicloLectivo: "156951",
+    formaDePago: "transferencia",
+    montoPagado: "4900",
+    numeroComprobante: 1,
+    observacionesPagoRealizado: undefined,
+    fechaYHora:new Date(),
+    uid:95145
+  },
+  {
+    legajo: "2234",
+    concepto: 1530,
+    tipoComprobante: 12345,
+    cicloLectivo: "156951",
+    formaDePago: "transferencia",
+    montoPagado: "4900",
+    numeroComprobante: 2,
+    observacionesPagoRealizado: undefined,
+    fechaYHora:new Date(),
+    uid:36524
+  },
+  {
+    legajo: "2233",
     concepto: 156953,
-    tipoComprobante: undefined,
+    tipoComprobante: "12345",
     cicloLectivo: "156951",
     formaDePago: "transferencia",
     cicloLectivo: "156951",
@@ -95,8 +143,7 @@ export const pagosRealizados = [
     montoPagado: "4900",
     numeroComprobante: 0,
     observacionesPagoRealizado: undefined,
-    tipoComprobante: "12345",
     fechaYHora:new Date(),
-    uid:15462
+    uid:96584
   },
 ];

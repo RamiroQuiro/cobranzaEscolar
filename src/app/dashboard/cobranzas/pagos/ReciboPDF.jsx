@@ -33,7 +33,6 @@ const mostrar4dig = (num) => {
 };
 export default function ReciboPDF({ relacionesData }) {
   // The 'theme' object is your Tailwind theme config
-console.log(relacionesData)
   return (
     <Document
     style={{
@@ -57,7 +56,7 @@ console.log(relacionesData)
             <View style={tw("w-1/3 ")}>
               <View
                 style={tw(
-                  "bg-white mx-auto h-full rounded-full w-1/2 flex items-center justify-center text-2xl"
+                  "bg-white mx-auto h-full rounded-full w-1/2 flex items-center justify-center text-lg"
                 )}
               >
              <Text>RamiroCode</Text>

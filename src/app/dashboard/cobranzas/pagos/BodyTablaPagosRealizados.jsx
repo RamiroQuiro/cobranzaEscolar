@@ -3,12 +3,15 @@ import BotonEmoji from "@/app/componentes/BotonEmoji";
 import { contextCobranzas } from "@/context/contextCobranzas";
 import { contextData, contextOrdenar } from "@/context/contextData";
 import useRelacionesData from "@/hook/useRelacionesData";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import { shallow } from "zustand/shallow";
+import ReciboPDF from "./ReciboPDF";
 
 export default function BodyTablaPagosRealizados() {
   const { pagosEfectuados } = contextCobranzas((state) => ({
     pagosEfectuados: state.pagosEfectuados,
   }));
+  const cargarPantalla = contextCobranzas((state) => state.cargarPantalla);
   const order = contextOrdenar((state) => state.ordenarPor, shallow);
   const activarModal = contextData((state) => state.activarModal);
   const capturarUidPago = contextCobranzas((state) => state.capturarUidPago);
@@ -30,31 +33,18 @@ export default function BodyTablaPagosRealizados() {
       uidPagoSeleccionado: state.uidPagoSeleccionado,
     }));
 
-  const  {newArrayPagos} = useRelacionesData({
+  const { newArrayPagos,relacionesData } = useRelacionesData({
     legajos,
     comprobantes,
     ciclosLectivos,
     pagosEfectuados,
+    uidPagoSeleccionado,
     conceptos,
   });
-  const obtenerHora = (data) => {
-    let fechapago = data;
-    if (!fechapago) return;
-    const event = fechapago;
-    const fecha = {
-      horas: event.getHours(),
-      minutos: event.getMinutes(),
-      segundos: event.getSeconds(),
-      diaSemana: event.getDay(),
-      dia: event.getDate(),
-      mes: event.getMonth(),
-      year: event.getFullYear(),
-    };
-    return `${fecha.dia < 10 ? "0" + fecha.dia : fecha.dia}/${
-      fecha.mes < 10 ? "0" + fecha.mes : fecha.mes
-    }/${fecha.year}`;
+  const handleClick = (e) => {
+    activarModal();
+    cargarPantalla(e.target.id);
   };
-  
   return (
     <tbody className="divide-y divide-gray-200 my-3">
       {newArrayPagos
@@ -89,14 +79,21 @@ export default function BodyTablaPagosRealizados() {
               {pagos.nombreLegajo}
             </td>
             <td className="whitespace-nowrap px-4 py-2 text-primary-text">
-              {obtenerHora(pagos.fechaYHora)}
+              {pagos.fecha}
             </td>
             <td className="whitespace-nowrap px-4 py-2 text-primary-text">
               {pagos.montoPagado}
             </td>
             <td className="whitespace-nowrap  text-primary-text flex gap-2 items-center mx-auto justify-center">
-              <BotonEmoji>🔽</BotonEmoji>
-              <BotonEmoji>🖨️</BotonEmoji>
+              <BotonEmoji onClick={handleClick} id={"reciboPDF"}>
+                🖨️
+              </BotonEmoji>
+              <PDFDownloadLink
+                document={<ReciboPDF relacionesData={relacionesData} />}
+                fileName="SistemaEscolarCuotas"
+              >
+                <BotonEmoji>🔽</BotonEmoji>
+              </PDFDownloadLink>
             </td>
           </tr>
         ))}
