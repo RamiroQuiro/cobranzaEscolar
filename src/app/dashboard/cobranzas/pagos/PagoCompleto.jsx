@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import ReciboPDF from "./ReciboPDF";
 import useReceiptPDF from "@/hook/useReciepPDF";
 import VisorRecibos from "./VisorRecibos";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 export default function PagoCompleto({ uidPago }) {
   const activarModal = contextData((state) => state.activarModal);
@@ -56,7 +57,7 @@ export default function PagoCompleto({ uidPago }) {
         <div className="absolute top-2 right-2 flex items-center justify-between gap-2">
           <BotonEmoji onClick={handleClick}>🖨️</BotonEmoji>
           <BotonEmoji onClick={handleClick} id={"reciboPDF"}>🔎</BotonEmoji>
-          <BotonEmoji onClick={handleDownload}>🔽</BotonEmoji>
+          <PDFDownloadLink document={<ReciboPDF/>}></PDFDownloadLink><BotonEmoji onClick={handleDownload}>🔽</BotonEmoji><PDFDownloadLink/>
           <BotonEmoji onClick={botonCerrar}>❌</BotonEmoji>
         </div>
         <div id="pagoRealizado" className="p-5 flex flex-col w-full justify-between h-full gap-3">

@@ -24,11 +24,12 @@ export default function BotonDePago({form,cargarPantalla,setForm,legajoSelect}) 
   }, [form,legajoSelect])
   
 
-console.log(registrarPago)
     const realizarPago = (e) => {
         e.preventDefault();
         efectuarPago(registrarPago)
-        toast.success("guardado");
+        toast.success("Pago realizado",{
+        
+        });
         setForm({});
         cargarPantalla("pagosRealizados");
       };

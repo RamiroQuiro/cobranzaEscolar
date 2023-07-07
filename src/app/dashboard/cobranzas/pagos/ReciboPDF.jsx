@@ -42,7 +42,7 @@ console.log(relacionesData)
     }}
     >
       <Page
-      style={tw("pt-4 mt-12 flex flex-row gap-4 w-full justify-between items-center")}
+      style={tw("pt-4 mt-12 flex flex-row gap-4 w-full justify-between items-center text-gray-800")}
       orientation="landscape" size={"A6"} fixed>
         <View
           style={tw(
@@ -60,7 +60,7 @@ console.log(relacionesData)
                   "bg-white mx-auto h-full rounded-full w-1/2 flex items-center justify-center text-2xl"
                 )}
               >
-             <Text></Text>
+             <Text>RamiroCode</Text>
               </View>
             </View>
             <View style={tw("w-1/3 text-white font-bold")}>
@@ -85,7 +85,7 @@ console.log(relacionesData)
                 "p-5 flex flex-col w-full h-full justify-start items-center gap-3 text-sm"
               )}
             >
-             <View style={tw("w-full flex flex-row items-center border-b mb-2 justify-between")}>
+             <View style={tw("w-full flex flex-row items-center border-b mb-2 py-1 justify-between")}>
                 <Text>
                   Fecha de Pago{" "}
                   <Text style={tw("uppercase font-bold")}>
@@ -99,7 +99,7 @@ console.log(relacionesData)
                   </Text>
                 </Text>
               </View>
-              <View style={tw("w-full flex flex-row items-center border-b mb-2 justify-between")}>
+              <View style={tw("w-full flex flex-row items-center border-b py-2  justify-between")}>
                 <Text>
                   Recibi Conforme de{" "}
                   <Text style={tw("uppercase font-bold")}>
@@ -113,7 +113,7 @@ console.log(relacionesData)
                   </Text>
                 </Text>
               </View>
-              <View style={tw("w-full flex flex-row items-center border-b mb-2 justify-between")}>
+              <View style={tw("w-full flex flex-row items-center border-b py-2 justify-between")}>
                 <Text>
                   Por concepto de:{" "}
                   <Text style={tw("uppercase font-bold")}>
@@ -121,7 +121,7 @@ console.log(relacionesData)
                   </Text>{" "}
                 </Text>
                 </View>
-                <View style={tw("w-full flex flex-row items-center border-b mb-2 justify-between")}>
+                <View style={tw("w-full flex flex-row items-center border-b py-2 justify-between")}>
                 <Text>
                   El Monto de:{" "}
                   <Text style={tw("uppercase font-bold")}>
@@ -135,7 +135,7 @@ console.log(relacionesData)
                   </Text>{" "}
                 </Text>
               </View>
-              <View style={tw("w-full flex flex-row items-center border-b mb-2 justify-between")}>
+              <View style={tw("w-full flex flex-row items-center border-b  py-2 justify-between")}>
                 <Text>
                   Observaciones de pago:{" "}
                   <Text style={tw("uppercase font-bold")}>

@@ -24,7 +24,6 @@ export default function RealizarPago() {
     if (conceptoSelec) {
       let numeroComp = comprobantes?.find((comp) => comp.uid == conceptoSelec?.tipoComprobante)?.numeroComprobante
       let montoConcepto = conceptos?.find((comp) => comp.uid == conceptoSelec?.concepto)?.montoConcepto
-      console.log(numeroComp)
       setForm((form)=>({
         ...form,
         montoPagado:montoConcepto,
@@ -69,7 +68,6 @@ export default function RealizarPago() {
   ];
 
   const onSelectComprobante = (e) => {
-    console.log("seleccionado ", e.target.value);
     handleForm(e);
     setConceptoSelec(conceptoSelec=>({...conceptoSelec,[e.target.name]: e.target.value }))
   };
