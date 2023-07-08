@@ -36,7 +36,7 @@ const legajoPrueba = [
     emailTutor: "rama.exe.13@gmail.com",
     fechaIngreso: "15/08/2005",
     cicloLectivo: "156951",
-    gradoLectivo: "sexto",
+    gradoLectivo: "quinto",
     sexo: "masculino",
     nacionalidad: "argentina",
     uid: 15486,

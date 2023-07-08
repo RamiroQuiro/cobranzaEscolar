@@ -22,14 +22,7 @@ export const ciclos = [
 ];
 
 export const conceptosCargados = [
-  {
-    label: "cuota mensual 2023",
-    montoConcepto: "1200",
-    tipoPago: "mensual",
-    fechaInicio: "2023/07/01",
-    activo: true,
-    uid: 1530,
-  },{
+ {
     label: "Otro Concepto",
     montoConcepto: "",
     tipoPago: "",
@@ -37,7 +30,14 @@ export const conceptosCargados = [
     activo: true,
     uid: 1564,
   },
-
+  {
+    label: "cuota mensual 2023",
+    montoConcepto: "1200",
+    tipoPago: "mensual",
+    fechaInicio: "2023/07/01",
+    activo: true,
+    uid: 1530,
+  },
   {
     label: "Matricula Primaria 2023",
     montoConcepto: "2200",

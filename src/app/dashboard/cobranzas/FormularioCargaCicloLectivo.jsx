@@ -22,7 +22,7 @@ export default function FormularioCargaCicloLectivo() {
   };
   const inputs = [
     {
-      name: "cicloLectivo",
+      name: "label",
       type: "text",
       label: "Nombre del Ciclo",
       id: 1,

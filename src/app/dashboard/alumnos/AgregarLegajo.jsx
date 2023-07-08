@@ -165,7 +165,7 @@ export default function AgregarLegajo() {
     },
     {
       label: "text",
-      name: "gradoEscolar",
+      name: "gradoLectivo",
       type: "text",
       onChange: handleForm,
       children: "Grado o Año Escolar",

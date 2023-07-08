@@ -5,10 +5,7 @@ import ModalPantalla from "@/app/componentes/ModalPantalla";
 import { contextCobranzas } from "@/context/contextCobranzas";
 import { contextData } from "@/context/contextData";
 import useRelacionesData from "@/hook/useRelacionesData";
-import { useEffect, useState } from "react";
 import ReciboPDF from "./ReciboPDF";
-import useReceiptPDF from "@/hook/useReciepPDF";
-import VisorRecibos from "./VisorRecibos";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 
 export default function PagoCompleto({ uidPago }) {
