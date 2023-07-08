@@ -19,7 +19,6 @@ export default function BodyTablaAlumnos() {
   };
   const order = contextOrdenar((state) => state.ordenarPor, shallow);
 
-  console.log(legajos)
   const encontrado = (arr)=>{
     if (busquedaLegajo?.length<=3) return arr;
     return arr?.filter((leg) => {

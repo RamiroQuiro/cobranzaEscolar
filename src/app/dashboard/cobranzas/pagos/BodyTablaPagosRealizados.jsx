@@ -6,6 +6,7 @@ import useRelacionesData from "@/hook/useRelacionesData";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { shallow } from "zustand/shallow";
 import ReciboPDF from "./ReciboPDF";
+import useBusquedaFiltros from "@/hook/useBusquedaFiltros";
 
 export default function BodyTablaPagosRealizados() {
   const { pagosEfectuados } = contextCobranzas((state) => ({
@@ -21,18 +22,20 @@ export default function BodyTablaPagosRealizados() {
     activarModal();
   };
 
-  const { modal, legajos } = contextData((state) => ({
+  const { legajos } = contextData((state) => ({
     legajos: state.legajos,
-    modal: state.modal,
+   
   }));
-  const { uidPagoSeleccionado, comprobantes, ciclosLectivos, conceptos } =
+  const { uidPagoSeleccionado, comprobantes, ciclosLectivos, conceptos ,filtroCobranzas} =
     contextCobranzas((state) => ({
+      filtroCobranzas:state.filtroCobranzas,
       comprobantes: state.comprobantes,
       conceptos: state.conceptos,
       ciclosLectivos: state.ciclosLectivos,
       uidPagoSeleccionado: state.uidPagoSeleccionado,
     }));
 
+    const  { search, encontrado, handleSearch ,setSearch}=useBusquedaFiltros(legajos)
   const { newArrayPagos,relacionesData } = useRelacionesData({
     legajos,
     comprobantes,
@@ -45,6 +48,9 @@ export default function BodyTablaPagosRealizados() {
     activarModal();
     cargarPantalla(e.target.id);
   };
+console.log(filtroCobranzas)
+
+
   return (
     <tbody className="divide-y divide-gray-200 my-3">
       {newArrayPagos

@@ -25,6 +25,7 @@ function obtenerHoraActual() {
 export const contextCobranzas = create((set, get) => ({
   uidPagoSeleccionado: "",
   comprobantes: comprobantes,
+  filtroCobranzas:"",
   pantallaActiva: "pagosEfectuados",
   pagosEfectuados: pagosRealizados,
   ciclosLectivos: ciclos,
@@ -92,6 +93,12 @@ export const contextCobranzas = create((set, get) => ({
     set((state) => ({
       ...state,
       pantallaActiva: strig,
+    }));
+  },
+  cargaFiltroCobranza: (strig) => {
+    set((state) => ({
+      ...state,
+      filtroCobranzas: strig,
     }));
   },
 }));
