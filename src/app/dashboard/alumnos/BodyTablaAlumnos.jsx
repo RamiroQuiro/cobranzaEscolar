@@ -4,12 +4,12 @@ import { useState } from "react";
 import { shallow } from "zustand/shallow";
 
 export default function BodyTablaAlumnos() {
-  const { legajos, filtroActivo,busquedaLegajo } = contextData((state) => ({
+  const { legajos, filtroActivo, busquedaLegajo } = contextData((state) => ({
     legajos: state.legajos,
-    busquedaLegajo:state.busquedaLegajo,
+    busquedaLegajo: state.busquedaLegajo,
     filtroActivo: state.filtroActivo,
   }));
-  const [tablaLegajos, setTablaLegajos] = useState(legajos)
+  const [tablaLegajos, setTablaLegajos] = useState(legajos);
 
   const cargarPantalla = contextData((state) => state.cargarPantalla);
   const capturarLegajo = contextData((state) => state.capturarLegajo);
@@ -19,30 +19,39 @@ export default function BodyTablaAlumnos() {
   };
   const order = contextOrdenar((state) => state.ordenarPor, shallow);
 
-  const encontrado = (arr)=>{
-    if (busquedaLegajo?.length<=3) return arr;
+  const encontrado = (arr) => {
+    if (busquedaLegajo?.length <= 3) return arr;
     return arr?.filter((leg) => {
-    let nombreLeg = leg.nombreLegajo
-      ?.toUpperCase()
-      .includes(busquedaLegajo?.toUpperCase());
-    let dniLegajo = leg.dniLegajo
-      ?.toUpperCase()
-      .includes(busquedaLegajo?.toUpperCase());
-    let legajo = leg.legajo?.toUpperCase().includes(busquedaLegajo?.toUpperCase());
-    let nombreApellidoTutor = leg.nombreApellidoTutor?.toUpperCase().includes(busquedaLegajo?.toUpperCase());
-    let cicloLectivo = String(leg.cicloLectivo)?.includes(busquedaLegajo?.toUpperCase());
-    if (nombreLeg || dniLegajo || legajo || nombreApellidoTutor || cicloLectivo) {
+      let nombreLeg = leg.nombreLegajo
+        ?.toUpperCase()
+        .includes(busquedaLegajo?.toUpperCase());
+      let dniLegajo = leg.dniLegajo
+        ?.toUpperCase()
+        .includes(busquedaLegajo?.toUpperCase());
+      let legajo = leg.legajo
+        ?.toUpperCase()
+        .includes(busquedaLegajo?.toUpperCase());
+      let nombreApellidoTutor = leg.nombreApellidoTutor
+        ?.toUpperCase()
+        .includes(busquedaLegajo?.toUpperCase());
+      let cicloLectivo = String(leg.cicloLectivo)?.includes(
+        busquedaLegajo?.toUpperCase()
+      );
+      if (
+        nombreLeg ||
+        dniLegajo ||
+        legajo ||
+        nombreApellidoTutor ||
+        cicloLectivo
+      ) {
         return leg;
-    }
-  }
-  )
-}
+      }
+    });
+  };
 
   return (
     <tbody className="divide-y divide-gray-200 my-3">
-      {
-      
-      encontrado(legajos)
+      {encontrado(legajos)
         ?.sort((a, b) => {
           if (order == "nombreLegajo") {
             if (a.nombreLegajo < b.nombreLegajo) return -1;

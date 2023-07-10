@@ -7,6 +7,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import { shallow } from "zustand/shallow";
 import ReciboPDF from "./ReciboPDF";
 import useBusquedaFiltros from "@/hook/useBusquedaFiltros";
+import { useEffect } from "react";
 
 export default function BodyTablaPagosRealizados() {
   const { pagosEfectuados } = contextCobranzas((state) => ({
@@ -35,7 +36,6 @@ export default function BodyTablaPagosRealizados() {
       uidPagoSeleccionado: state.uidPagoSeleccionado,
     }));
 
-    const  { search, encontrado, handleSearch ,setSearch}=useBusquedaFiltros(legajos)
   const { newArrayPagos,relacionesData } = useRelacionesData({
     legajos,
     comprobantes,
@@ -48,12 +48,40 @@ export default function BodyTablaPagosRealizados() {
     activarModal();
     cargarPantalla(e.target.id);
   };
-console.log(filtroCobranzas)
 
+  const encontrado = (arr) => {
+    if (filtroCobranzas?.length <= 3) return arr;
+    return arr?.filter((leg) => {
+      let nombreLeg = leg.nombreLegajo
+        ?.toUpperCase()
+        .includes(filtroCobranzas?.toUpperCase());
+      let dniLegajo = leg.dniLegajo
+        ?.toUpperCase()
+        .includes(filtroCobranzas?.toUpperCase());
+      let legajo = leg.legajo
+        ?.toUpperCase()
+        .includes(filtroCobranzas?.toUpperCase());
+      let nombreApellidoTutor = leg.nombreApellidoTutor
+        ?.toUpperCase()
+        .includes(filtroCobranzas?.toUpperCase());
+      let cicloLectivo = String(leg.cicloLectivo)?.includes(
+        filtroCobranzas?.toUpperCase()
+      );
+      if (
+        nombreLeg ||
+        dniLegajo ||
+        legajo ||
+        nombreApellidoTutor ||
+        cicloLectivo
+      ) {
+        return leg;
+      }
+    });
+  };
 
   return (
     <tbody className="divide-y divide-gray-200 my-3">
-      {newArrayPagos
+      {encontrado(newArrayPagos)
         ?.reverse()
         ?.sort((a, b) => {
           if (order == "nombreLegajo") {
