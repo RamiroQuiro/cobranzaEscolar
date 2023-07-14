@@ -10,12 +10,12 @@ import RealizarPago from './pagos/RealizarPago';
 import ReciboPDF from './pagos/ReciboPDF';
 import VisorRecibos from './pagos/VisorRecibos';
 import PDFRealizados from './PDFRealizados';
+import PreCargaPDFPagos from './pagos/PreCargaPDFPagos';
 
 export default function RenderPantallas({captarUidLegajo}) {
     const {pantallaActiva}=contextCobranzas((state)=>({
         pantallaActiva:state.pantallaActiva
     }))
-    console.log(pantallaActiva)
   switch (pantallaActiva) {
     case "pagosEfectuados":
         return <PanelCobranzas />
@@ -35,7 +35,7 @@ export default function RenderPantallas({captarUidLegajo}) {
         return <VisorRecibos/>
   
     case "listadoPagosPDF":
-        return <PDFRealizados/>
+        return <PreCargaPDFPagos/>
   
     default:
         return <PanelCobranzas  />

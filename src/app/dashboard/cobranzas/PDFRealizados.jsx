@@ -1,5 +1,6 @@
 "use client";
 
+import TableHeadPDF from "@/app/componentes/TableHeadPDF";
 import {
   Document,
   PDFRenderer,
@@ -10,6 +11,7 @@ import {
   Image,
 } from "@react-pdf/renderer";
 import { createTw } from "react-pdf-tailwind";
+import TableBodyPDF from "./TableBodyPDF";
 const tw = createTw({
   theme: {
     fontFamily: {
@@ -23,62 +25,93 @@ const tw = createTw({
   },
 });
 
+const headerTable = [
+  {
+    name: "Comprobantes",
+    id: 2,
+    type: "text",
+  },
+  {
+    name: "N°",
+    id: 2,
+    type: "text",
+  },
+  {
+    name: "Legajos",
+    id: 2,
+    type: "text",
+  },
+  {
+    name: "Nombre Alumno",
+    id: 2,
+    type: "text",
+  },
+  {
+    name: "Monto",
+    id: 2,
+    type: "text",
+  },
+  {
+    name: "Fecha Pago",
+    id: 2,
+    type: "text",
+  },
+];
 
-export default function PDFRealizados() {
-  return (<PDFViewer
-    className='w-full rounded-lg  h-[90vh] '
-    
-    width={"90%"}
-    >
-    <Document
-    style={{
-      paddingTop:"16mm",
-      height:'90vh'
-    }}
-    >
-      <Page
-      style={tw("pt-4 mt-12 flex flex-row gap-4 w-full justify-between items-center text-gray-800")}
-      orientation="" size={"A4"} fixed>
-        </Page> 
-        <View style={tw('w-full flex-row items-center')}>
-        <View style={tw("text-center ltr:text-left rtl:text-right bg-primary-600 rounded py-2 sticky top-0 left-0")}>
-    <tr>
-      <th
-      id="nombreLegajo"
-      className="whitespace-nowrap pl-1 py-2 font-medium text-primary-800 cursor-pointer hover:bg-primary-300/20 duration-200">
-         Comproban
-      </th>
-      <th
-      id="nombreLegajo"
-      className="whitespace-nowrap px-1 py-2 font-medium text-primary-800 cursor-pointer hover:bg-primary-300/20 duration-200">
-        N° 
-      </th>
-      <th 
-        id="legajo"
-        className="whitespace-nowrap px-4 py-2 font-medium text-primary-800 cursor-pointer  hover:bg-primary-300/20 duration-200">
-       Legajo 
-      </th>
-      <th 
-        id="dniLegajo"
-        className="whitespace-nowrap px-4 py-2 font-medium text-primary-800 cursor-pointer  hover:bg-primary-300/20 duration-200">
-        Nombre Alumno 
-      </th>
-      <th 
-        id="activo"
-        className="whitespace-nowrap px-1 py-2 font-medium text-primary-800 cursor-pointer  hover:bg-primary-300/20 duration-200">
-        Fecha Pago
-      </th>
-      <th 
-        id="activo"
-        className="whitespace-nowrap px-1 py-2 font-medium text-primary-800 cursor-pointer  hover:bg-primary-300/20 duration-200">
-        Monto 
-      </th>
-      <th 
-        id="activo"
-        className="whitespace-nowrap px-1 py-2 font-medium text-primary-800 cursor-pointer  hover:bg-primary-300/20 duration-200">
-        Acciones 
-      </th>
-    </tr>
-  </View></View></Document></PDFViewer>
-  )
+export default function PDFRealizados({data}) {
+
+  console.log(data)
+  return (
+      <Document
+        
+      >
+        <Page
+          style={{
+            
+            height: "90vh",
+            fontSize:"10",
+          }}
+          orientation=""
+          size={"A4"}
+          fixed
+        >
+          <View style={tw(
+              "whitespace-nowrap flex flex-row items-center gap-2 border-b border-b-2 justify-between flex-row w-11/12 mb-2 mx-auto h-1/6"
+            )}>
+              <View>
+            <Text
+            style={tw(
+              "text-xl text-orange-500"
+            )}
+            >RamiroCode </Text>
+            <Text style={tw(
+              "text-base text-gray-800 "
+            )}>Desarrollo y Diseño Web</Text>{" "}
+            </View>
+            <Text
+            style={tw(
+              "text-sm font-extraligth w-8/12 text-gray-800 "
+            )}
+            >
+              Desarrollo Web con experiencia en la creación de sitios web y
+              aplicaciones atractivas y funcionales. Especializado en React,
+              Node.js y TailwindCSS.{" "}
+            </Text>
+          </View>
+          <View
+          style={tw(
+              "flex flex-col items-center justify-center flex-grow w-11/12 mx-auto rounded-lg overflow-hidden"
+            )} >
+
+          <TableHeadPDF
+          array={headerTable}
+          />
+          <TableBodyPDF
+          array={data}
+          />
+          </View>
+         {" "}
+        </Page>{" "}
+      </Document>
+  );
 }
