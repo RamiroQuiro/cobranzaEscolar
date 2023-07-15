@@ -39,8 +39,19 @@ export default function TableBodyPDF({ array, label, style }) {
         .filter(([key]) => !NOPINTARCAMPOS.includes(key))
         ?.sort(([keyA], [keyB]) => order.indexOf(keyA) - order.indexOf(keyB))
         ?.map(([key, value], i) => {
+            if (key=="numeroComprobante" || key=="fecha"|| key=="legajos") {
+                return (<View key={i} style={tw(" text-gray-700 font-medium py-1 px-2 flex-grow-0")}>
+              <Text>{value}</Text>
+            </View>)
+            }
+            if (key=="montoPagado") {
+                return ( <View key={i} style={tw(" text-gray-700 font-medium py-1 px-2 flex-grow-0")}>
+              <Text>${value}</Text>
+            </View>)
+                
+            }
           return (
-            <View key={i} style={tw(" text-gray-700 font-medium py-1 w-1/6 flex-auto")}>
+            <View key={i} style={tw(" text-gray-700 font-medium py-1  w-1/6 flex-grow")}>
               <Text>{value}</Text>
             </View>
           );

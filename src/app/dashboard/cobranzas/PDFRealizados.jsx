@@ -60,7 +60,6 @@ const headerTable = [
 
 export default function PDFRealizados({data}) {
 
-  console.log(data)
   return (
       <Document
         
