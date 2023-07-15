@@ -35,13 +35,11 @@ export default function ReciboPDF({ relacionesData }) {
   // The 'theme' object is your Tailwind theme config
   return (
     <Document
-    style={{
-      paddingTop:"16mm",
-      height:'90vh'
-    }}
+   
     >
       <Page
-      style={tw("pt-4 mt-12 flex flex-row gap-4 w-full justify-between items-center text-gray-800")}
+      style={
+        tw("pt-4 mt-12 flex flex-row gap-4 w-full justify-between items-center text-gray-800")}
       orientation="landscape" size={"A6"} fixed>
         <View
           style={tw(
