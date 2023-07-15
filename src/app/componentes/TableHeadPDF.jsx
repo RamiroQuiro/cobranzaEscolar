@@ -28,7 +28,7 @@ export default function TableHeadPDF({array}) {
     {array?.map((head) => (
       <ItemHeadTablePDF
       style={tw(
-        " text-gray-700 font-medium"
+        " text-gray-700 font-medium w-1/6 flex-grow "
       )}
       key={head.id}
       head={head}/>
