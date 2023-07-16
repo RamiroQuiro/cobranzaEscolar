@@ -19,7 +19,9 @@ export default function BodyTablaAlumnos() {
   };
   const order = contextOrdenar((state) => state.ordenarPor, shallow);
 
-  const encontrado = (arr) => {
+
+  /* funcion hecha por mi */
+/*  const encontrado = (arr) => {
     if (busquedaLegajo?.length <= 3) return arr;
     return arr?.filter((leg) => {
       let nombreLeg = leg.nombreLegajo
@@ -47,8 +49,23 @@ export default function BodyTablaAlumnos() {
         return leg;
       }
     });
-  };
+  };*/
 
+  /* funcion mejorada por aiEdge */
+  const encontrado = (arr) => {
+    if (busquedaLegajo?.length <= 3) return arr;
+    const busquedaLegajoUpper = busquedaLegajo?.toUpperCase();
+    return arr?.filter((leg) => {
+      const { nombreLegajo, dniLegajo, legajo, nombreApellidoTutor, cicloLectivo } = leg;
+      return (
+        nombreLegajo?.toUpperCase().includes(busquedaLegajoUpper) ||
+        dniLegajo?.toUpperCase().includes(busquedaLegajoUpper) ||
+        legajo?.toUpperCase().includes(busquedaLegajoUpper) ||
+        nombreApellidoTutor?.toUpperCase().includes(busquedaLegajoUpper) ||
+        String(cicloLectivo)?.includes(busquedaLegajoUpper)
+      );
+    });
+  };
   return (
     <tbody className="divide-y divide-gray-200 my-3">
       {encontrado(legajos)

@@ -1,6 +1,6 @@
 "use client"
 import { contextCobranzas } from '@/context/contextCobranzas';
-import { contextData } from '@/context/contextData';
+import { contextData, contextOrdenar } from '@/context/contextData';
 import useRelacionesData from '@/hook/useRelacionesData';
 import ReciboPDF from './ReciboPDF';
 import { PDFViewer } from '@react-pdf/renderer';
@@ -11,6 +11,9 @@ export default function PreCargaPDFPagos() {
     const { modal, legajos } = contextData((state) => ({
         legajos: state.legajos,
       }));
+      const order = contextOrdenar((state) => state.ordenarPor);
+
+
     const { pagosEfectuados, comprobantes, ciclosLectivos, conceptos,filtroCobranzas } =
     contextCobranzas((state) => ({
       filtroCobranzas:state.filtroCobranzas,
@@ -63,7 +66,23 @@ export default function PreCargaPDFPagos() {
         className='w-full rounded-lg  h-[90vh] '
         
         width={"90%"}
-        ><PDFRealizados data={encontrado(newArrayPagos)}/></PDFViewer>
+        ><PDFRealizados data={encontrado(newArrayPagos)?.sort((a, b) => {
+          if (order == "tipoComprobante") {
+            return a.tipoComprobante.localeCompare(b.tipoComprobante)
+          }
+          if (order == "nombreLegajo") {
+            return a.nombreLegajo.localeCompare(b.nombreLegajo)
+          }
+          if (order == "monto") {
+            return a.montoPagado-b.montoPagado
+          }
+          if (order == "legajo") return a.legajo - b.legajo;
+          if (order === "fecha") {
+            const dateA = new Date(a.fecha);
+            const dateB = new Date(b.fecha);
+            return dateA - dateB;
+          }
+        })}/></PDFViewer>
     }
   return (
     <div>esperar</div>

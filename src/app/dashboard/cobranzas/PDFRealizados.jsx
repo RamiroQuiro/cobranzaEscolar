@@ -3,8 +3,6 @@
 import TableHeadPDF from "@/app/componentes/TableHeadPDF";
 import {
   Document,
-  PDFRenderer,
-  PDFViewer,
   Page,
   View,
   Text,

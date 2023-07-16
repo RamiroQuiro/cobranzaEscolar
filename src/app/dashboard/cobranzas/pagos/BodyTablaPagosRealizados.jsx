@@ -78,21 +78,23 @@ export default function BodyTablaPagosRealizados() {
       }
     });
   };
-
   return (
     <tbody className="divide-y divide-gray-200 my-3">
       {encontrado(newArrayPagos)
         ?.reverse()
         ?.sort((a, b) => {
+          if (order == "tipoComprobante") {
+            return a.tipoComprobante.localeCompare(b.tipoComprobante)
+          }
           if (order == "nombreLegajo") {
-            if (a.nombreLegajo < b.nombreLegajo) return -1;
-            if (a.nombreLegajo > b.nombreLegajo) return 1;
+            return a.nombreLegajo.localeCompare(b.nombreLegajo)
           }
           if (order == "legajo") return a.legajo - b.legajo;
-          if (order == "dniLegajo") return a.dniLegajo - b.dniLegajo;
-          if (order == "activo")
-            if (a.activo > b.activo) return -1;
-            else return 1;
+          if (order === "fecha") {
+            const dateA = new Date(a.fecha);
+            const dateB = new Date(b.fecha);
+            return dateA - dateB;
+          }
         })
         ?.map((pagos) => (
           <tr
