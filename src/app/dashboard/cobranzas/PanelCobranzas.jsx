@@ -11,6 +11,7 @@ import BotonEmoji from "@/app/componentes/BotonEmoji";
 
 export default function PanelCobranzas() {
   const cargarPantalla = contextCobranzas((state) => state.cargarPantalla);
+  const filtroCobranzas = contextCobranzas((state) => state.filtroCobranzas);
   const cargaFiltroCobranza = contextCobranzas(
     (state) => state.cargaFiltroCobranza
   );
@@ -38,6 +39,7 @@ export default function PanelCobranzas() {
           <InputFomr
             className={"flex-grow"}
             onChange={handleSearck}
+            value={filtroCobranzas}
             type={"search"}
           >
             Filtra tu busqueda
