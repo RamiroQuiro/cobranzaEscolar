@@ -7,7 +7,7 @@ export default function HeadTablaCobranzas() {
     }
     let ordenarPor="ordenarpor"
   return (
-    <thead className="text-center ltr:text-left rtl:text-right bg-primary-600 rounded py-2 sticky top-0 left-0">
+    <thead className="text-left ltr:text-left rtl:text-right bg-primary-600 rounded py-2 sticky top-0 left-0">
     <tr>
       <th
       onClick={handleClick}

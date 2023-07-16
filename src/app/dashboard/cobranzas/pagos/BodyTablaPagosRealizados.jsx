@@ -98,24 +98,24 @@ export default function BodyTablaPagosRealizados() {
           <tr
             onClick={(e) => selectorDePagos(e, pagos.uidPago)}
             key={pagos.uid}
-            className="odd:bg-primary-300/50 cursor-pointer hover:bg-gray-200/80 duration-200"
+            className="odd:bg-primary-300/50 cursor-pointer hover:bg-gray-200/80 duration-200 text-left"
           >
-            <td className="whitespace-nowrap px-4 py-2 font-medium text-primary-text">
+            <td className="whitespace-nowrap px-2 py-2 font-medium text-primary-text">
               {pagos.tipoComprobante}
             </td>
-            <td className="whitespace-nowrap px-4 py-2 text-primary-text">
+            <td className="whitespace-nowrap px-2 py-2 text-primary-text">
               {pagos.numeroComprobante}
             </td>
             <td className="whitespace-nowrap px-4 py-2 text-primary-text">
               {pagos.legajo}
             </td>
-            <td className="whitespace-nowrap px-4 py-2 text-primary-text">
+            <td className="whitespace-nowrap px-2 py-2 text-primary-text">
               {pagos.nombreLegajo}
             </td>
-            <td className="whitespace-nowrap px-4 py-2 text-primary-text">
+            <td className="whitespace-nowrap px-2 py-2 text-primary-text">
               {pagos.fecha}
             </td>
-            <td className="whitespace-nowrap px-4 py-2 text-primary-text">
+            <td className="whitespace-nowrap px-2 py-2 text-primary-text">
               {pagos.montoPagado}
             </td>
             <td className="whitespace-nowrap  text-primary-text flex gap-2 items-center mx-auto justify-center">

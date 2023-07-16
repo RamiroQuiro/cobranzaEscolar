@@ -50,8 +50,8 @@ export default function TableBodyPDF({ array, label, style }) {
       <View
         key={i}
         style={tw(
-          `text-gray-700 font-medium py-1 px-2 border-l ${
-            isFixedWidth ? 'flex-grow-0' : 'w-1/6 flex-grow'
+          `text-gray-700 font-medium py-1 px-2  ${
+            isFixedWidth ? 'flex-grow-0 w-[12.5%] ' : 'w-1/3 flex-grow'
           }`
         )}
       >
