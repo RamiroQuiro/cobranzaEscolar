@@ -29,7 +29,7 @@ export default function LegajoModelo({ legajo }) {
       <div className="my-5">
         <h2 className="font-medium mt-8 mb-4 ml-4">Estado contable</h2>
         <div className="bg-white p-2 rounded-lg w-11/12 mx-auto">
-          <Chart />
+          <Chart legajo={legajo} />
         </div>
         
       </div>

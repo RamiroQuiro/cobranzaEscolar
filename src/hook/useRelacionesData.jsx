@@ -57,6 +57,7 @@ function useRelacionesData({
       (comp) => comp.uid == uidPagoSeleccionado?.cicloLectivo
     );
     setRelacionesData({
+      fechaYHora:uidPagoSeleccionado?.fechaYHora,
       fecha: obtenerFecha(uidPagoSeleccionado?.fechaYHora),
       hora:obtenerHora(uidPagoSeleccionado?.fechaYHora),
       tipoComprobante: comproban?.label,
@@ -85,6 +86,7 @@ function useRelacionesData({
             (comp) => comp.uid == element?.cicloLectivo
           );
           return {
+            fechaYHora:element?.fechaYHora,
             fecha: obtenerFecha(element?.fechaYHora),
             hora:obtenerHora(element?.fechaYHora),
             tipoComprobante: comproban?.label,
