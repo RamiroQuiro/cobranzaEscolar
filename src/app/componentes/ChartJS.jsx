@@ -122,7 +122,7 @@ export function Chart({ legajo }) {
       },
       title: {
         display: false,
-        text: "Chart.js Line Chart",
+        text: "",
       },
       tooltip: {
         displayColors: false,

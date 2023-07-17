@@ -78,9 +78,8 @@ export default function PreCargaPDFPagos() {
           }
           if (order == "legajo") return a.legajo - b.legajo;
           if (order === "fecha") {
-            const dateA = new Date(a.fecha);
-            const dateB = new Date(b.fecha);
-            return dateA - dateB;
+          
+            return a.fechaYHora - b.fechaYHora
           }
         })}/></PDFViewer>
     }
