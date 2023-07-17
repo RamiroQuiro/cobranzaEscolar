@@ -93,7 +93,7 @@ export const pagosRealizados = [
     montoPagado: "4900",
     numeroComprobante: 1,
     observacionesPagoRealizado: undefined,
-    fechaYHora:new Date(),
+    fechaYHora : new Date(Date.UTC(2023, 3, 15)),
     uid:15452
   },
   {
@@ -105,7 +105,7 @@ export const pagosRealizados = [
     montoPagado: "4900",
     numeroComprobante: 1,
     observacionesPagoRealizado: undefined,
-    fechaYHora:new Date(),
+    fechaYHora : new Date(Date.UTC(2023, 2, 10)),
     uid:15643
   },
   {
@@ -117,7 +117,8 @@ export const pagosRealizados = [
     montoPagado: "4900",
     numeroComprobante: 1,
     observacionesPagoRealizado: undefined,
-    fechaYHora:new Date(),
+     fechaYHora : new Date(Date.UTC(2023, 5, 20)),
+
     uid:95145
   },
   {
@@ -134,7 +135,7 @@ export const pagosRealizados = [
   },
   {
     legajo: "2233",
-    concepto: 156953,
+    concepto: 1530,
     tipoComprobante: "12345",
     cicloLectivo: "156951",
     formaDePago: "transferencia",
