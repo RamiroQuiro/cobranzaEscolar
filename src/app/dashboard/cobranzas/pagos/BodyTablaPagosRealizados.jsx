@@ -102,7 +102,7 @@ export default function BodyTablaPagosRealizados() {
           <tr
             onClick={(e) => selectorDePagos(e, pagos.uidPago)}
             key={pagos.uid}
-            className="odd:bg-primary-300/50 cursor-pointer hover:bg-gray-200/80 duration-200 text-left"
+            className="odd:bg-primary-300/50 cursor-pointer hover:bg-gray-200/80 duration-200 text-left animate-[aparecer_.2s]"
           >
             <td className="whitespace-nowrap px-2 py-2 font-medium text-primary-text">
               {pagos.tipoComprobante}
