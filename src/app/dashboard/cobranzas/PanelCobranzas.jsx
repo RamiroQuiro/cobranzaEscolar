@@ -41,6 +41,7 @@ export default function PanelCobranzas() {
             onChange={handleSearck}
             value={filtroCobranzas}
             type={"search"}
+            classNameInput={"pr-2"}
           >
             Filtra tu busqueda
           </InputFomr>

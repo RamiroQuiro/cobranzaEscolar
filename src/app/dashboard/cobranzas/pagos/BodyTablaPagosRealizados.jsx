@@ -67,15 +67,17 @@ export default function BodyTablaPagosRealizados() {
       let cicloLectivo = String(leg.cicloLectivo)?.includes(
         filtroCobranzas?.toUpperCase()
       );
-      if (
-        nombreLeg ||
-        dniLegajo ||
-        legajo ||
-        nombreApellidoTutor ||
-        cicloLectivo
-      ) {
-        return leg;
-      }
+       let fecha = (leg.fecha)?.includes(filtroCobranzas) 
+    if (
+      nombreLeg ||
+      dniLegajo ||
+      legajo ||
+      nombreApellidoTutor ||
+      cicloLectivo ||
+      fecha
+    ) {
+      return leg;
+    }
     });
   };
   return (
@@ -91,8 +93,8 @@ export default function BodyTablaPagosRealizados() {
           }
           if (order == "legajo") return a.legajo - b.legajo;
           if (order === "fecha") {
-            const dateA = new Date(a.fecha);
-            const dateB = new Date(b.fecha);
+            const dateA = new Date(a.fechaYHora);
+            const dateB = new Date(b.fechaYHora);
             return dateA - dateB;
           }
         })

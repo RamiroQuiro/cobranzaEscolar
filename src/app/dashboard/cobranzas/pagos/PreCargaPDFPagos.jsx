@@ -49,15 +49,17 @@ export default function PreCargaPDFPagos() {
         let cicloLectivo = String(leg.cicloLectivo)?.includes(
           filtroCobranzas?.toUpperCase()
         );
-        if (
-          nombreLeg ||
-          dniLegajo ||
-          legajo ||
-          nombreApellidoTutor ||
-          cicloLectivo
-        ) {
-          return leg;
-        }
+         let fecha = (leg.fecha)?.includes(filtroCobranzas) 
+      if (
+        nombreLeg ||
+        dniLegajo ||
+        legajo ||
+        nombreApellidoTutor ||
+        cicloLectivo ||
+        fecha
+      ) {
+        return leg;
+      }
       });
     };
     if(newArrayPagos)
@@ -73,17 +75,15 @@ export default function PreCargaPDFPagos() {
           if (order == "nombreLegajo") {
             return a.nombreLegajo.localeCompare(b.nombreLegajo)
           }
-          if (order == "monto") {
-            return a.montoPagado-b.montoPagado
-          }
           if (order == "legajo") return a.legajo - b.legajo;
           if (order === "fecha") {
-          
-            return a.fechaYHora - b.fechaYHora
+            const dateA = new Date(a.fechaYHora);
+            const dateB = new Date(b.fechaYHora);
+            return dateA - dateB;
           }
         })}/></PDFViewer>
     }
   return (
-    <div>esperar</div>
+    <div className='animate-pulse text-xs mx-auto font-medium'>Cargando...</div>
   )
 }

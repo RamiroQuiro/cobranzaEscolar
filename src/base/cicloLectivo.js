@@ -22,7 +22,7 @@ export const ciclos = [
 ];
 
 export const conceptosCargados = [
- {
+  {
     label: "Otro Concepto",
     montoConcepto: "",
     tipoPago: "",
@@ -93,8 +93,20 @@ export const pagosRealizados = [
     montoPagado: "4900",
     numeroComprobante: 1,
     observacionesPagoRealizado: undefined,
-    fechaYHora : new Date(Date.UTC(2023, 3, 15)),
-    uid:15452
+    fechaYHora: new Date(Date.UTC(2023, 3, 15)),
+    uid: 15452,
+  },
+  {
+    legajo: "2233",
+    concepto: 1564,
+    tipoComprobante: "12345",
+    cicloLectivo: "156951",
+    formaDePago: "transferencia",
+    montoPagado: "7500",
+    numeroComprobante: 2,
+    observacionesPagoRealizado: undefined,
+    fechaYHora: new Date(Date.UTC(2023, 3, 25)),
+    uid: 15402,
   },
   {
     legajo: "2234",
@@ -105,8 +117,20 @@ export const pagosRealizados = [
     montoPagado: "4900",
     numeroComprobante: 1,
     observacionesPagoRealizado: undefined,
-    fechaYHora : new Date(Date.UTC(2023, 2, 10)),
-    uid:15643
+    fechaYHora: new Date(Date.UTC(2023, 2, 10)),
+    uid: 15643,
+  },
+  {
+    legajo: "2234",
+    concepto: 1568,
+    tipoComprobante: "12346",
+    cicloLectivo: "156951",
+    formaDePago: "transferencia",
+    montoPagado: "4900",
+    numeroComprobante: 3,
+    observacionesPagoRealizado: undefined,
+    fechaYHora: new Date(Date.UTC(2023, 3, 10)),
+    uid: 15223,
   },
   {
     legajo: "2233",
@@ -117,9 +141,8 @@ export const pagosRealizados = [
     montoPagado: "4900",
     numeroComprobante: 1,
     observacionesPagoRealizado: undefined,
-     fechaYHora : new Date(Date.UTC(2023, 5, 20)),
-
-    uid:95145
+    fechaYHora: new Date(Date.UTC(2023, 5, 20)),
+    uid: 95145,
   },
   {
     legajo: "2234",
@@ -130,8 +153,8 @@ export const pagosRealizados = [
     montoPagado: "4900",
     numeroComprobante: 2,
     observacionesPagoRealizado: undefined,
-    fechaYHora:new Date(),
-    uid:36524
+    fechaYHora: new Date(),
+    uid: 36524,
   },
   {
     legajo: "2233",
@@ -144,7 +167,7 @@ export const pagosRealizados = [
     montoPagado: "4900",
     numeroComprobante: 0,
     observacionesPagoRealizado: undefined,
-    fechaYHora:new Date(),
-    uid:96584
+    fechaYHora: new Date(),
+    uid: 96584,
   },
 ];
