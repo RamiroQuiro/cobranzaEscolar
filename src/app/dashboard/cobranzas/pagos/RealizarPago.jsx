@@ -177,7 +177,7 @@ export default function RealizarPago() {
                 className={""}
                 onChange={onSelectComprobante}
                 type={"select"}
-                name={"periodoPagado"}
+                name={"periodo"}
                 options={periodos}
                 classNameInput={"bg-white font-bold"}
               >

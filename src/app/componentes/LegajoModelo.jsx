@@ -17,10 +17,10 @@ pagosEfectuados:state.pagosEfectuados
 }))
 
 useEffect(() => {
-  const concepto=ciclosLectivos.filter(ciclo=>ciclo.uid==legajo.cicloLectivo)
-  if(!concepto)return
+  const cicloLectivoLegajo=ciclosLectivos.find(ciclo=>ciclo.uid==legajo.cicloLectivo)
+  if(!cicloLectivoLegajo)return
   else{
-    const filtrar=pagosEfectuados.filter(pago=>pago.legajo==legajo.legajo && pago.concepto==concepto?.conceptoCuota  && pago.cicloLectivo==legajo.cicloLectivo)
+    const filtrar=pagosEfectuados.filter(pago=>pago.legajo==legajo.legajo && pago.concepto==cicloLectivoLegajo?.conceptoCuota  && pago.cicloLectivo==legajo.cicloLectivo)
     if(!filtrar)return
     else{
       setDatos(filtrar)
@@ -28,8 +28,7 @@ useEffect(() => {
   }
 }, [pagosEfectuados])
 
-
-console.log(ciclosLectivos)
+console.log(datos)
 
   return (
     <div className="w-full mx-auto relative animate-apDeArriba ">

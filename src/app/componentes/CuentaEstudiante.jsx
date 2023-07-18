@@ -52,6 +52,7 @@ export default function CuentaEstudiante({ datos,idLegajo }) {
       <tbody className="divide-y divide-gray-200 my-3">
         {periodos.map((period, index) => {
             let isPay=datos?.find(pago=>pago.periodo==period.toLowerCase())
+            console.log(isPay)
           return (<tr
             key={index}
             className="odd:bg-primary-300/50 cursor-pointer text-sm hover:bg-gray-200/80 duration-200 animate-[aparecer_.2s]"
