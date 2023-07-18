@@ -16,7 +16,6 @@ export default function InputFomr({
         htmlFor={name}
         className="peer w- text-sm  py-1 mt-2 pl-4 focus:bg-transparent  bg-transparent shadow-none border rounded-lg p-2 text-primary-text  border-primary-100/50 outline-none   focus:outline-none relative"
       >
-        {children}
         <select
           name={name}
           disabled={disabled}
@@ -25,7 +24,7 @@ export default function InputFomr({
           className="ml-5 text-primary-text  bg-transparent "
         >
           <option selected disabled="disabled">
-            Selec. una Opcion
+            Selecc. {children}
           </option>
           {options?.map((option, i) => {
             if (option.selected) {

@@ -3,6 +3,7 @@ import { contextData } from "@/context/contextData";
 import CabeceraContenedor from "./CabeceraContenedor";
 import { Chart } from "./ChartJS";
 import DatosLegajo from "../dashboard/alumnos/DatosLegajo";
+import CuentaEstudiante from "./CuentaEstudiante";
 
 export default function LegajoModelo({ legajo }) {
   const cargarPantalla = contextData((state) => state.cargarPantalla);
@@ -28,6 +29,9 @@ export default function LegajoModelo({ legajo }) {
       <DatosLegajo legajo={legajo}/>
       <div className="my-5">
         <h2 className="font-medium mt-8 mb-4 ml-4">Estado contable</h2>
+        <div className="w-8/12 rounded-lg mx-auto overflow-hidden my-5">
+          <CuentaEstudiante/>
+        </div>
         <div className="bg-white p-2 rounded-lg w-11/12 mx-auto">
           <Chart legajo={legajo} />
         </div>

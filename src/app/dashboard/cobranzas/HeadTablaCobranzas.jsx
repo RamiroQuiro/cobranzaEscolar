@@ -12,7 +12,7 @@ export default function HeadTablaCobranzas() {
   };
   const cabeceras = [
     {
-      name: "Comprobante",
+      name: "Detalle",
       key: "1",
       id: "tipoComprobante",
     },
@@ -29,7 +29,7 @@ export default function HeadTablaCobranzas() {
       //sortable : true,
     },
     {
-      name: "Nombre Alumno",
+      name: "Alumno",
       key: 5,
       id: "nombreLegajo",
       //sortable : true,

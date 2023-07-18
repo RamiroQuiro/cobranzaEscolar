@@ -92,6 +92,7 @@ export const pagosRealizados = [
     formaDePago: "transferencia",
     montoPagado: "4900",
     numeroComprobante: 1,
+    periodo:["enero"],
     observacionesPagoRealizado: undefined,
     fechaYHora: new Date(Date.UTC(2023, 3, 15)),
     uid: 15452,
