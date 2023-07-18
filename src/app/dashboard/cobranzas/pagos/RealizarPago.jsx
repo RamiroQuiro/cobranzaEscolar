@@ -12,6 +12,7 @@ export default function RealizarPago() {
   const [conceptoSelec, setConceptoSelec] = useState(null);
   const [form, setForm] = useState({});
   const cargarPantalla = contextCobranzas((state) => state.cargarPantalla);
+  const [checkAgrega, setCheckAgrega] = useState(true);
   const { conceptos, ciclosLectivos, comprobantes } = contextCobranzas(
     (state) => ({
       conceptos: state.conceptos,
@@ -87,21 +88,20 @@ export default function RealizarPago() {
     }
   };
   const comprobarMonto = (num) => {
-    if (!num) return null;
-    return `$ ` + String(num);
+    if (!num) return "0";
+    return num;
   };
   const periodos = [
-    { label: "Mar" },
-    { label: "Abr" },
-    { label: "May" },
-    { label: "Jun" },
-    { label: "Jul" },
-    { label: "Agos" },
+    { label: "Marzo" },
+    { label: "Abril" },
+    { label: "Mayo" },
+    { label: "Junio" },
+    { label: "Julio" },
+    { label: "Agost" },
     { label: "Sept" },
     { label: "Oct" },
     { label: "Nov" },
   ];
-  console.log(form);
   return (
     <ContenedorDePantallas>
       <CabeceraContenedor>Realizar Pago</CabeceraContenedor>
@@ -206,7 +206,7 @@ export default function RealizarPago() {
                 className={""}
                 onChange={onSelectComprobante}
                 type={"select"}
-                name={"periodo"}
+                name={"periodoPagado"}
                 options={periodos}
                 classNameInput={"bg-white font-bold"}
               >
@@ -234,33 +234,43 @@ export default function RealizarPago() {
               <InputFomr
                 name={"montoPagado"}
                 onChange={handleForm}
-                value={comprobarMonto(
-                  conceptos?.find((comp) => comp.uid == conceptoSelec?.concepto)
-                    ?.montoConcepto
-                )}
+                value={
+                  "$ " +
+                  comprobarMonto(
+                    conceptos?.find(
+                      (comp) => comp.uid == conceptoSelec?.concepto
+                    )?.montoConcepto
+                  )
+                }
               >
                 Moto Concepto
               </InputFomr>
             </div>
-            <div className="flex flex-wrap items-center justify-stretch w-1/4 p-2 gap-2">
+            <div className="flex flex-wrap items-center justify-stretch w-1/4 p-2 ">
               <label
-                htmlFor="montoAgregadoCheck"
-                className="rounded-full text-xs items-center justify-center flex gap-2 p-1 mx-auto"
+                htmlFor="pagoTermino"
+                className={`rounded-full text-xs font-ligth items-center justify-center flex font-bold p-1 mx-auto ${
+                  checkAgrega ? " text-green-500" : " text-red-500"
+                }`}
               >
-                Pago a Termino?
+                {checkAgrega ? "Pago a Termino" : "No Pago a Termino"}
+                <input
+                  onClick={() => setCheckAgrega(!checkAgrega)}
+                  defaultChecked={checkAgrega}
+                  type="checkbox"
+                  name="montoAgregadoCheck"
+                  id="pagoTermino"
+                  className="mx-auto peer hidden"
+                />
               </label>
-              <input
-                type="checkbox"
-                name="montoAgregadoCheck"
-                id="checkAgrega"
-                className="mx-auto peer"
-              />
-              <InputFomr
-                className="peer-checked:flex hidden w-10/12 rounded text-sm"
-                type="text"
-                name="montoAgregado"
-                onChange={handleForm}
-              ></InputFomr>
+              {!checkAgrega && (
+                <InputFomr
+                  className="peer-checked:hidden flex  w-10/12 rounded text-sm animate-aparecer"
+                  type="text"
+                  name="montoAgregado"
+                  onChange={handleForm}
+                ></InputFomr>
+              )}
             </div>
           </div>
           <textarea
@@ -276,7 +286,13 @@ export default function RealizarPago() {
         <div className="w-1/3">
           <InputFomr
             value={
-              "$" + (Number(form?.montoPagado) + Number(form?.montoAgregado))
+              `$ 
+              ${(Number(comprobarMonto((
+                  conceptos?.find((comp) => comp.uid == conceptoSelec?.concepto)
+                    ?.montoConcepto)
+                )
+              )+Number(comprobarMonto(form?.montoAgregado))  )}`
+              
             }
             onChange={handleForm}
             name="numeroComprobante"
