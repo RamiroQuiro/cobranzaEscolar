@@ -255,12 +255,12 @@ export default function RealizarPago() {
                 id="checkAgrega"
                 className="mx-auto peer"
               />
-              <input
+              <InputFomr
                 className="peer-checked:flex hidden w-10/12 rounded text-sm"
                 type="text"
                 name="montoAgregado"
                 onChange={handleForm}
-              />
+              ></InputFomr>
             </div>
           </div>
           <textarea
