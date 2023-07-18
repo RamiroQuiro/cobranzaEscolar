@@ -10,7 +10,7 @@ import {
   Filler,
   Legend,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Line,Bar } from "react-chartjs-2";
 import { contextCobranzas } from "@/context/contextCobranzas";
 import useRelacionesData from "@/hook/useRelacionesData";
 import { contextData } from "@/context/contextData";

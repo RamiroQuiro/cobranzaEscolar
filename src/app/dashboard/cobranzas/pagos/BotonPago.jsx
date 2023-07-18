@@ -18,12 +18,12 @@ export default function BotonDePago({form,cargarPantalla,setForm,legajoSelect}) 
       cicloLectivo:legajoSelect?.cicloLectivo,
       formaDePago:form?.formaDePago,
       montoPagado:form.montoPagado,
+      periodoPagado:form?.periodoPagado,
+      montoAgregado:form?.montoAgregado,
       observacionesPagoRealizado:form.observacionesPagoRealizado,
       numeroComprobante:form.numeroComprobante
     })
   }, [form,legajoSelect])
-  
-
     const realizarPago = (e) => {
         e.preventDefault();
         efectuarPago(registrarPago)

@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import BotonDePago from "./BotonPago";
 
 export default function RealizarPago() {
-  const [conceptoSelec, setConceptoSelec] = useState(null);
+  const [camposSelect, setConceptoSelec] = useState(null);
   const [form, setForm] = useState({});
   const cargarPantalla = contextCobranzas((state) => state.cargarPantalla);
   const [checkAgrega, setCheckAgrega] = useState(true);
@@ -21,13 +21,13 @@ export default function RealizarPago() {
     })
   );
   useEffect(() => {
-    if (!conceptoSelec) return;
-    if (conceptoSelec) {
+    if (!camposSelect) return;
+    if (camposSelect) {
       let numeroComp = comprobantes?.find(
-        (comp) => comp.uid == conceptoSelec?.tipoComprobante
+        (comp) => comp.uid == camposSelect?.tipoComprobante
       )?.numeroComprobante;
       let montoConcepto = conceptos?.find(
-        (comp) => comp.uid == conceptoSelec?.concepto
+        (comp) => comp.uid == camposSelect?.concepto
       )?.montoConcepto;
       setForm((form) => ({
         ...form,
@@ -35,41 +35,12 @@ export default function RealizarPago() {
         numeroComprobante: numeroComp,
       }));
     }
-  }, [conceptoSelec]);
+  }, [camposSelect]);
   const handleForm = (e) => {
     setForm((form) => ({ ...form, [e.target.name]: e.target.value }));
   };
   const captarUidLegajo = contextData((state) => state.captarUidLegajo);
 
-  const inputs = [
-    {
-      name: "nombreLegajo",
-      type: "text",
-      label: "Nombre de Alumno",
-      id: 1,
-      onChange: handleForm,
-    },
-    {
-      name: "legajo",
-      type: "text",
-      label: "N° de Legajo",
-      id: 2,
-      onChange: handleForm,
-    },
-    {
-      name: "periodoCobroConcepto",
-      type: "select",
-      options: [
-        { label: "mensual" },
-        { label: "trimestral" },
-        { label: "unicaVez" },
-        { label: "anual" },
-      ],
-      label: "Modo que se cobrara el Concepto",
-      id: 3,
-      onChange: handleForm,
-    },
-  ];
 
   const onSelectComprobante = (e) => {
     handleForm(e);
@@ -129,7 +100,7 @@ export default function RealizarPago() {
               <InputFomr
                 value={mostrar4dig(
                   comprobantes?.find(
-                    (comp) => comp.uid == conceptoSelec?.tipoComprobante
+                    (comp) => comp.uid == camposSelect?.tipoComprobante
                   )?.numeroComprobante
                 )}
                 onChange={handleForm}
@@ -238,7 +209,7 @@ export default function RealizarPago() {
                   "$ " +
                   comprobarMonto(
                     conceptos?.find(
-                      (comp) => comp.uid == conceptoSelec?.concepto
+                      (comp) => comp.uid == camposSelect?.concepto
                     )?.montoConcepto
                   )
                 }
@@ -249,7 +220,7 @@ export default function RealizarPago() {
             <div className="flex flex-wrap items-center justify-stretch w-1/4 p-2 ">
               <label
                 htmlFor="pagoTermino"
-                className={`rounded-full text-xs font-ligth items-center justify-center flex font-bold p-1 mx-auto ${
+                className={`rounded-full cursor-pointer text-xs font-ligth items-center justify-center flex font-bold p-1 mx-auto ${
                   checkAgrega ? " text-green-500" : " text-red-500"
                 }`}
               >
@@ -260,7 +231,7 @@ export default function RealizarPago() {
                   type="checkbox"
                   name="montoAgregadoCheck"
                   id="pagoTermino"
-                  className="mx-auto peer hidden"
+                  className="mx-auto peer ml-2 "
                 />
               </label>
               {!checkAgrega && (
@@ -288,7 +259,7 @@ export default function RealizarPago() {
             value={
               `$ 
               ${(Number(comprobarMonto((
-                  conceptos?.find((comp) => comp.uid == conceptoSelec?.concepto)
+                  conceptos?.find((comp) => comp.uid == camposSelect?.concepto)
                     ?.montoConcepto)
                 )
               )+Number(comprobarMonto(form?.montoAgregado))  )}`
