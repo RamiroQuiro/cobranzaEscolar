@@ -4,31 +4,9 @@ import CabeceraContenedor from "./CabeceraContenedor";
 import { Chart } from "./ChartJS";
 import DatosLegajo from "../dashboard/alumnos/DatosLegajo";
 import CuentaEstudiante from "./CuentaEstudiante";
-import { contextCobranzas } from "@/context/contextCobranzas";
-import { useEffect, useState } from "react";
 
 export default function LegajoModelo({ legajo }) {
-  const [datos, setDatos] = useState(null)
   const cargarPantalla = contextData((state) => state.cargarPantalla);
-
-const {pagosEfectuados,ciclosLectivos}=contextCobranzas((state)=>({
-  ciclosLectivos:state.ciclosLectivos,
-pagosEfectuados:state.pagosEfectuados
-}))
-
-useEffect(() => {
-  const cicloLectivoLegajo=ciclosLectivos.find(ciclo=>ciclo.uid==legajo.cicloLectivo)
-  if(!cicloLectivoLegajo)return
-  else{
-    const filtrar=pagosEfectuados.filter(pago=>pago.legajo==legajo.legajo && pago.concepto==cicloLectivoLegajo?.conceptoCuota  && pago.cicloLectivo==legajo.cicloLectivo)
-    if(!filtrar)return
-    else{
-      setDatos(filtrar)
-    }
-  }
-}, [pagosEfectuados])
-
-console.log(datos)
 
   return (
     <div className="w-full mx-auto relative animate-apDeArriba ">
@@ -54,8 +32,8 @@ console.log(datos)
         <h2 className="font-medium mt-8 mb-4 ml-4">Estado contable</h2>
         <div className="w-8/12 rounded-lg mx-auto overflow-hidden my-5">
           {
-            datos?
-            <CuentaEstudiante datos={datos} idLegajo={legajo}/>:
+            legajo?
+            <CuentaEstudiante  legajo={legajo}/>:
             <span>CARGANDO..</span>
             }
         </div>

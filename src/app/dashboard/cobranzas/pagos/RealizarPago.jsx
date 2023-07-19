@@ -63,15 +63,15 @@ export default function RealizarPago() {
     return num;
   };
   const periodos = [
-    { label: "Marzo" },
+    { label: "Marzo", },
     { label: "Abril" },
     { label: "Mayo" },
     { label: "Junio" },
     { label: "Julio" },
-    { label: "Agost" },
-    { label: "Sept" },
-    { label: "Oct" },
-    { label: "Nov" },
+    { label: "Agosto" },
+    { label: "Septiembre" },
+    { label: "Octubre" },
+    { label: "Noviembre" },
   ];
   return (
     <ContenedorDePantallas>
