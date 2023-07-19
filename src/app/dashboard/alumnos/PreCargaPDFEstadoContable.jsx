@@ -83,7 +83,7 @@ export default function PreCargaPDFEstadoContable({legajo}) {
         { totalMontoPagado: 0, totalMontoAgregado: 0, totalMontoTotal: 0 }
       );
       if (!datos) {
-        return <div>Cargando...</div>;
+        return <div>Cargando...</div>;1
       } else
 
         return  <PDFViewer

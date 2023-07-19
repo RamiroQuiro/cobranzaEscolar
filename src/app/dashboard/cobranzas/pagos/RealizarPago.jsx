@@ -7,8 +7,11 @@ import { contextCobranzas } from "@/context/contextCobranzas";
 import { contextData } from "@/context/contextData";
 import React, { useEffect, useState } from "react";
 import BotonDePago from "./BotonPago";
+import PaneoPagoMensual from "./PaneoPagoMensual";
+import CuentaEstudiante from "@/app/componentes/CuentaEstudiante";
 
 export default function RealizarPago() {
+  const captarUidLegajo = contextData((state) => state.captarUidLegajo);
   const [camposSelect, setConceptoSelec] = useState(null);
   const [form, setForm] = useState({});
   const cargarPantalla = contextCobranzas((state) => state.cargarPantalla);
@@ -35,11 +38,10 @@ export default function RealizarPago() {
         numeroComprobante: numeroComp,
       }));
     }
-  }, [camposSelect]);
+  }, [camposSelect,captarUidLegajo]);
   const handleForm = (e) => {
     setForm((form) => ({ ...form, [e.target.name]: e.target.value }));
   };
-  const captarUidLegajo = contextData((state) => state.captarUidLegajo);
 
 
   const onSelectComprobante = (e) => {
@@ -78,6 +80,8 @@ export default function RealizarPago() {
       <CabeceraContenedor>Realizar Pago</CabeceraContenedor>
 
       <InputSearchLegajo />
+
+   {captarUidLegajo?  <CuentaEstudiante label={"paneoGral"} legajo={captarUidLegajo}/>:null}
       <form
         action=""
         className="py-4 md:px-5 w-full border-t border-primary-100 pt-8 flex flex-wrap items-center justify-between mx-auto gap-2"

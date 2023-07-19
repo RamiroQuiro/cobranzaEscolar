@@ -40,7 +40,7 @@ export default function PDFRealizados({data,headerTable,label}) {
             fontSize:"10",
           }}
           orientation=""
-          size={"A5"}
+          size={label=="pagosRealizados"? "A4":label=="estadoContable"?"A5":"A4"}
           fixed
         >
          <CabeceraPDF/>

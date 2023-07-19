@@ -5,8 +5,9 @@ import { contextCobranzas } from "@/context/contextCobranzas";
 import TableEstadoCiclo from "../dashboard/alumnos/TableEstadoCiclo";
 import HeadTableEstadoCiclo from "../dashboard/alumnos/HeadTableEstadoCiclo";
 import BodyTableEstadoCiclo from "../dashboard/alumnos/BodyTableEstadoCiclo";
+import PaneoPagoMensual from "../dashboard/cobranzas/pagos/PaneoPagoMensual";
 
-export default function CuentaEstudiante({ legajo }) {
+export default function CuentaEstudiante({ legajo,label }) {
   const [datos, setDatos] = useState(null);
 
   const { pagosEfectuados, ciclosLectivos } = contextCobranzas((state) => ({
@@ -32,7 +33,7 @@ export default function CuentaEstudiante({ legajo }) {
         setDatos(filtrar);
       }
     }
-  }, [pagosEfectuados]);
+  }, [pagosEfectuados,legajo]);
 
   const cabeceras = [
     {
@@ -88,6 +89,11 @@ export default function CuentaEstudiante({ legajo }) {
   if (!datos) {
     return <div>Cargando...</div>;
   } else
+  if(label==="paneoGral"){
+    return (
+      <PaneoPagoMensual periodos={periodos}    datos={datos} />
+    )
+  }else
     return (
       <TableEstadoCiclo>
         <HeadTableEstadoCiclo cabeceras={cabeceras} />
