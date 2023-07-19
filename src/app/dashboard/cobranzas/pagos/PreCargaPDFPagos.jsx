@@ -13,6 +13,39 @@ export default function PreCargaPDFPagos() {
       }));
       const order = contextOrdenar((state) => state.ordenarPor);
 
+      const headerTable = [
+        {
+          name: "Comprobantes",
+          id: 2,
+          type: "text",
+        },
+        {
+          name: "N°",
+          id: 2,
+          type: "text",
+        },
+        {
+          name: "Legajos",
+          id: 2,
+          type: "text",
+        },
+        {
+          name: "Nombre Alumno",
+          id: 2,
+          type: "text",
+        },
+        {
+          name: "Monto",
+          id: 2,
+          type: "text",
+        },
+        {
+          name: "Fecha Pago",
+          id: 2,
+          type: "text",
+        },
+      ];
+      
 
     const { pagosEfectuados, comprobantes, ciclosLectivos, conceptos,filtroCobranzas } =
     contextCobranzas((state) => ({
@@ -68,7 +101,7 @@ export default function PreCargaPDFPagos() {
         className='w-full rounded-lg  h-[90vh] '
         
         width={"90%"}
-        ><PDFRealizados data={encontrado(newArrayPagos)?.sort((a, b) => {
+        ><PDFRealizados label={"pagosRealizados"} headerTable={headerTable} data={encontrado(newArrayPagos)?.sort((a, b) => {
           if (order == "tipoComprobante") {
             return a.tipoComprobante.localeCompare(b.tipoComprobante)
           }

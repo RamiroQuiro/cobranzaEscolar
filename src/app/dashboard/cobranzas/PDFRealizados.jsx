@@ -10,6 +10,8 @@ import {
 } from "@react-pdf/renderer";
 import { createTw } from "react-pdf-tailwind";
 import TableBodyPDF from "./TableBodyPDF";
+import CabeceraPDF from "@/app/componentes/CabeceraPDF";
+import BodyEstadoCuentaPDF from "../alumnos/BodyEstadoCuentaPDF";
 const tw = createTw({
   theme: {
     fontFamily: {
@@ -23,40 +25,9 @@ const tw = createTw({
   },
 });
 
-const headerTable = [
-  {
-    name: "Comprobantes",
-    id: 2,
-    type: "text",
-  },
-  {
-    name: "N°",
-    id: 2,
-    type: "text",
-  },
-  {
-    name: "Legajos",
-    id: 2,
-    type: "text",
-  },
-  {
-    name: "Nombre Alumno",
-    id: 2,
-    type: "text",
-  },
-  {
-    name: "Monto",
-    id: 2,
-    type: "text",
-  },
-  {
-    name: "Fecha Pago",
-    id: 2,
-    type: "text",
-  },
-];
 
-export default function PDFRealizados({data}) {
+export default function PDFRealizados({data,headerTable,label}) {
+  const { periodos, totales, datos } = data;
 
   return (
       <Document
@@ -69,32 +40,10 @@ export default function PDFRealizados({data}) {
             fontSize:"10",
           }}
           orientation=""
-          size={"A4"}
+          size={"A5"}
           fixed
         >
-          <View style={tw(
-              "whitespace-nowrap flex flex-row items-center gap-2 border-b border-b-2 justify-between flex-row w-11/12 mb-2 mx-auto h-1/6"
-            )}>
-              <View>
-            <Text
-            style={tw(
-              "text-xl text-orange-500"
-            )}
-            >RamiroCode </Text>
-            <Text style={tw(
-              "text-base text-gray-800 "
-            )}>Desarrollo y Diseño Web</Text>{" "}
-            </View>
-            <Text
-            style={tw(
-              "text-sm font-extraligth w-8/12 text-gray-800 "
-            )}
-            >
-              Desarrollo Web con experiencia en la creación de sitios web y
-              aplicaciones atractivas y funcionales. Especializado en React,
-              Node.js y TailwindCSS.{" "}
-            </Text>
-          </View>
+         <CabeceraPDF/>
           <View
           style={tw(
               "flex flex-col items-center justify-center flex-grow w-11/12 mx-auto rounded-lg overflow-hidden"
@@ -103,9 +52,23 @@ export default function PDFRealizados({data}) {
           <TableHeadPDF
           array={headerTable}
           />
-          <TableBodyPDF
+
+         {
+         label=="pagosRealizados"?
+         <TableBodyPDF
           array={data}
           />
+          :
+          label=="estadoContable"?
+          <BodyEstadoCuentaPDF
+         periodos={periodos}
+         totales={totales}
+         datos={datos}
+           
+           />
+           :<></>
+          
+        }
           </View>
          {" "}
         </Page>{" "}

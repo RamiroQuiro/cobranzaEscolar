@@ -4,6 +4,7 @@ import AgregarLegajo from './AgregarLegajo';
 import LegajoModelo from '@/app/componentes/LegajoModelo';
 import { contextData } from '@/context/contextData';
 import LegajoCompleto from '@/app/componentes/LegajoCompleto';
+import PreCargaPDFEstadoContable from './PreCargaPDFEstadoContable';
 
 export default function RenderPantallas({captarUidLegajo}) {
     const {label}=contextData((state)=>({
@@ -21,6 +22,8 @@ export default function RenderPantallas({captarUidLegajo}) {
         return <LegajoModelo legajo={captarUidLegajo}/>
     case "legajoCompleto":
         return <LegajoCompleto legajo={captarUidLegajo}/>
+    case "estadoContableAlumno":
+        return <PreCargaPDFEstadoContable legajo={captarUidLegajo}/>
     default:
         return <TablaAlumnos />
         break;

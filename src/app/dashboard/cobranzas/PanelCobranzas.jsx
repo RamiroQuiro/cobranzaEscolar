@@ -46,7 +46,7 @@ export default function PanelCobranzas() {
             Filtra tu busqueda
           </InputFomr>
           <div className="border-primary-200/50 flex-auto border flex items-center rounded-lg px-2 relative">
-            <span className="absolute -top-5 left-4 bg-primary-200 rounded-lg font-medium p-1 text-xs">
+            <span className="absolute -top-5 left-4 bg-primary-200 text-gray-50 rounded-lg font-medium p-1 text-xs">
               Descarga
             </span>
             <BotonEmoji

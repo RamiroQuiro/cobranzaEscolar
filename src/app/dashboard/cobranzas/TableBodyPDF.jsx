@@ -13,7 +13,7 @@ const tw = createTw({
   },
 });
 
-export default function TableBodyPDF({ array, label, style }) {
+export default function TableBodyPDF({ array,  style }) {
   const NOPINTARCAMPOS = [
     "concepto",
     "obsercacionesPagoRealizado",
@@ -30,6 +30,7 @@ export default function TableBodyPDF({ array, label, style }) {
     "montoPagado",
     "fecha",
   ];
+  
   return array?.map((fila, i) => (
     <View
       key={i}
