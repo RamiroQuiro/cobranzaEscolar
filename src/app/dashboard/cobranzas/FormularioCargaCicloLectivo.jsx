@@ -9,18 +9,45 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import PeriodosCiclosCarga from "./PeriodosCiclosCarga";
 
+
+const periodos = [
+  // { label: "Enero", id: 1 },
+  { label: "Febrero", id: 2 },
+  { label: "Marzo", id: 3 },
+  { label: "Abril", id: 4 },
+  { label: "Mayo", id: 5 },
+  { label: "Junio", id: 6 },
+  { label: "Julio", id: 7 },
+  { label: "Agosto", id: 8 },
+  { label: "Septiembre", id: 9 },
+  { label: "Octubre", id: 10 },
+  { label: "Noviembre", id: 11 },
+  // { label: "Diciembre", id: 12 },
+];
+
+const suma = (a, b) => {
+  if (a === undefined) {
+    a = 0;
+  }
+  if (b === undefined) {
+    b = 0;
+  }
+  return Number(a) + Number(b);
+};
+
 export default function FormularioCargaCicloLectivo() {
   const [form, setForm] = useState({ activo: true });
-  const [checked, setChecked] = useState(true);
+  const [check, setCheck] = useState(true);
   const cargarPantalla=contextCobranzas((state)=>state.cargarPantalla)
-
+  
   const cargarCiclosLectivos=contextCobranzas((state)=>state.cargarCiclosLectivos)
+  const [checked, setChecked] = useState(periodos.reduce((acc, periodo) => ({ ...acc, [periodo.label]: true }), {}));
+  const handleCheck = () => {
+    setCheck((state) => !state);
+    setForm({ ...form, activo: check });
+  };
   const handleForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-  };
-  const handleCheck = () => {
-    setChecked((state) => !state);
-    setForm({ ...form, activo: checked });
   };
   const inputs = [
     {
@@ -68,14 +95,17 @@ export default function FormularioCargaCicloLectivo() {
     //   onChange: handleForm,
     // },
   ];
-  const suma = (a, b) => {
-    if (a === undefined) {
-      a = 0;
-    }
-    if (b === undefined) {
-      b = 0;
-    }
-    return Number(a) + Number(b);
+ 
+ 
+
+
+
+  const handleCheckPeriodo = (label) => {
+    setChecked((checked) => ({
+      ...checked,
+      [label]: !checked[label],
+    }));
+    setForm((state)=>({...state,periodos:checked}))
   };
   const guardarLegajo = (e) => {
     e.preventDefault();
@@ -83,7 +113,9 @@ export default function FormularioCargaCicloLectivo() {
     toast.success("guardado");
     setForm({});
     cargarPantalla("pagosEfectuados");
+    console.log(form)
   };
+
   return (
     <ContenedorDePantallas>
       <CabeceraContenedor>Agregar un ciclo Lectivo</CabeceraContenedor>
@@ -129,8 +161,8 @@ export default function FormularioCargaCicloLectivo() {
               >Total Valor del Ciclo Lectivo
               </InputFomr>
               </div>
-          <PeriodosCiclosCarga/>
-        <textarea onChange={handleForm} name="observacionesCicloLectivo" id="" cols="30" placeholder="Observaciones" className="w-full border outline-none border-primary-200/50 bg-transparent rounded-xl p-2 text-sm" rows="5">Obeservaciones</textarea>
+          <PeriodosCiclosCarga handleCheckPeriodo={handleCheckPeriodo} periodos={periodos} checked={checked}/>
+        <textarea onChange={handleForm} name="observacionesCicloLectivo" id="" cols="30" placeholder="Observaciones" className="w-full border outline-none border-primary-200/50 bg-transparent rounded-xl p-2 text-sm" rows="5"></textarea>
         </div>
         <CheckBox handleCheck={handleCheck} state={form?.activo} />
         <Boton1 onClick={guardarLegajo}>Guardar Datos</Boton1>

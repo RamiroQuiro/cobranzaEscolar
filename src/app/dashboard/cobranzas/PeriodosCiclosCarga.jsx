@@ -1,29 +1,8 @@
 import SvgComponent from "@/app/componentes/SVGComponent";
 import React, { useState } from "react";
 
-export default function PeriodosCiclosCarga() {
-  const periodos = [
-    { label: "Enero", id: 1 },
-    { label: "Febrero", id: 2 },
-    { label: "Marzo", id: 3 },
-    { label: "Abril", id: 4 },
-    { label: "Mayo", id: 5 },
-    { label: "Junio", id: 6 },
-    { label: "Julio", id: 7 },
-    { label: "Agosto", id: 8 },
-    { label: "Septiembre", id: 9 },
-    { label: "Octubre", id: 10 },
-    { label: "Noviembre", id: 11 },
-    { label: "Diciembre", id: 12 },
-  ];
-  const [check, setCheck] = useState(periodos.reduce((acc, periodo) => ({ ...acc, [periodo.label]: true }), {}));
+export default function PeriodosCiclosCarga({periodos,handleCheckPeriodo,checked}) {
 
-  const handleCheck = (label) => {
-    setCheck((check) => ({
-      ...check,
-      [label]: !check[label],
-    }));
-  };
   return (
     <div className="w-11/12 flex items-center my-5 justify-between mx-auto gap-2">
       {periodos?.map((periodo) => (
@@ -40,10 +19,10 @@ export default function PeriodosCiclosCarga() {
             name={periodo.label}
             id={periodo.label}
             defaultChecked={true}
-            onChange={() => handleCheck(periodo.label)}
+            onChange={() => handleCheckPeriodo(periodo.label)}
             className="hidden peer"
           />
-          <SvgComponent checked={check[periodo.label]} />
+          <SvgComponent checked={checked[periodo.label]} />
         </label>
       ))}
     </div>
