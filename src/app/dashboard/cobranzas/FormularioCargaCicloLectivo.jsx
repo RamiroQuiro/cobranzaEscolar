@@ -3,9 +3,11 @@ import CabeceraContenedor from "@/app/componentes/CabeceraContenedor";
 import CheckBox from "@/app/componentes/CheckBox";
 import ContenedorDePantallas from "@/app/componentes/ContenedorDePantallas";
 import InputFomr from "@/app/componentes/InputFomr";
+import SvgComponent from "@/app/componentes/SVGComponent";
 import { contextCobranzas } from "@/context/contextCobranzas";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
+import PeriodosCiclosCarga from "./PeriodosCiclosCarga";
 
 export default function FormularioCargaCicloLectivo() {
   const [form, setForm] = useState({ activo: true });
@@ -40,7 +42,7 @@ export default function FormularioCargaCicloLectivo() {
       name: "añoCiclo",
       type: "select",
       options: [{label:"2023"},{label: "2024"},{label: "2025"}],
-      label: "Año del Ciclo Lectivo",
+      label: "Año",
       id: 3,
       onChange: handleForm,
     },
@@ -97,6 +99,7 @@ export default function FormularioCargaCicloLectivo() {
               </InputFomr>
             );
           })}
+          <PeriodosCiclosCarga/>
         <textarea onChange={handleForm} name="observacionesCicloLectivo" id="" cols="30" placeholder="Observaciones" className="w-full border outline-none border-primary-200/50 bg-transparent rounded-xl p-2 text-sm" rows="5">Obeservaciones</textarea>
         </div>
         <CheckBox handleCheck={handleCheck} state={form?.activo} />
