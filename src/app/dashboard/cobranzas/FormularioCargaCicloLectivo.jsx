@@ -24,89 +24,73 @@ const periodos = [
   { label: "Noviembre", id: 11 },
   // { label: "Diciembre", id: 12 },
 ];
-
-const suma = (a, b) => {
-  if (a === undefined) {
-    a = 0;
-  }
-  if (b === undefined) {
-    b = 0;
-  }
-  return Number(a) + Number(b);
-};
-
+const inputs = [
+  {
+    name: "label",
+    type: "text",
+    label: "Nombre del Ciclo",
+    id: 1,
+  },
+  {
+    name: "nivelEducativo",
+    type: "select",
+    options: [{label:"primaria"}, {label:"secundaria"},{label: "jardin"}],
+    label: "Nivel Educativo",
+    id: 2,
+  },
+  {
+    name: "añoCiclo",
+    type: "select",
+    options: [{label:"2023"},{label: "2024"},{label: "2025"}],
+    label: "Año",
+    id: 3,
+  },
+  {
+    name: "valorCuota",
+    type: "text",
+    label: "Valor de Cuota del Ciclo Lectivo",
+    id: 4,
+  },
+  {
+    name: "valorMatricula",
+    type: "text",
+    label: "Valor de Matricula del Ciclo Lectivo",
+    id: 5,
+  },
+  // {
+  //   name: "matriculaInicial",
+  //   type: "text",
+  //   label: "Matricula del Ciclo",
+  //   id: 5,
+  //   onChange: handleForm,
+  // },
+];
 export default function FormularioCargaCicloLectivo() {
-  const [form, setForm] = useState({ activo: true });
-  const [check, setCheck] = useState(true);
+  const [form, setForm] = useState({ activo: true,periodos:{Febrero:true,Marzo:true,Abril:true,Mayo:true,Junio:true,Julio:true,Agosto:true,Septiembre:true,Octubre:true,noviembre:true} });
+  const [checked, setChecked] = useState(true);
   const cargarPantalla=contextCobranzas((state)=>state.cargarPantalla)
-  
+
   const cargarCiclosLectivos=contextCobranzas((state)=>state.cargarCiclosLectivos)
-  const [checked, setChecked] = useState(periodos.reduce((acc, periodo) => ({ ...acc, [periodo.label]: true }), {}));
   const handleCheck = () => {
-    setCheck((state) => !state);
-    setForm({ ...form, activo: check });
+    setChecked((state) => !state);
+    setForm({ ...form, activo: checked });
   };
   const handleForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  const inputs = [
-    {
-      name: "label",
-      type: "text",
-      label: "Nombre del Ciclo",
-      id: 1,
-      onChange: handleForm,
-    },
-    {
-      name: "nivelEducativo",
-      type: "select",
-      options: [{label:"primaria"}, {label:"secundaria"},{label: "jardin"}],
-      label: "Nivel Educativo",
-      id: 2,
-      onChange: handleForm,
-    },
-    {
-      name: "añoCiclo",
-      type: "select",
-      options: [{label:"2023"},{label: "2024"},{label: "2025"}],
-      label: "Año",
-      id: 3,
-      onChange: handleForm,
-    },
-    {
-      name: "valorCuota",
-      type: "text",
-      label: "Valor de Cuota del Ciclo Lectivo",
-      id: 4,
-      onChange: handleForm,
-    },
-    {
-      name: "valorMatricula",
-      type: "text",
-      label: "Valor de Matricula del Ciclo Lectivo",
-      id: 5,
-      onChange: handleForm,
-    },
-    // {
-    //   name: "matriculaInicial",
-    //   type: "text",
-    //   label: "Matricula del Ciclo",
-    //   id: 5,
-    //   onChange: handleForm,
-    // },
-  ];
  
- 
-
-
-
-  const handleCheckPeriodo = (label) => {
-    setChecked((checked) => ({
-      ...checked,
-      [label]: !checked[label],
-    }));
-    setForm((state)=>({...state,periodos:checked}))
+  const suma = (a, b) => {
+    if (a === undefined) {
+      a = 0;
+    }
+    if (b === undefined) {
+      b = 0;
+    }
+    return Number(a)*Object.values(form?.periodos)?.filter(activo=>activo==true)?.length + Number(b);
   };
+
+
+
   const guardarLegajo = (e) => {
     e.preventDefault();
     cargarCiclosLectivos(form);
@@ -142,7 +126,7 @@ export default function FormularioCargaCicloLectivo() {
               <InputFomr
                 options={input.options}
                 name={input.name}
-                onChange={input.onChange}
+                onChange={handleForm}
                 type={input.type}
                
               >
@@ -161,7 +145,7 @@ export default function FormularioCargaCicloLectivo() {
               >Total Valor del Ciclo Lectivo
               </InputFomr>
               </div>
-          <PeriodosCiclosCarga handleCheckPeriodo={handleCheckPeriodo} periodos={periodos} checked={checked}/>
+          <PeriodosCiclosCarga setForm={setForm}/>
         <textarea onChange={handleForm} name="observacionesCicloLectivo" id="" cols="30" placeholder="Observaciones" className="w-full border outline-none border-primary-200/50 bg-transparent rounded-xl p-2 text-sm" rows="5"></textarea>
         </div>
         <CheckBox handleCheck={handleCheck} state={form?.activo} />
