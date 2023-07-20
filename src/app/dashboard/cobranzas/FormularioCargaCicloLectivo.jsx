@@ -47,10 +47,17 @@ export default function FormularioCargaCicloLectivo() {
       onChange: handleForm,
     },
     {
-      name: "valorDelCicloLectivo",
+      name: "valorCuota",
       type: "text",
-      label: "Valor del Ciclo Lectivo",
+      label: "Valor de Cuota del Ciclo Lectivo",
       id: 4,
+      onChange: handleForm,
+    },
+    {
+      name: "valorMatricula",
+      type: "text",
+      label: "Valor de Matricula del Ciclo Lectivo",
+      id: 5,
       onChange: handleForm,
     },
     // {
@@ -61,6 +68,15 @@ export default function FormularioCargaCicloLectivo() {
     //   onChange: handleForm,
     // },
   ];
+  const suma = (a, b) => {
+    if (a === undefined) {
+      a = 0;
+    }
+    if (b === undefined) {
+      b = 0;
+    }
+    return Number(a) + Number(b);
+  };
   const guardarLegajo = (e) => {
     e.preventDefault();
     cargarCiclosLectivos(form);
@@ -88,17 +104,31 @@ export default function FormularioCargaCicloLectivo() {
         <div className=" w-full flex flex-wrap items-center justify-between mx-auto gap-2">
           {inputs?.map((input, index) => {
             return (
+              <div 
+              key={input.id}
+              className="w- flex-grow">
               <InputFomr
                 options={input.options}
                 name={input.name}
                 onChange={input.onChange}
                 type={input.type}
-                key={input.id}
+               
               >
                 {input.label}
               </InputFomr>
+              </div>
             );
           })}
+           <div 
+              className="w- flex-grow">
+              <InputFomr
+                name={"totalValorCiclo"}
+                value={"$"+suma(form?.valorCuota,form?.valorMatricula)}
+                type={"text"}
+               
+              >Total Valor del Ciclo Lectivo
+              </InputFomr>
+              </div>
           <PeriodosCiclosCarga/>
         <textarea onChange={handleForm} name="observacionesCicloLectivo" id="" cols="30" placeholder="Observaciones" className="w-full border outline-none border-primary-200/50 bg-transparent rounded-xl p-2 text-sm" rows="5">Obeservaciones</textarea>
         </div>

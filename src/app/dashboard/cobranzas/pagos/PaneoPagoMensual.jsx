@@ -1,3 +1,4 @@
+import SvgComponent from "@/app/componentes/SVGComponent";
 
 export default function PaneoPagoMensual({periodos,datos}) {
   return (
@@ -10,12 +11,10 @@ export default function PaneoPagoMensual({periodos,datos}) {
       return(
         <div
         key={index}
-        className={`border border-primary-100/50 flex flex-col  items-center justify-stretch  rounded text-sm flex-grow ${isPay?.montoPagado?"bg-green-200/80":"bg-red-200/80"}`}
+        className={`rounded h-10 cursor-pointer border-primary-100 text-xs border flex items-center justify-between flex-col flex-auto ${isPay?.montoPagado?"bg-green-200/80":"bg-red-200/80"}`}
         >
-          <h3 className='bg-primary-100 w-full text-center text-primary-400'>{period}</h3>
-         <p className="py-1">{
-          isPay?.montoPagado ? "👌🏼" :"🚫"
-           }</p>
+        <span className="w-full bg-primary-100 text-white mx-auto text-center">{period}</span>
+            <SvgComponent checked={ isPay?.montoPagado}/> 
         </div>
       )
     })}
