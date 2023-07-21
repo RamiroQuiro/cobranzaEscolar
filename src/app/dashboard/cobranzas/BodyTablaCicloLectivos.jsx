@@ -7,7 +7,12 @@ export default function BodyTablaCicloLectivos() {
           }))
 
           const captaruid=contextCobranzas((state)=>state.captaruid)
+          const cargarPantalla = contextCobranzas((state) => state.cargarPantalla);
 
+          const handleClick=(leg)=>{
+            cargarPantalla("addCicloLectivo")
+            captaruid(leg)
+          }
   return (
     <tbody className="divide-y divide-gray-200 my-3">
     
@@ -33,7 +38,7 @@ export default function BodyTablaCicloLectivos() {
     //   })
       ciclosLectivos?.map((leg) => (
         <tr
-          onClick={() => captaruid(leg.uid)}
+          onClick={() => handleClick(leg)}
           key={leg.id}
           className="odd:bg-primary-300/50 cursor-pointer hover:bg-gray-200/80 duration-200"
         >

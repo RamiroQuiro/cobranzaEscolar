@@ -57,10 +57,10 @@ export const contextCobranzas = create((set, get) => ({
       pagosEfectuados: newArray,
     }));
   },
-  captaruid: () => {
-    set((uid) => ({
+  captaruid: (leg) => {
+    set((state) => ({
       ...state,
-      uidActivo: uid,
+      uidActivo: leg,
     }));
   },
   cargarConceptos: (obj) => {

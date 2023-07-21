@@ -5,7 +5,7 @@ import ContenedorDePantallas from "@/app/componentes/ContenedorDePantallas";
 import InputFomr from "@/app/componentes/InputFomr";
 import SvgComponent from "@/app/componentes/SVGComponent";
 import { contextCobranzas } from "@/context/contextCobranzas";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import PeriodosCiclosCarga from "./PeriodosCiclosCarga";
 
@@ -66,11 +66,21 @@ const inputs = [
   // },
 ];
 export default function FormularioCargaCicloLectivo() {
-  const [form, setForm] = useState({ activo: true,periodos:{Febrero:true,Marzo:true,Abril:true,Mayo:true,Junio:true,Julio:true,Agosto:true,Septiembre:true,Octubre:true,noviembre:true} });
+  //cargando el useState del formiulario con los periodos ya predefinidos
+  const [form, setForm] = useState({ activo: true,periodos:{"Febrero":true,"Marzo":true,"Abril":true,"Mayo":true,"Junio":true,"Julio":true,"Agosto":true,"Septiembre":true,"Octubre":true,"Noviembre":true} });
+  const uidActivo=contextCobranzas((state)=>state.uidActivo)
   const [checked, setChecked] = useState(true);
   const cargarPantalla=contextCobranzas((state)=>state.cargarPantalla)
-
   const cargarCiclosLectivos=contextCobranzas((state)=>state.cargarCiclosLectivos)
+
+
+  useEffect(() => {
+    if (!uidActivo) return
+  if(uidActivo){
+    setForm(uidActivo)
+  }
+  }, [])
+  
   const handleCheck = () => {
     setChecked((state) => !state);
     setForm({ ...form, activo: checked });
@@ -97,7 +107,6 @@ export default function FormularioCargaCicloLectivo() {
     toast.success("guardado");
     setForm({});
     cargarPantalla("pagosEfectuados");
-    console.log(form)
   };
 
   return (
@@ -124,6 +133,7 @@ export default function FormularioCargaCicloLectivo() {
               key={input.id}
               className="w- flex-grow">
               <InputFomr
+              value={form?.[input.name]}
                 options={input.options}
                 name={input.name}
                 onChange={handleForm}
@@ -145,7 +155,7 @@ export default function FormularioCargaCicloLectivo() {
               >Total Valor del Ciclo Lectivo
               </InputFomr>
               </div>
-          <PeriodosCiclosCarga setForm={setForm}/>
+          <PeriodosCiclosCarga setForm={setForm} periodosForm={form?.periodos} />
         <textarea onChange={handleForm} name="observacionesCicloLectivo" id="" cols="30" placeholder="Observaciones" className="w-full border outline-none border-primary-200/50 bg-transparent rounded-xl p-2 text-sm" rows="5"></textarea>
         </div>
         <CheckBox handleCheck={handleCheck} state={form?.activo} />

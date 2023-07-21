@@ -10,6 +10,18 @@ export const ciclos = [
     conceptoCuota:1530,
     conceptoMatricula:1531,
     uid: 156951,
+    periodos:{
+      "Febrero": false,
+      "Marzo": false,
+      "Abril": true,
+      "Mayo": true,
+      "Junio": true,
+      "Julio": true,
+      "Agosto": true,
+      "Septiembre": true,
+      "Octubre": false,
+      "Noviembre": false
+  }
   },
   {
     label: "primaria 2023",
@@ -22,6 +34,18 @@ export const ciclos = [
     conceptoCuota:156150,
     conceptoMatricula:156151,
     uid: 156953,
+    periodos:{
+      "Febrero": true,
+      "Marzo": true,
+      "Abril": true,
+      "Mayo": true,
+      "Junio": true,
+      "Julio": true,
+      "Agosto": true,
+      "Septiembre": true,
+      "Octubre": true,
+      "Noviembre": true
+  }
   },
 ];
 

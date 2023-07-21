@@ -1,7 +1,7 @@
 import SvgComponent from "@/app/componentes/SVGComponent";
 import React, { useState } from "react";
 
-export default function PeriodosCiclosCarga({setForm}) {
+export default function PeriodosCiclosCarga({setForm,periodosForm}) {
   const periodos = [
     // { label: "Enero", id: 1 },
     { label: "Febrero", id: 2 },
@@ -25,9 +25,12 @@ export default function PeriodosCiclosCarga({setForm}) {
     }));
     setForm((state)=>({...state,periodos:{...state.periodos, [label]: !check[label]}}))
   };
+  
   return (
     <div className="w-11/12 flex items-center my-5 justify-between mx-auto gap-2">
-      {periodos?.map((periodo) => (
+      {periodos?.map((periodo) => {
+console.log(periodosForm)
+return(
         <label
           htmlFor={periodo.label}
           key={periodo.id}
@@ -37,16 +40,17 @@ export default function PeriodosCiclosCarga({setForm}) {
             {periodo.label}
           </span>
           <input
-            type="checkbox"
+          value={periodosForm[periodo.label]}
+            type="checkbox"  
             name={periodo.label}
             id={periodo.label}
             defaultChecked={true}
             onChange={() => handleCheck(periodo.label)}
             className="hidden peer"
           />
-          <SvgComponent checked={check[periodo.label]} />
+          <SvgComponent checked={!periodosForm?check[periodo.label]:periodosForm[periodo.label]} />
         </label>
-      ))}
+       )} )}
     </div>
   );
 }
